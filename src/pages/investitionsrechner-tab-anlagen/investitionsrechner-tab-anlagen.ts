@@ -67,9 +67,9 @@ export class InvestitionsrechnerTabAnlagenPage {
     this.setKostenToProvider('betriebsAltRuestKosten', betriebsAltRuestKosten);
     this.setKostenToProvider('betriebsAltLagerKosten', betriebsAltLagerKosten);
     this.setKostenToProvider('betriebsAltSonstigebetriebsAltkosten', betriebsAltSonstigebetriebsAltkosten);
-    this.setKostenToProvider('verwertungRueckbauKosten', verwertungRueckbauKosten);
-    this.setKostenToProvider('verwertungRestwert', verwertungRestwert);
-    this.setKostenToProvider('verwertungSonstigeVerwertungKosten', verwertungSonstigeVerwertungKosten);
+    this.setKostenToProvider('verwertungsRueckbauKosten', verwertungRueckbauKosten);
+    this.setKostenToProvider('verwertungsRestwert', verwertungRestwert);
+    this.setKostenToProvider('verwertungsSonstigeVerwertungKosten', verwertungSonstigeVerwertungKosten);
 
     this.switchToTabWithData(1);
 

@@ -50,7 +50,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
 
   private pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(
-    betriebsInfraBeschaffungsKosten, betriebsInfraInfrastrukturKosten, betriebsInfraSonstigeEntstehungsKosten, 
+    betriebsInfraNeueschaffungsKosten, betriebsInfraNeuInfrastrukturKosten, betriebsInfraNeuSonstigeEntstehungsKosten, 
     betriebsNeuMaterialKosten, betriebsNeuBetriebsundHilfsStoffeKosten, betriebsNeuWartungsKosten, 
     betriebsNeuEntsorgungsKosten, betriebsNeuEnergieKosten, betriebsNeuWerkzeugKosten,
     betriebsNeuPersonalKosten, betriebsNeuInstandsetzungKosten, betriebsNeuRuestKosten, 
@@ -58,9 +58,9 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
     verwertungNeuRueckbauKosten, verwertungNeuRestwert, verwertungNeuSonstigeVerwertungKosten){
       
       // Entstehungskosten der NeuInvestition
-      this.setKostenToProvider('betriebsInfraBeschaffungsKosten', betriebsInfraBeschaffungsKosten);
-      this.setKostenToProvider('betriebsInfraInfrastrukturKosten', betriebsInfraInfrastrukturKosten);
-      this.setKostenToProvider('betriebsInfraSonstigeEntstehungsKosten', betriebsInfraSonstigeEntstehungsKosten);
+      this.setKostenToProvider('betriebsInfraNeuBeschaffungsKosten', betriebsInfraNeueschaffungsKosten);
+      this.setKostenToProvider('betriebsInfraNeuInfrastrukturKosten', betriebsInfraNeuInfrastrukturKosten);
+      this.setKostenToProvider('betriebsInfraNeuSonstigeEntstehungsKosten', betriebsInfraNeuSonstigeEntstehungsKosten);
       this.setKostenToProvider('betriebsNeuMaterialKosten', betriebsNeuMaterialKosten);
       this.setKostenToProvider('betriebsNeuBetriebsundHilfsStoffeKosten', betriebsNeuBetriebsundHilfsStoffeKosten);
       this.setKostenToProvider('betriebsNeuWartungsKosten', betriebsNeuWartungsKosten);

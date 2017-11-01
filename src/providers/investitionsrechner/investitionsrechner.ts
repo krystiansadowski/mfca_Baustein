@@ -216,9 +216,9 @@ export class InvestitionsrechnerProvider {
   berechneVerwertungskostenNachInvestition() {
     this.ergVerwertungskostenVorInvestition = 0.0;
 
-    var neuRestwert = parseFloat(this.getKostentraegerByName("verwertungsNeuRestwert"));
-    var neuRueckbauKosten = parseFloat(this.getKostentraegerByName("verwertungsNeuRueckbauKosten"));
-    var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungsSonstigeVerwertungKosten"));
+    var neuRestwert = parseFloat(this.getKostentraegerByName("verwertungNeuRestwert"));
+    var neuRueckbauKosten = parseFloat(this.getKostentraegerByName("verwertungNeuRueckbauKosten"));
+    var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungSonstigeVerwertungKosten"));
 
     this.ergVerwertungskostenVorInvestition = neuRestwert - neuRueckbauKosten;
     console.log("Ergebnis: Der jährlichen Kosten nach der Investition: " + this.ergVerwertungskostenVorInvestition);

@@ -15,7 +15,7 @@
   <br>
 
 <form [formGroup]="formData" (ngSubmit)="pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(
-  betriebsInfraBeschaffungsKosten, betriebsInfraInfrastrukturKosten, betriebsInfraSonstigeEntstehungsKosten, 
+    betriebsInfraNeuBeschaffungsKosten, betriebsInfraNeuInfrastrukturKosten, betriebsInfraNeuSonstigeEntstehungsKosten, 
     betriebsNeuMaterialKosten, betriebsNeuBetriebsundHilfsStoffeKosten, betriebsNeuWartungsKosten, 
     betriebsNeuEntsorgungsKosten, betriebsNeuEnergieKosten, betriebsNeuWerkzeugKosten,
     betriebsNeuPersonalKosten, betriebsNeuInstandsetzungKosten, betriebsNeuRuestKosten, 
@@ -24,18 +24,18 @@
 <h5>Entstehungsphase der Neuinvestition</h5>
     <ion-item>
       <ion-label stacked class="formLabel">Beschaffungskosten</ion-label>
-      <ion-input type="number" name="betriebsNeuinvestition" [(ngModel)]="betriebsInfraBeschaffungsKosten" [min]="0" placeholder="0" formControlName="beschaffensKostenInputCheck"></ion-input>
+      <ion-input type="number" name="betriebsNeuinvestition" [(ngModel)]="betriebsInfraNeuBeschaffungsKosten" [min]="0" placeholder="0" formControlName="beschaffensKostenInputCheck"></ion-input>
     </ion-item>
-
+    
     <ion-item>
       <ion-label stacked class="formLabel">Infrastrukturkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsInfraInfrastrukturKosten" formControlName="infrastrukturKostenCheck"
+      <ion-input type="number" [(ngModel)]="betriebsInfraNeuInfrastrukturKosten" formControlName="infrastrukturKostenCheck"
         [min]="0" placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked class="formLabel">Sonstige Entstehungskosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsInfraSonstigeEntstehungsKosten" formControlName="sonstigeEntstehungskostenCheck" [min]="0" placeholder="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="betriebsInfraNeuSonstigeEntstehungsKosten" formControlName="sonstigeEntstehungskostenCheck" [min]="0" placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>

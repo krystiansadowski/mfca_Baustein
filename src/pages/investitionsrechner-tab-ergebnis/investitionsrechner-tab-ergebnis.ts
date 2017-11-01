@@ -71,6 +71,19 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
   private berechneInvestition(kalkulatorischerZins, nutzungsdauer) {
     this.setKostenToProvider('kalkulatorischerZins', kalkulatorischerZins);
     this.setKostenToProvider('nutzungsdauer', nutzungsdauer);
+
+    // var a= this.jaehrlicheKostenVorInvestition;
+    // var b= this.alleVerwertungskostenVorInvestition;
+    // var c= this.beschaffungsUndInfrastrukturKosten;
+    // var d= this.jaehrlicheKostenNachInvestition;
+    // var e= this.jaehrlicheEinsparungNachInvestition; 
+    // var f= this.kostenEndeNutzungNachInvestition;
+    // var g= this.zinsFakor;
+    // var h= this.nutzungsdauer; 
+
+
+    // let modal = {a,b,c,d,e,f,g,h};
+
   }
 
   // Provider Methoden 
