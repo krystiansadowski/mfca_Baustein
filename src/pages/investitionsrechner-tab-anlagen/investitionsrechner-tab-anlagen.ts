@@ -30,7 +30,7 @@ export class InvestitionsrechnerTabAnlagenPage {
 
     this.formData = this.formBuilder.group({
       materialInputCheck: [],
-      betriebsHilfstoffeInputCheck: [],
+      betriebsAltHilfstoffeInputCheck: [],
       wartungsInputCheck: [],
       entsorgungsInputCheck: [],
       energieInputCheck: [],
@@ -49,26 +49,26 @@ export class InvestitionsrechnerTabAnlagenPage {
     });
   }
 
-  private pushValuesToInvestitionrechnerProvider(
-    material:number, betriebsBetriebundHilfstoffeKosten, betriebsWartungKosten,
-    betriebsEntsorgungKosten, betriebsEnergieKosten, betriebsWerkzeugKosten,
-    betriebsPersonalKosten, betriebsRaumKosten, betriebsInstandsetzungKosten,
-    betriebsRuestKosten, betriebsLagerKosten, betriebsSonstigebetriebskosten,
+  private pushValuesToInvestitionrechnerProviderUndWechselZumTabZwei(
+    betriebsAltAltMaterial:number, betriebsAltBetriebundHilfstoffeKosten, betriebsAltWartungKosten,
+    betriebsAltEntsorgungKosten, betriebsAltEnergieKosten, betriebsAltWerkzeugKosten,
+    betriebsAltPersonalKosten, betriebsAltRaumKosten, betriebsAltInstandsetzungKosten,
+    betriebsAltRuestKosten, betriebsAltLagerKosten, betriebsAltSonstigebetriebsAltkosten,
     verwertungRueckbauKosten, verwertungRestwert, verwertungSonstigeVerwertungKosten) {
 
 
-    this.setKostenToProvider('betriebsMaterialKosten', material);
-    this.setKostenToProvider('betriebsBetriebundHilfstoffeKosten', betriebsBetriebundHilfstoffeKosten);
-    this.setKostenToProvider('betriebsWartungKosten', betriebsWartungKosten);
-    this.setKostenToProvider('betriebsEntsorgungKosten', betriebsEntsorgungKosten);
-    this.setKostenToProvider('betriebsEnergieKosten', betriebsEnergieKosten);
-    this.setKostenToProvider('betriebsWerkzeugKosten', betriebsWerkzeugKosten);
-    this.setKostenToProvider('betriebsPersonalKosten', betriebsPersonalKosten);
-    this.setKostenToProvider('betriebsRaumKosten', betriebsRaumKosten);
-    this.setKostenToProvider('betriebsInstandsetzungKosten', betriebsInstandsetzungKosten);
-    this.setKostenToProvider('betriebsRuestKosten', betriebsRuestKosten);
-    this.setKostenToProvider('betriebsLagerKosten', betriebsLagerKosten);
-    this.setKostenToProvider('betriebsSonstigebetriebskosten', betriebsSonstigebetriebskosten);
+    this.setKostenToProvider('betriebsAltMaterialKosten', betriebsAltAltMaterial);
+    this.setKostenToProvider('betriebsAltBetriebundHilfstoffeKosten', betriebsAltBetriebundHilfstoffeKosten);
+    this.setKostenToProvider('betriebsAltWartungKosten', betriebsAltWartungKosten);
+    this.setKostenToProvider('betriebsAltEntsorgungKosten', betriebsAltEntsorgungKosten);
+    this.setKostenToProvider('betriebsAltEnergieKosten', betriebsAltEnergieKosten);
+    this.setKostenToProvider('betriebsAltWerkzeugKosten', betriebsAltWerkzeugKosten);
+    this.setKostenToProvider('betriebsAltPersonalKosten', betriebsAltPersonalKosten);
+    this.setKostenToProvider('betriebsAltRaumKosten', betriebsAltRaumKosten);
+    this.setKostenToProvider('betriebsAltInstandsetzungKosten', betriebsAltInstandsetzungKosten);
+    this.setKostenToProvider('betriebsAltRuestKosten', betriebsAltRuestKosten);
+    this.setKostenToProvider('betriebsAltLagerKosten', betriebsAltLagerKosten);
+    this.setKostenToProvider('betriebsAltSonstigebetriebsAltkosten', betriebsAltSonstigebetriebsAltkosten);
     this.setKostenToProvider('verwertungRueckbauKosten', verwertungRueckbauKosten);
     this.setKostenToProvider('verwertungRestwert', verwertungRestwert);
     this.setKostenToProvider('verwertungSonstigeVerwertungKosten', verwertungSonstigeVerwertungKosten);
@@ -84,6 +84,6 @@ export class InvestitionsrechnerTabAnlagenPage {
   // Provider Methoden 
   private setKostenToProvider(kostenTyp, kostenValue) {
     this.investitionsrechnerService.setKostentraeger(kostenTyp, kostenValue);
-
   }
+  
 }

@@ -2,6 +2,57 @@
 </ion-header>
 
 <ion-content padding>
-    <h1>Ergebnis</h1>
-  </ion-content>
-  
+  <p id="Beschreibungstext">Bitte geben Sie für die Berechnung der Amortisationszeit und den Kapitalwert den zugrundegelegten Zinssatz und die Nutzungsdauer
+    an.</p>
+
+  <br>
+
+  <div class="row header">
+    <div class="col">Jährliche Kosten vor Investition in Euro</div>
+    <div class="col">Kosten nach der Nutzung bestehender Anlage in Euro</div>
+    <div class="col">Beschaffungskosten Tab 2 </div>
+    <div class="col">Jährliche Kosten nach Investition in Euro</div>
+    <div class="col">Jährliche Einsparung nach Investition in Euro</div>
+    <div class="col"> kostenEndeNutzungNachInvestition in Euro</div>
+  </div>
+  <div class="row">
+    <div class="col">{{jaehrlicheKostenVorInvestition}}</div>
+    <div class="col">{{alleVerwertungskostenVorInvestition}}</div>
+    <div class="col">{{beschaffungsUndInfrastrukturKosten}}</div>
+    <div class="col">{{jaehrlicheKostenNachInvestition}}</div>
+    <div class="col">{{jaehrlicheEinsparungNachInvestition}}</div>
+    <div class="col">{{ kostenEndeNutzungNachInvestition}}</div>
+  </div>
+  <br>
+  <br>
+
+  <div class="row header">
+      <div class="col">Kapitalwert</div>
+      <div class="col">Armotisation</div>
+    </div>
+    <div class="row">
+      <div class="col">{{kapitalwert}}</div>
+      <div class="col">{{amortisation}}</div>
+    </div>
+    <br>
+    <br>
+
+
+  <form [formGroup]="formData" (ngSubmit)="berechneInvestition(kalkulatorischerZins, nutzungsdauer)">
+    <h5>Berechnungsgrundlagen</h5>
+    <ion-item>
+      <ion-label stacked class="formLabel">Kalkulatorischer Zinssatz</ion-label>
+      <ion-input type="number" name="kalkulatorischerZinssatz" [(ngModel)]="kalkulatorischerZins" [min]="0.1" placeholder="5" formControlName="kalkulatorischerZinsInputCheck"
+        required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked class="formLabel">Nutzungsdauer</ion-label>
+      <ion-input type="number" name="nutzungsdauer" [(ngModel)]="nutzungsdauer" formControlName="nutzungsdauerInputCheck" [min]="0.1" placeholder="20" required></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit" block> Berechnen
+      <ion-icon name="ion-calculator"></ion-icon>
+    </button>
+  </form>
+</ion-content>

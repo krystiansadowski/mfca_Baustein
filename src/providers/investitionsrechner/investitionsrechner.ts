@@ -8,6 +8,7 @@ export class InvestitionsrechnerProvider {
   kosten: any = [];
   private alleAusgelesenenKostenTraegerWerteSumiert: number = 0;
   private ergVerwertungskostenVorInvestition: number = 0;
+  private kostenEndeNutzung: number = 0;
 
 
   constructor() { }
@@ -15,28 +16,57 @@ export class InvestitionsrechnerProvider {
   load() {
     this.kosten = [
 
-      // Testdaten 
-      { kostentraegerTyp: 'betriebsMaterialKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsBetriebundHilfstoffeKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsWartungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsEntsorgungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsEnergieKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsWerkzeugKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsPersonalKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsRaumKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsInstandsetzungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsRuestKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsLagerKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsSonstigebetriebskosten', kostentraegerWert: '10' },
+      // Testdaten  Tab1 
+      { kostentraegerTyp: 'betriebsAltMaterialKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltBetriebundHilfstoffeKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltWartungKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltEntsorgungKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltEnergieKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltWerkzeugKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltPersonalKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltRaumKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltInstandsetzungKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltRuestKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltLagerKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsAltSonstigebetriebskosten', kostentraegerWert: '10' },
 
       { kostentraegerTyp: 'verwertungsRueckbauKosten', kostentraegerWert: '100' },
       { kostentraegerTyp: 'verwertungsRestwert', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'verwertungsSonstigeVerwertungKosten', kostentraegerWert: '5' }
+      { kostentraegerTyp: 'verwertungsSonstigeVerwertungKosten', kostentraegerWert: '5' },
+
+      // Testdaten  Tab2 erterTeil
+      { kostentraegerTyp: 'betriebsInfraNeuBeschaffungsKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', kostentraegerWert: '10' },
+      { kostentraegerTyp: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', kostentraegerWert: '10' },
+     
+      // Testdaten Tab2 zweiterTeil
+      { kostentraegerTyp: 'betriebsNeuMaterialKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuBetriebsundHilfsStoffeKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuWartungsKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuAbfallManagement', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuEnergieKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuWerkzeugKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuPersonalKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuRaumKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuInstandsetzungKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuRuestKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuLagerKosten', kostentraegerWert: '5' },
+      { kostentraegerTyp: 'betriebsNeuSonstigeBetriebsKosten', kostentraegerWert: '15' },
+
+      // Testdaten Tab2 dritterTeil
+      { kostentraegerTyp: 'verwertungsNeuRueckbauKosten', kostentraegerWert: '2' },
+      { kostentraegerTyp: 'verwertungsNeuRestwert', kostentraegerWert: '100' },
+
+
+      // Testdaten Tab3
+      { kostentraegerTyp: 'kalkulatorischerZins', kostentraegerWert: '5'},
+      { kostentraegerTyp: 'nutzungsdauer', kostentraegerWert: '20'}
+      
     ];
   }
 
 
-    /* ------ Setter und Getter Methoden ------*/
+  /* ------ Setter und Getter Methoden ------*/
 
   /* Setter für neue Kostentraeger */
   setKostentraeger(kostenTyp, kostenValue) {
@@ -123,6 +153,19 @@ export class InvestitionsrechnerProvider {
   }
 
 
+  getZinsfaktor(){
+    var zinsfaktor = 0.0;
+    var zins = this.getKostentraegerByName('kalkulatorischerZins')/100;
+    zinsfaktor =  1+ zins;
+
+    return zinsfaktor;
+  }
+
+  getNutzungsdauer(){
+    return this.getKostentraegerByName('nutzungsdauer');
+  }
+
+
 
 
   /* ------ Methoden zur Berechnung ------*/
@@ -153,10 +196,25 @@ export class InvestitionsrechnerProvider {
     var rueckbauKosten = parseFloat(this.getKostentraegerByName("verwertungsRueckbauKosten"));
     var restWert = parseFloat(this.getKostentraegerByName("verwertungsRestwert"));
     var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungsSonstigeVerwertungKosten"));
-    
+
     this.ergVerwertungskostenVorInvestition = rueckbauKosten - restWert + sonstigeKosten;
     console.log("Ergebnis: Der jährlichen Kosten vor der Investition: " + this.ergVerwertungskostenVorInvestition);
 
     return this.ergVerwertungskostenVorInvestition;
   }
+
+
+  berechneVerwertungskostenNachInvestition() {
+    this.ergVerwertungskostenVorInvestition = 0.0;
+
+    var neuRestwert = parseFloat(this.getKostentraegerByName("verwertungsNeuRestwert"));
+    var neuRueckbauKosten = parseFloat(this.getKostentraegerByName("verwertungsNeuRueckbauKosten"));
+    var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungsSonstigeVerwertungKosten"));
+
+    this.ergVerwertungskostenVorInvestition = neuRestwert - neuRueckbauKosten;
+    console.log("Ergebnis: Der jährlichen Kosten nach der Investition: " + this.ergVerwertungskostenVorInvestition);
+
+    return this.ergVerwertungskostenVorInvestition;
+  }
+
 }
