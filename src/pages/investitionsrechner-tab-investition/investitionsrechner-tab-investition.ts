@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
 
@@ -10,12 +11,39 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
 })
 export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
+  private formData: FormGroup;
   private jaehrlicheKostenVorInvestition: number = 0;
   private alleVerwertungskostenVorInvestition: number = 0;
 
-  constructor(private navCtrl: NavController, 
+  constructor(private navCtrl: NavController,
     private navParams: NavParams,
-    private investitionsrechnerService: InvestitionsrechnerProvider) {
+    private formBuilder: FormBuilder,
+    private tabs: Tabs,
+    public investitionsrechnerService: InvestitionsrechnerProvider) {
+
+    this.investitionsrechnerService.load();
+
+    this.formData = this.formBuilder.group({
+      beschaffensKostenInputCheck: [],
+      infrastrukturKostenCheck: [],
+      sonstigeEntstehungskostenCheck: [],
+      materialKostenInputCheck: [],
+      betriebsUndHilfsStoffeInputCheck: [],
+      wartungKostenInputCheck: [],
+      entsorgungsKostenInputCheck: [],
+      energieKostenInputCheck: [],
+      werkzeugKostenInputCheck: [],
+      personalKostenInputCheck: [],
+      instandsetzungKostenInputCheck: [],
+      ruestungKostenInputCheck: [],
+      lagerKostenInputCheck: [],
+      sonstigeBetriebsKostenInputCheck: [],
+      rueckbauInputCheck: [],
+      restwertInputCheck: [],
+      verwertungSonstigeKostenInputCheck: []
+
+
+    });
   }
   
   ngOnInit() {
