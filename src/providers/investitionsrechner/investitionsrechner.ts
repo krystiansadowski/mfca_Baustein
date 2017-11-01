@@ -15,7 +15,7 @@ export class InvestitionsrechnerProvider {
   load() {
     this.kosten = [
 
-      // Testdaten
+      // Testdaten 
       { kostentraegerTyp: 'betriebsMaterialKosten', kostentraegerWert: '10' },
       { kostentraegerTyp: 'betriebsBetriebundHilfstoffeKosten', kostentraegerWert: '10' },
       { kostentraegerTyp: 'betriebsWartungKosten', kostentraegerWert: '10' },
