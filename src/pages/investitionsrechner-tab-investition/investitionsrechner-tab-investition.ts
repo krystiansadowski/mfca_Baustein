@@ -12,16 +12,13 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
 export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
   private formData: FormGroup;
-  // private jaehrlicheKostenVorInvestition: number = 0;
-  // private alleVerwertungskostenVorInvestition: number = 0;
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private formBuilder: FormBuilder,
     private tabs: Tabs,
     public investitionsrechnerService: InvestitionsrechnerProvider) {
-
-    this.investitionsrechnerService.load();
+      console.log('Constructor Tab 2');
 
     this.formData = this.formBuilder.group({
       beschaffensKostenInputCheck: [],
@@ -41,42 +38,40 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       rueckbauInputCheck: [],
       restwertInputCheck: [],
       verwertungSonstigeKostenInputCheck: []
-
-
     });
+    
   }
   
   ngOnInit() {
+    console.log('NgOnItnit Tab 2')
     this.investitionsrechnerService.load();
-    // Berechnung der Kosten aus Tab 1  
-  //   this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.sumAlleKostentraegerWerteStartsWith('betriebs');
-  //   this.alleVerwertungskostenVorInvestition =  this.investitionsrechnerService.berechneVerwertungskostenVorInvestition();
   }
 
 
 
   private pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(
     betriebsInfraBeschaffungsKosten, betriebsInfraInfrastrukturKosten, betriebsInfraSonstigeEntstehungsKosten, 
-    entNeuMaterialKosten, entNeuBetriebsundHilfsStoffeKosten, entNeuWartungsKosten, 
-    entNeuEntsorgungsKosten, entNeuEnergieKosten, entNeuWerkzeugKosten,
-    entNeuPersonalKosten, entNeuInstandsetzungKosten, entNeuRuestKosten, 
-    entNeuLagerKosten, entNeuSonstigeBetriebsKosten,
+    betriebsNeuMaterialKosten, betriebsNeuBetriebsundHilfsStoffeKosten, betriebsNeuWartungsKosten, 
+    betriebsNeuEntsorgungsKosten, betriebsNeuEnergieKosten, betriebsNeuWerkzeugKosten,
+    betriebsNeuPersonalKosten, betriebsNeuInstandsetzungKosten, betriebsNeuRuestKosten, 
+    betriebsNeuLagerKosten, betriebsNeuSonstigeBetriebsKosten,
     verwertungNeuRueckbauKosten, verwertungNeuRestwert, verwertungNeuSonstigeVerwertungKosten){
       
       // Entstehungskosten der NeuInvestition
       this.setKostenToProvider('betriebsInfraBeschaffungsKosten', betriebsInfraBeschaffungsKosten);
       this.setKostenToProvider('betriebsInfraInfrastrukturKosten', betriebsInfraInfrastrukturKosten);
       this.setKostenToProvider('betriebsInfraSonstigeEntstehungsKosten', betriebsInfraSonstigeEntstehungsKosten);
-      this.setKostenToProvider('betriebsNeuMaterialKosten', entNeuMaterialKosten);
-      this.setKostenToProvider('betriebsNeuBetriebsundHilfsStoffeKosten', entNeuBetriebsundHilfsStoffeKosten);
-      this.setKostenToProvider('betriebsNeuWartungsKosten', entNeuWartungsKosten);
-      this.setKostenToProvider('betriebsNeuEnergieKosten', entNeuEnergieKosten);
-      this.setKostenToProvider('betriebsNeuWerkzeugKosten', entNeuWerkzeugKosten);
-      this.setKostenToProvider('betriebsNeuPersonalKosten', entNeuPersonalKosten);
-      this.setKostenToProvider('betriebsNeuInstandsetzungKosten', entNeuInstandsetzungKosten);
-      this.setKostenToProvider('betriebsNeuRuestKosten', entNeuRuestKosten);
-      this.setKostenToProvider('betriebsNeuLagerKosten', entNeuLagerKosten);
-      this.setKostenToProvider('betriebsNeuSonstigeBetriebsKosten', entNeuSonstigeBetriebsKosten);
+      this.setKostenToProvider('betriebsNeuMaterialKosten', betriebsNeuMaterialKosten);
+      this.setKostenToProvider('betriebsNeuBetriebsundHilfsStoffeKosten', betriebsNeuBetriebsundHilfsStoffeKosten);
+      this.setKostenToProvider('betriebsNeuWartungsKosten', betriebsNeuWartungsKosten);
+      this.setKostenToProvider('betriebsNeuEntsorgungsKosten', betriebsNeuEntsorgungsKosten);
+      this.setKostenToProvider('betriebsNeuEnergieKosten', betriebsNeuEnergieKosten);
+      this.setKostenToProvider('betriebsNeuWerkzeugKosten', betriebsNeuWerkzeugKosten);
+      this.setKostenToProvider('betriebsNeuPersonalKosten', betriebsNeuPersonalKosten);
+      this.setKostenToProvider('betriebsNeuInstandsetzungKosten', betriebsNeuInstandsetzungKosten);
+      this.setKostenToProvider('betriebsNeuRuestKosten', betriebsNeuRuestKosten);
+      this.setKostenToProvider('betriebsNeuLagerKosten', betriebsNeuLagerKosten);
+      this.setKostenToProvider('betriebsNeuSonstigeBetriebsKosten', betriebsNeuSonstigeBetriebsKosten);
 
       // Verwertungskosten der NeuInvestition
       this.setKostenToProvider('verwertungNeuRueckbauKosten', verwertungNeuRueckbauKosten);

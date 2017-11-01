@@ -44,8 +44,6 @@ export class InvestitionsrechnerTabAnlagenPage {
       rueckbauInputCheck: [],
       restwertInputCheck: [],
       verwertungSonstigeKostenInputCheck: []
-
-
     });
   }
 

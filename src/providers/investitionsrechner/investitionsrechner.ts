@@ -5,64 +5,72 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class InvestitionsrechnerProvider {
 
-  kosten: any = [];
+  private kosten: any = [];
   private alleAusgelesenenKostenTraegerWerteSumiert: number = 0;
   private ergVerwertungskostenVorInvestition: number = 0;
   private kostenEndeNutzung: number = 0;
 
 
-  constructor() { }
+  constructor() {
+    this.load();
+  }
 
   load() {
-    this.kosten = [
-
-      // Testdaten  Tab1 
-      { kostentraegerTyp: 'betriebsAltMaterialKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltBetriebundHilfstoffeKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltWartungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltEntsorgungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltEnergieKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltWerkzeugKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltPersonalKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltRaumKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltInstandsetzungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltRuestKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltLagerKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltSonstigebetriebskosten', kostentraegerWert: '10' },
-
-      { kostentraegerTyp: 'verwertungsRueckbauKosten', kostentraegerWert: '100' },
-      { kostentraegerTyp: 'verwertungsRestwert', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'verwertungsSonstigeVerwertungKosten', kostentraegerWert: '5' },
-
-      // Testdaten  Tab2 erterTeil
-      { kostentraegerTyp: 'betriebsInfraNeuBeschaffungsKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', kostentraegerWert: '10' },
-     
-      // Testdaten Tab2 zweiterTeil
-      { kostentraegerTyp: 'betriebsNeuMaterialKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuBetriebsundHilfsStoffeKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuWartungsKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuAbfallManagement', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuEnergieKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuWerkzeugKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuPersonalKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuRaumKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuInstandsetzungKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuRuestKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuLagerKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuSonstigeBetriebsKosten', kostentraegerWert: '15' },
-
-      // Testdaten Tab2 dritterTeil
-      { kostentraegerTyp: 'verwertungsNeuRueckbauKosten', kostentraegerWert: '2' },
-      { kostentraegerTyp: 'verwertungsNeuRestwert', kostentraegerWert: '100' },
-
-
-      // Testdaten Tab3
-      { kostentraegerTyp: 'kalkulatorischerZins', kostentraegerWert: '5'},
-      { kostentraegerTyp: 'nutzungsdauer', kostentraegerWert: '20'}
+    if (this.kosten) {
+      // already loaded data
+      return Promise.resolve(this.kosten);
+    }
+    
       
-    ];
+    // this.kosten = [
+
+      // // Testdaten  Tab1 
+      // { kostentraegerTyp: 'betriebsAltMaterialKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltBetriebundHilfstoffeKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltWartungKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltEntsorgungKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltEnergieKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltWerkzeugKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltPersonalKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltRaumKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltInstandsetzungKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltRuestKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltLagerKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsAltSonstigebetriebskosten', kostentraegerWert: '10' },
+
+      // { kostentraegerTyp: 'verwertungsRueckbauKosten', kostentraegerWert: '100' },
+      // { kostentraegerTyp: 'verwertungsRestwert', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'verwertungsSonstigeVerwertungKosten', kostentraegerWert: '5' },
+
+      // // Testdaten  Tab2 erterTeil
+      // { kostentraegerTyp: 'betriebsInfraNeuBeschaffungsKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', kostentraegerWert: '10' },
+      // { kostentraegerTyp: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', kostentraegerWert: '10' },
+
+      // // Testdaten Tab2 zweiterTeil
+      // { kostentraegerTyp: 'betriebsNeuMaterialKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuBetriebsundHilfsStoffeKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuWartungsKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuAbfallManagement', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuEnergieKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuWerkzeugKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuPersonalKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuRaumKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuInstandsetzungKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuRuestKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuLagerKosten', kostentraegerWert: '5' },
+      // { kostentraegerTyp: 'betriebsNeuSonstigeBetriebsKosten', kostentraegerWert: '15' },
+
+      // // Testdaten Tab2 dritterTeil
+      // { kostentraegerTyp: 'verwertungsNeuRueckbauKosten', kostentraegerWert: '2' },
+      // { kostentraegerTyp: 'verwertungsNeuRestwert', kostentraegerWert: '100' },
+
+
+      // // Testdaten Tab3
+      // { kostentraegerTyp: 'kalkulatorischerZins', kostentraegerWert: '5'},
+      // { kostentraegerTyp: 'nutzungsdauer', kostentraegerWert: '20'}
+
+    // ];
   }
 
 
@@ -75,7 +83,8 @@ export class InvestitionsrechnerProvider {
     }
 
     this.kosten.push({ kostentraegerTyp: kostenTyp, kostentraegerWert: kostenValue });
-    console.log("Setter: Kostenträger mit kostentraegerTyp: " + kostenTyp + ", kostentraegerWert: " + kostenValue + " wurde erfolgreich hinzugefügt.")
+    console.log("Setter: Kostenträger mit kostentraegerTyp: " + kostenTyp + ", kostentraegerWert: " + kostenValue + " wurde erfolgreich hinzugefügt.");
+    return this.kosten;
   }
 
   /*
@@ -153,15 +162,15 @@ export class InvestitionsrechnerProvider {
   }
 
 
-  getZinsfaktor(){
+  getZinsfaktor() {
     var zinsfaktor = 0.0;
-    var zins = this.getKostentraegerByName('kalkulatorischerZins')/100;
-    zinsfaktor =  1+ zins;
+    var zins = this.getKostentraegerByName('kalkulatorischerZins') / 100;
+    zinsfaktor = 1 + zins;
 
     return zinsfaktor;
   }
 
-  getNutzungsdauer(){
+  getNutzungsdauer() {
     return this.getKostentraegerByName('nutzungsdauer');
   }
 

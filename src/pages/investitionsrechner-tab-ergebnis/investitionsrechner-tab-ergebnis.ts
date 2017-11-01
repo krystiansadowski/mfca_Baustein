@@ -37,6 +37,8 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     private formBuilder: FormBuilder,
     private investitionsrechnerService: InvestitionsrechnerProvider) {
 
+    console.log('Constructor Tab 3');
+
     this.formData = this.formBuilder.group({
       kalkulatorischerZinsInputCheck: [],
       nutzungsdauerInputCheck: [],
@@ -44,6 +46,7 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('OnInit Tab 3');
     this.investitionsrechnerService.load();
 
     // Tab 1 Ergebnisse 
@@ -65,7 +68,7 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     this.amortisation = this.berechneAmortisation();
   }
 
-  private berechneInvestition(kalkulatorischerZins, nutzungsdauer){
+  private berechneInvestition(kalkulatorischerZins, nutzungsdauer) {
     this.setKostenToProvider('kalkulatorischerZins', kalkulatorischerZins);
     this.setKostenToProvider('nutzungsdauer', nutzungsdauer);
   }
@@ -75,12 +78,12 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     this.investitionsrechnerService.setKostentraeger(kostenTyp, kostenValue);
   }
 
-  private berechneKapitalwert(){
+  private berechneKapitalwert() {
     return -1 * this.jaehrlicheKostenVorInvestition + this.jaehrlicheEinsparungNachInvestition * ((Math.pow(this.zinsFakor, this.nutzungsdauer) - 1) / (Math.pow(this.zinsFakor, this.nutzungsdauer) * (this.zinsFakor - 1))) + this.kostenEndeNutzungNachInvestition / Math.pow(this.zinsFakor, this.nutzungsdauer);
   }
 
-  private berechneAmortisation(){
-     return Math.log(1 - this.jaehrlicheKostenVorInvestition * (this.zinsFakor - 1) / this.jaehrlicheEinsparungNachInvestition) / Math.log(1 / this.zinsFakor);
+  private berechneAmortisation() {
+    return Math.log(1 - this.jaehrlicheKostenVorInvestition * (this.zinsFakor - 1) / this.jaehrlicheEinsparungNachInvestition) / Math.log(1 / this.zinsFakor);
   }
 
 }

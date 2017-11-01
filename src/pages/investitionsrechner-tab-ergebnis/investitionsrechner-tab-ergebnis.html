@@ -7,6 +7,12 @@
 
   <br>
 
+   <ion-list>
+    <ion-item *ngFor="let kostentraeger of investitionsrechnerService.kosten">
+      {{kostentraeger.kostentraegerTyp}} {{kostentraeger.kostentraegerWert}}
+    </ion-item>
+  </ion-list>
+
   <div class="row header">
     <div class="col">Jährliche Kosten vor Investition in Euro</div>
     <div class="col">Kosten nach der Nutzung bestehender Anlage in Euro</div>
