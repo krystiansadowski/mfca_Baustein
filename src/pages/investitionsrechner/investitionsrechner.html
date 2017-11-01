@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Investitionsrechner</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="mainContent">
+  <p id="Beschreibungstext">
+    Bitte geben Sie hier die Kosten für den Betrieb und der Verwertung der bestehenden Anlage an.</p>
+  <br>
+  <h2>Betriebsphase der bestehenden Anlage Euro/Jahr</h2>
+  
+  <br>
+    <ion-tabs tabsPlacement='top'>
+      <ion-tab [root]="tab1root" tabTitle="Anlagen" tabIcon="home"></ion-tab>
+      <ion-tab [root]="tab2root" tabTitle="Investition" tabIcon="logo-euro"></ion-tab>
+      <ion-tab [root]="tab3root" tabTitle="Ergebnis" tabIcon="md-stats"></ion-tab> 
+    </ion-tabs>
+
+</ion-content>

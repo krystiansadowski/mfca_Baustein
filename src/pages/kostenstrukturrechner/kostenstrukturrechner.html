@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Kostenstrukturrechner</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="mainContent">
+  <p id="Beschreibungstext">
+    Erhalten Sie eine Übersicht, wie sich in Ihrem Unternehmen die Kosten verteilen. Füllen Sie dazu die Felder für die einzelnen
+    Kostenpositionen aus.</p>
+  <br>
+  <h2>Ihre Kostenstruktur (Euro/Jahr)</h2>
+  <br>
+
+  <form [formGroup]="formData" 
+      (ngSubmit)="openModal(materialKosten, 
+      energieKosten, handelswarekosten, lohnarbeitkosten, 
+      personalkosten, abschreibungkosten, instandhaltungkosten,
+      mietekosten, sonstigekosten)">
+
+    <ion-item>
+      <ion-label stacked class="formLabel">Materialkosten</ion-label>
+      <ion-input type="number" name="materialkostenInput" [(ngModel)]="materialKosten" [min]="0" placeholder="0" formControlName="materialInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Energiekosten</ion-label>
+      <ion-input type="number" name="energiekostenInput" [(ngModel)]="energieKosten" min="0" placeholder="0" formControlName="energieInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Kosten für Handelsware</ion-label>
+      <ion-input type="number" name="handelswarekostenInput" [(ngModel)]="handelswarekosten" min="0" placeholder="0" formControlName="handelswareInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Kosten für Lohnarbeit</ion-label>
+      <ion-input type="number" name="lohnarbeitkostenInput" [(ngModel)]="lohnarbeitkosten" min="0" placeholder="0" formControlName="lohnarbeitInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Personalkosten</ion-label>
+      <ion-input type="number" name="personalKostenInput" [(ngModel)]="personalkosten" min="0" placeholder="0" formControlName="personalInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Abschreibungen</ion-label>
+      <ion-input type="number" name="abschreibungkostenInput" [(ngModel)]="abschreibungkosten" min="0" placeholder="0" formControlName="abschreibungInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Kosten für industrielle Instandhaltung</ion-label>
+      <ion-input type="number" name="instandhaltungkostenInput" [(ngModel)]="instandhaltungkosten" min="0" placeholder="0" formControlName="instandhaltungInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Miete & Pachten</ion-label>
+      <ion-input type="number" name="mietekostenInput" [(ngModel)]="mietekosten" min="0" placeholder="0" formControlName="mieteInputCheck"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked class="formLabel">Sonstiges</ion-label>
+      <ion-input type="number" name="sonstigeKostenInput" [(ngModel)]="sonstigekosten" min="0" placeholder="0" formControlName="sonstigesInputCheck"></ion-input>
+    </ion-item>
+
+    <br>
+    <button ion-button type="submit" block [disabled]="formData.valid">Berechnen</button>
+  </form>
+</ion-content>

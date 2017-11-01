@@ -3,13 +3,19 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { TabsPage } from '../pages/tabs/tabs';
+import { KostenstrukturrechnerPage } from '../pages/kostenstrukturrechner/kostenstrukturrechner';
+import { ModalKostenstrukturrechnerPage } from '../pages/modal-kostenstrukturrechner/modal-kostenstrukturrechner';
+
+import { InvestitionsrechnerPage } from '../pages/investitionsrechner/investitionsrechner';
+import { InvestitionsrechnerTabAnlagenPage } from '../pages/investitionsrechner-tab-anlagen/investitionsrechner-tab-anlagen';
+import { InvestitionsrechnerTabInvestitionPage } from '../pages/investitionsrechner-tab-investition/investitionsrechner-tab-investition';
+import { InvestitionsrechnerTabErgebnisPage } from '../pages/investitionsrechner-tab-ergebnis/investitionsrechner-tab-ergebnis';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = KostenstrukturrechnerPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
