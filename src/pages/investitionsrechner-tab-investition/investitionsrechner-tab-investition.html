@@ -3,49 +3,45 @@
 
 
 <ion-content padding>
-    
-  <ion-list>
-        <ion-item *ngFor="let kostentraeger of investitionsrechnerService.kosten">
-          {{kostentraeger.kostentraegerTyp}} {{kostentraeger.kostentraegerWert}}
-        </ion-item>
-      </ion-list>
-
-
   <p id="Beschreibungstext">Bitte geben Sie hier die Kosten für Investitionsalternativen in der Entstehungs-, Betriebs- und Verwertungsphase an.</p>
+  
   <br>
-
-<form [formGroup]="formData" (ngSubmit)="pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(
+  
+  <form [formGroup]="formData" (ngSubmit)="pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(
     betriebsInfraNeuBeschaffungsKosten, betriebsInfraNeuInfrastrukturKosten, betriebsInfraNeuSonstigeEntstehungsKosten, 
-    betriebsNeuMaterialKosten, betriebsNeuBetriebsundHilfsStoffeKosten, betriebsNeuWartungsKosten, 
+    betriebsNeuMaterialKosten, betriebsNeuBetriebsundHilfsStoffeKosten, betriebsNeuWartungsKosten,  
     betriebsNeuEntsorgungsKosten, betriebsNeuEnergieKosten, betriebsNeuWerkzeugKosten,
-    betriebsNeuPersonalKosten, betriebsNeuInstandsetzungKosten, betriebsNeuRuestKosten, 
-    betriebsNeuLagerKosten, betriebsNeuSonstigeBetriebsKosten,
+    betriebsNeuPersonalKosten, betriebsNeuRaumKosten, betriebsNeuInstandsetzungKosten,  
+    betriebsNeuRuestKosten, betriebsNeuLagerKosten, betriebsNeuSonstigeBetriebsKosten,
     verwertungRueckbauKosten, verwertungRestwert, verwertungSonstigeVerwertungKosten)">
-<h5>Entstehungsphase der Neuinvestition</h5>
+    <h5>Entstehungsphase der Neuinvestition</h5>
     <ion-item>
       <ion-label stacked class="formLabel">Beschaffungskosten</ion-label>
-      <ion-input type="number" name="betriebsNeuinvestition" [(ngModel)]="betriebsInfraNeuBeschaffungsKosten" [min]="0" placeholder="0" formControlName="beschaffensKostenInputCheck"></ion-input>
+      <ion-input type="number" name="betriebsNeuinvestition" [(ngModel)]="betriebsInfraNeuBeschaffungsKosten" [min]="0" placeholder="0"
+        formControlName="beschaffensKostenInputCheck"></ion-input>
     </ion-item>
-    
+
     <ion-item>
       <ion-label stacked class="formLabel">Infrastrukturkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsInfraNeuInfrastrukturKosten" formControlName="infrastrukturKostenCheck"
-        [min]="0" placeholder="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="betriebsInfraNeuInfrastrukturKosten" formControlName="infrastrukturKostenCheck" [min]="0"
+        placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked class="formLabel">Sonstige Entstehungskosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsInfraNeuSonstigeEntstehungsKosten" formControlName="sonstigeEntstehungskostenCheck" [min]="0" placeholder="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="betriebsInfraNeuSonstigeEntstehungsKosten" formControlName="sonstigeEntstehungskostenCheck"
+        [min]="0" placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked class="formLabel">Kosten für Materialeinsatz</ion-label>
       <ion-input type="number" [(ngModel)]="betriebsNeuMaterialKosten" formControlName="materialKostenInputCheck" [min]="0" placeholder="0"></ion-input>
-      
+
     </ion-item>
     <ion-item>
       <ion-label stacked class="formLabel">Kosten für Betriebs und Hilffsstoffe</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsNeuBetriebsundHilfsStoffeKosten" formControlName="betriebsUndHilfsStoffeInputCheck" [min]="0" placeholder="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="betriebsNeuBetriebsundHilfsStoffeKosten" formControlName="betriebsUndHilfsStoffeInputCheck"
+        [min]="0" placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -55,7 +51,8 @@
 
     <ion-item>
       <ion-label stacked class="formLabel">Entsorgungskosten (Abfallmanagement)</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsNeuEntsorgungsKosten" formControlName="entsorgungsKostenInputCheck" [min]="0" placeholder="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="betriebsNeuEntsorgungsKosten" formControlName="entsorgungsKostenInputCheck" [min]="0"
+        placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -69,13 +66,19 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked class="formLabel">Personal für Betrieb</ion-label>
+      <ion-label stacked class="formLabel">Personalkosten für Betrieb</ion-label>
       <ion-input type="number" [(ngModel)]="betriebsNeuPersonalKosten" formControlName="personalKostenInputCheck" [min]="0" placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>
+      <ion-label stacked class="formLabel">Raumkosten</ion-label>
+      <ion-input type="number" [(ngModel)]="betriebsNeuRaumKosten" formControlName="raumKostenInputCheck" [min]="0" placeholder="0"></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label stacked class="formLabel">Instandsetzungskosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsNeuInstandsetzungKosten" formControlName="instandsetzungKostenInputCheck" [min]="0" placeholder="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="betriebsNeuInstandsetzungKosten" formControlName="instandsetzungKostenInputCheck" [min]="0"
+        placeholder="0"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -84,14 +87,15 @@
     </ion-item>
 
     <ion-item>
-        <ion-label stacked class="formLabel">Lagerkosten</ion-label>
-        <ion-input type="number" [(ngModel)]="betriebsNeuLagerKosten" formControlName="lagerKostenInputCheck" [min]="0" placeholder="0"></ion-input>
-      </ion-item>
+      <ion-label stacked class="formLabel">Lagerkosten</ion-label>
+      <ion-input type="number" [(ngModel)]="betriebsNeuLagerKosten" formControlName="lagerKostenInputCheck" [min]="0" placeholder="0"></ion-input>
+    </ion-item>
 
     <ion-item>
-        <ion-label stacked class="formLabel">Sonstige Betriebskosten</ion-label>
-        <ion-input type="number" [(ngModel)]="betriebsNeuSonstigeBetriebsKosten" formControlName="sonstigeBetriebsKostenInputCheck" [min]="0" placeholder="0"></ion-input>
-      </ion-item>
+      <ion-label stacked class="formLabel">Sonstige Betriebskosten</ion-label>
+      <ion-input type="number" [(ngModel)]="betriebsNeuSonstigeBetriebsKosten" formControlName="sonstigeBetriebsKostenInputCheck"
+        [min]="0" placeholder="0"></ion-input>
+    </ion-item>
 
 
     <h5>Verwertungsphase der Neuinvestition</h5>
@@ -106,24 +110,14 @@
       <ion-input type="number" [(ngModel)]="verwertungRestwert" formControlName="restwertInputCheck" [min]="0" placeholder="0"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label stacked class="formLabel">Sonstige Verwertungskosten</ion-label>
       <ion-input type="number" [(ngModel)]="verwertungSonstigeVerwertungKosten" formControlName="verwertungSonstigeKostenInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-
+    </ion-item> -->
     <br>
 
     <button ion-button type="submit" block> Weiter
       <ion-icon name="arrow-forward"></ion-icon>
     </button>
-
   </form>
-
-  <!-- <ion-list>
-    <ion-item *ngFor="let kostentraeger of investitionsrechnerService.kosten">
-      {{kostentraeger.kostentraegerTyp}} {{kostentraeger.kostentraegerWert}}
-    </ion-item>
-  </ion-list> -->
-
 </ion-content>

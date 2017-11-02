@@ -10,6 +10,7 @@ import { InvestitionsrechnerPage } from '../pages/investitionsrechner/investitio
 import { InvestitionsrechnerTabAnlagenPage } from '../pages/investitionsrechner-tab-anlagen/investitionsrechner-tab-anlagen';
 import { InvestitionsrechnerTabInvestitionPage } from '../pages/investitionsrechner-tab-investition/investitionsrechner-tab-investition';
 import { InvestitionsrechnerTabErgebnisPage } from '../pages/investitionsrechner-tab-ergebnis/investitionsrechner-tab-ergebnis';
+import { ModalInvestitionsrechnerPage } from '../pages/modal-investitionsrechner/modal-investitionsrechner';
 
 @Component({
   templateUrl: 'app.html'

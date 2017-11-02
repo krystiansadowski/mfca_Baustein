@@ -16,6 +16,7 @@ import { InvestitionsrechnerTabAnlagenPage } from '../pages/investitionsrechner-
 import { InvestitionsrechnerTabInvestitionPage } from '../pages/investitionsrechner-tab-investition/investitionsrechner-tab-investition';
 import { InvestitionsrechnerTabErgebnisPage } from '../pages/investitionsrechner-tab-ergebnis/investitionsrechner-tab-ergebnis';
 import { InvestitionsrechnerProvider} from '../providers/investitionsrechner/investitionsrechner';
+import { ModalInvestitionsrechnerPage } from '../pages/modal-investitionsrechner/modal-investitionsrechner';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,10 +31,12 @@ import Chart from 'chart.js';
     HomePage,
     KostenstrukturrechnerPage,
     ModalKostenstrukturrechnerPage,
+
     InvestitionsrechnerPage, 
     InvestitionsrechnerTabAnlagenPage,
     InvestitionsrechnerTabInvestitionPage,
-    InvestitionsrechnerTabErgebnisPage
+    InvestitionsrechnerTabErgebnisPage, 
+    ModalInvestitionsrechnerPage
   ],
   imports: [
     BrowserModule,    
@@ -46,10 +49,12 @@ import Chart from 'chart.js';
     HomePage,
     KostenstrukturrechnerPage,
     ModalKostenstrukturrechnerPage,
+    
     InvestitionsrechnerPage, 
     InvestitionsrechnerTabAnlagenPage,
     InvestitionsrechnerTabInvestitionPage,
-    InvestitionsrechnerTabErgebnisPage
+    InvestitionsrechnerTabErgebnisPage, 
+    ModalInvestitionsrechnerPage
   ],
   providers: [
     StatusBar,

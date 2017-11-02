@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ergebnis</ion-title>
+    <ion-buttons left>
+      <button ion-button clear (click)="closeModal()">
+        <span showWhen="ios">Züruck</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding>
+    <div class="row header">
+        <div class="col">Jährliche Kosten vor Investition in Euro</div>
+        <div class="col">Kosten nach der Nutzung bestehender Anlage in Euro</div>
+        <div class="col">Beschaffungskosten Tab 2 </div>
+        <div class="col">Jährliche Kosten nach Investition in Euro</div>
+        <div class="col">Jährliche Einsparung nach Investition in Euro</div>
+        <div class="col"> kostenEndeNutzungNachInvestition in Euro</div>
+      </div>
+      <div class="row">
+        <div class="col">{{jaehrlicheKostenVorInvestition}}</div>
+        <div class="col">{{alleVerwertungskostenVorInvestition}}</div>
+        <div class="col">{{beschaffungsUndInfrastrukturKosten}}</div>
+        <div class="col">{{jaehrlicheKostenNachInvestition}}</div>
+        <div class="col">{{jaehrlicheEinsparungNachInvestition}}</div>
+        <div class="col">{{ kostenEndeNutzungNachInvestition}}</div>
+      </div>
+      <br>
+      <br>
+    
+      <div class="row header">
+        <div class="col">Kapitalwert</div>
+        <div class="col">Armotisation</div>
+      </div>
+      <div class="row">
+        <div class="col">{{kapitalwert}}</div>
+        <div class="col">{{amortisation}}</div>
+      </div>
+</ion-content>

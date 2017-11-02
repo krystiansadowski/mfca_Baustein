@@ -31,13 +31,14 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       energieKostenInputCheck: [],
       werkzeugKostenInputCheck: [],
       personalKostenInputCheck: [],
+      raumKostenInputCheck: [],
       instandsetzungKostenInputCheck: [],
       ruestungKostenInputCheck: [],
       lagerKostenInputCheck: [],
       sonstigeBetriebsKostenInputCheck: [],
       rueckbauInputCheck: [],
-      restwertInputCheck: [],
-      verwertungSonstigeKostenInputCheck: []
+      restwertInputCheck: []
+      // verwertungSonstigeKostenInputCheck: []
     });
     
   }
@@ -50,15 +51,15 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
 
   private pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(
-    betriebsInfraNeueschaffungsKosten, betriebsInfraNeuInfrastrukturKosten, betriebsInfraNeuSonstigeEntstehungsKosten, 
+    betriebsInfraNeuBeschaffungsKosten, betriebsInfraNeuInfrastrukturKosten, betriebsInfraNeuSonstigeEntstehungsKosten, 
     betriebsNeuMaterialKosten, betriebsNeuBetriebsundHilfsStoffeKosten, betriebsNeuWartungsKosten, 
     betriebsNeuEntsorgungsKosten, betriebsNeuEnergieKosten, betriebsNeuWerkzeugKosten,
-    betriebsNeuPersonalKosten, betriebsNeuInstandsetzungKosten, betriebsNeuRuestKosten, 
-    betriebsNeuLagerKosten, betriebsNeuSonstigeBetriebsKosten,
+    betriebsNeuPersonalKosten, betriebsNeuRaumKosten, betriebsNeuInstandsetzungKosten,  
+    betriebsNeuRuestKosten, betriebsNeuLagerKosten, betriebsNeuSonstigeBetriebsKosten,
     verwertungNeuRueckbauKosten, verwertungNeuRestwert, verwertungNeuSonstigeVerwertungKosten){
       
       // Entstehungskosten der NeuInvestition
-      this.setKostenToProvider('betriebsInfraNeuBeschaffungsKosten', betriebsInfraNeueschaffungsKosten);
+      this.setKostenToProvider('betriebsInfraNeuBeschaffungsKosten', betriebsInfraNeuBeschaffungsKosten);
       this.setKostenToProvider('betriebsInfraNeuInfrastrukturKosten', betriebsInfraNeuInfrastrukturKosten);
       this.setKostenToProvider('betriebsInfraNeuSonstigeEntstehungsKosten', betriebsInfraNeuSonstigeEntstehungsKosten);
       this.setKostenToProvider('betriebsNeuMaterialKosten', betriebsNeuMaterialKosten);
@@ -68,6 +69,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       this.setKostenToProvider('betriebsNeuEnergieKosten', betriebsNeuEnergieKosten);
       this.setKostenToProvider('betriebsNeuWerkzeugKosten', betriebsNeuWerkzeugKosten);
       this.setKostenToProvider('betriebsNeuPersonalKosten', betriebsNeuPersonalKosten);
+      this.setKostenToProvider('betriebsNeuRaumKosten', betriebsNeuRaumKosten);
       this.setKostenToProvider('betriebsNeuInstandsetzungKosten', betriebsNeuInstandsetzungKosten);
       this.setKostenToProvider('betriebsNeuRuestKosten', betriebsNeuRuestKosten);
       this.setKostenToProvider('betriebsNeuLagerKosten', betriebsNeuLagerKosten);
