@@ -39,7 +39,6 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   ngOnInit() {
     this.investitionsrechnerService.load();
-
     this.loadErgebnisseAusVorherigenTabs();
   }
 
@@ -93,12 +92,13 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     var amortisation = this.amortisation;
 
     let ergInvestitionsrechner = {
-      jaehrlicheKostenVorInvestiton, alleVerwertungskostenVorInvestition, beschaffungsUndInfrastrukturKosten,
-      jaehrlicheKostenNachInvestition, jaehrlicheEinsparungNachInvestition, kostenEndeNutzungNachInvestition,
+      // jaehrlicheKostenVorInvestiton, alleVerwertungskostenVorInvestition, beschaffungsUndInfrastrukturKosten,
+      // jaehrlicheKostenNachInvestition, jaehrlicheEinsparungNachInvestition, kostenEndeNutzungNachInvestition,
       kapitalwert, amortisation
     };
 
-    let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage, ergInvestitionsrechner)
-    modalPage.present()
+    // Modal-Darstellung
+    let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage, {ergInvestitionsrechner: ergInvestitionsrechner})
+    modalPage.present();
   }
 }
