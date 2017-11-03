@@ -56,7 +56,8 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
     betriebsNeuEntsorgungsKosten, betriebsNeuEnergieKosten, betriebsNeuWerkzeugKosten,
     betriebsNeuPersonalKosten, betriebsNeuRaumKosten, betriebsNeuInstandsetzungKosten,  
     betriebsNeuRuestKosten, betriebsNeuLagerKosten, betriebsNeuSonstigeBetriebsKosten,
-    verwertungNeuRueckbauKosten, verwertungNeuRestwert, verwertungNeuSonstigeVerwertungKosten){
+    verwertungNeuRueckbauKosten, verwertungNeuRestwert){
+      // verwertungNeuSonstigeVerwertungKosten
       
       // Entstehungskosten der NeuInvestition
       this.setKostenToProvider('betriebsInfraNeuBeschaffungsKosten', betriebsInfraNeuBeschaffungsKosten);

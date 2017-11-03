@@ -16,14 +16,13 @@ export class InvestitionsrechnerProvider {
   }
 
   load() {
-    // if (this.kosten) {
-    //   // already loaded data
-    //   return Promise.resolve(this.kosten);
-    // }
+  //   if (this.kosten) {
+  //     // already loaded data
+  //     return Promise.resolve(this.kosten);
+  //   }
     
       
     this.kosten = [
-
       // Testdaten  Tab1 
       { kostentraegerTyp: 'betriebsAltMaterialKosten', kostentraegerWert: '10' },
       { kostentraegerTyp: 'betriebsAltBetriebundHilfstoffeKosten', kostentraegerWert: '10' },
@@ -62,8 +61,8 @@ export class InvestitionsrechnerProvider {
       { kostentraegerTyp: 'betriebsNeuSonstigeBetriebsKosten', kostentraegerWert: '15' },
 
       // Testdaten Tab2 dritterTeil
-      { kostentraegerTyp: 'verwertungNeuRueckbauKosten', kostentraegerWert: '100' },
-      { kostentraegerTyp: 'verwertungNeuRestwert', kostentraegerWert: '2' },
+      { kostentraegerTyp: 'verwertungNeuRueckbauKosten', kostentraegerWert: '2' },
+      { kostentraegerTyp: 'verwertungNeuRestwert', kostentraegerWert: '100' },
 
       // Testdaten Tab3
       { kostentraegerTyp: 'kalkulatorischerZins', kostentraegerWert: '5'},
@@ -165,7 +164,7 @@ export class InvestitionsrechnerProvider {
   }
 
   getNutzungsdauer() {
-    return this.getKostentraegerByName('nutzungsdauer');
+    return parseFloat(this.getKostentraegerByName('nutzungsdauer'));
   }
 
 
@@ -196,23 +195,23 @@ export class InvestitionsrechnerProvider {
     var restWert = parseFloat(this.getKostentraegerByName("verwertungsRestwert"));
     var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungsSonstigeVerwertungKosten"));
 
-    this.ergVerwertungskostenVorInvestition = rueckbauKosten - restWert + sonstigeKosten;
+    this.ergVerwertungskostenVorInvestition = (rueckbauKosten - restWert) + sonstigeKosten;
     console.log("Ergebnis: Der jährlichen Kosten vor der Investition: " + this.ergVerwertungskostenVorInvestition);
 
     return this.ergVerwertungskostenVorInvestition;
   }
 
   berechneVerwertungskostenNachInvestition() {
-    this.ergVerwertungskostenVorInvestition = 0.0;
+    var ergVerwertungskostenNachInvestition = 0.0;
 
     var neuRestwert = parseFloat(this.getKostentraegerByName("verwertungNeuRestwert"));
     var neuRueckbauKosten = parseFloat(this.getKostentraegerByName("verwertungNeuRueckbauKosten"));
     var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungSonstigeVerwertungKosten"));
 
-    this.ergVerwertungskostenVorInvestition = neuRueckbauKosten - neuRestwert;
+    ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
     console.log("Ergebnis: Der jährlichen Kosten nach der Investition: " + this.ergVerwertungskostenVorInvestition);
 
-    return this.ergVerwertungskostenVorInvestition;
+    return ergVerwertungskostenNachInvestition;
   }
 
 }

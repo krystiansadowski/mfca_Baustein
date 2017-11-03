@@ -39,21 +39,18 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   ngOnInit() {
     this.investitionsrechnerService.load();
-    this.loadErgebnisseAusVorherigenTabs();
 
-    this.kapitalwert = this.berechneKapitalwert();
-    this.amortisation = this.berechneAmortisation();
+    this.loadErgebnisseAusVorherigenTabs();
   }
 
-  private berechneInvestition(kalkulatorischerZins, nutzungsdauer) {
+  private setkalkulatorischenZinsUndNutzungsdauertToProvider(kalkulatorischerZins, nutzungsdauer) {
     this.setKostenToProvider('kalkulatorischerZins', kalkulatorischerZins);
-    this.setKostenToProvider('nutzungsdauer', nutzungsdauer);
-
     this.zinsFakor = this.investitionsrechnerService.getZinsfaktor();
+
+    this.setKostenToProvider('nutzungsdauer', nutzungsdauer);
     this.nutzungsdauer = this.investitionsrechnerService.getNutzungsdauer();
 
-    this.kapitalwert = this.berechneKapitalwert();
-    this.amortisation = this.berechneAmortisation();
+    this.berechneKapitalUndAmortisation();
   }
 
   private loadErgebnisseAusVorherigenTabs() {
@@ -80,23 +77,28 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     this.investitionsrechnerService.setKostentraeger(kostenTyp, kostenValue);
   }
 
-  private openModal() {
+  private berechneKapitalUndAmortisation() {
+    this.kapitalwert = this.berechneKapitalwert();
+    this.amortisation = this.berechneAmortisation();
+
+    // set Variables für Modal-Übergabe
     var jaehrlicheKostenVorInvestiton = this.jaehrlicheKostenVorInvestition;
     var alleVerwertungskostenVorInvestition = this.alleVerwertungskostenVorInvestition;
     var beschaffungsUndInfrastrukturKosten = this.beschaffungsUndInfrastrukturKosten;
     var jaehrlicheKostenNachInvestition = this.jaehrlicheKostenNachInvestition;
     var jaehrlicheEinsparungNachInvestition = this.jaehrlicheEinsparungNachInvestition;
     var kostenEndeNutzungNachInvestition = this.kostenEndeNutzungNachInvestition;
+
     var kapitalwert = this.kapitalwert;
     var amortisation = this.amortisation;
 
-    let kosten = {
+    let ergInvestitionsrechner = {
       jaehrlicheKostenVorInvestiton, alleVerwertungskostenVorInvestition, beschaffungsUndInfrastrukturKosten,
       jaehrlicheKostenNachInvestition, jaehrlicheEinsparungNachInvestition, kostenEndeNutzungNachInvestition,
       kapitalwert, amortisation
     };
-    let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage)
 
+    let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage, ergInvestitionsrechner)
     modalPage.present()
   }
 }

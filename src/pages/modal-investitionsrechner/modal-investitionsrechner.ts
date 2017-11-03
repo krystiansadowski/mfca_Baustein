@@ -8,14 +8,29 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class ModalInvestitionsrechnerPage {
 
+  private ergInvestitionsrechner = [];
+
   constructor(private navCtrl: NavController,
-    private navParams: NavParams, 
+    private navParams: NavParams,
     private viewCtrl: ViewController) {
   }
 
-// Methode zum Schliessen des Modalds
-private closeModal() {
-  this.viewCtrl.dismiss();
-}
+
+  private getKostentraegerValueAusForm(kostentraeger: string) {
+    let kostentraegerValue = parseFloat(this.navParams.get(kostentraeger));
+
+    if (isNaN(kostentraegerValue)) {
+      // kostentraegerValue = 0
+      return kostentraegerValue = 0;
+    }
+    else {
+      return kostentraegerValue;
+    }
+  }
+
+  // Methode zum Schliessen des Modalds
+  private closeModal() {
+    this.viewCtrl.dismiss();
+  }
 
 }
