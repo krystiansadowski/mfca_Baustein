@@ -9,7 +9,7 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
   selector: 'page-investitionsrechner-tab-investition',
   templateUrl: 'investitionsrechner-tab-investition.html',
 })
-export class InvestitionsrechnerTabInvestitionPage implements OnInit {
+export class InvestitionsrechnerTabInvestitionPage {
 
   private formData: FormGroup;
 
@@ -17,8 +17,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
     private navParams: NavParams,
     private formBuilder: FormBuilder,
     private tabs: Tabs,
-    public investitionsrechnerService: InvestitionsrechnerProvider) {
-    console.log('Constructor Tab 2');
+    private investitionsrechnerService: InvestitionsrechnerProvider) {
 
     this.formData = this.formBuilder.group({
       bezeichnungInvestitionCheck: [],
@@ -39,12 +38,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       sonstigeBetriebsKostenInputCheck: [],
       rueckbauInputCheck: [],
       restwertInputCheck: []
-      // verwertungSonstigeKostenInputCheck: []
     });
-  }
-
-  ngOnInit() {
-    this.investitionsrechnerService.load();
   }
 
   private pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(

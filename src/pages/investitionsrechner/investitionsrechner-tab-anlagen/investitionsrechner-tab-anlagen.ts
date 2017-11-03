@@ -20,8 +20,6 @@ export class InvestitionsrechnerTabAnlagenPage {
     private tabs: Tabs,
     private investitionsrechnerService: InvestitionsrechnerProvider) {
 
-    this.investitionsrechnerService.load();
-
     this.formData = this.formBuilder.group({
       materialInputCheck: [],
       betriebsAltHilfstoffeInputCheck: [],

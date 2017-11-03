@@ -15,11 +15,9 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   // Deklaration und Initialisierung der grundlegenden Variablen für den Kapitalwert und die Amortisationszeit
   private jaehrlicheKostenVorInvestition: number = 0;
-  private alleVerwertungskostenVorInvestition: number = 0;
-  private beschaffungsUndInfrastrukturKosten: number = 0;
-  private jaehrlicheKostenNachInvestition: number = 0;
   private jaehrlicheEinsparungNachInvestition: number = 0;
   private kostenEndeNutzungNachInvestition: number = 0;
+  
   private zinsFakor: number = 0;
   private nutzungsdauer: number = 0;
   private kapitalwert: number = 0;
@@ -54,13 +52,8 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   private berechneErgebnisseAusVorherigenTabs() {
     // Tab 1 Ergebnisse 
-    this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.summiereAlleValuesStartsWith('betriebsAlt');
-    this.alleVerwertungskostenVorInvestition = this.investitionsrechnerService.berechneVerwertungskostenVorInvestition();
-
-    // Tab 2 Ergebnisse
-    this.beschaffungsUndInfrastrukturKosten = this.investitionsrechnerService.summiereAlleValuesStartsWith('betriebsInfraNeu');
-    this.jaehrlicheKostenNachInvestition = this.investitionsrechnerService.summiereAlleValuesStartsWith('betriebsNeu');
-    this.jaehrlicheEinsparungNachInvestition = this.jaehrlicheKostenVorInvestition - this.jaehrlicheKostenNachInvestition;
+    this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.berechneVerwertungskostenVorInvestition();
+    this.jaehrlicheEinsparungNachInvestition = this.investitionsrechnerService.berechneJaehrlicheEinsparung();
     this.kostenEndeNutzungNachInvestition = this.investitionsrechnerService.berechneVerwertungskostenNachInvestition();
   }
 
@@ -82,9 +75,6 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
     // set Variables für Modal-Übergabe
     var jaehrlicheKostenVorInvestiton = this.jaehrlicheKostenVorInvestition;
-    var alleVerwertungskostenVorInvestition = this.alleVerwertungskostenVorInvestition;
-    var beschaffungsUndInfrastrukturKosten = this.beschaffungsUndInfrastrukturKosten;
-    var jaehrlicheKostenNachInvestition = this.jaehrlicheKostenNachInvestition;
     var jaehrlicheEinsparungNachInvestition = this.jaehrlicheEinsparungNachInvestition;
     var kostenEndeNutzungNachInvestition = this.kostenEndeNutzungNachInvestition;
 
@@ -92,8 +82,6 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     var amortisation = this.amortisation;
 
     let ergInvestitionsrechner = {
-      // jaehrlicheKostenVorInvestiton, alleVerwertungskostenVorInvestition, beschaffungsUndInfrastrukturKosten,
-      // jaehrlicheKostenNachInvestition, jaehrlicheEinsparungNachInvestition, kostenEndeNutzungNachInvestition,
       kapitalwert, amortisation
     };
 
