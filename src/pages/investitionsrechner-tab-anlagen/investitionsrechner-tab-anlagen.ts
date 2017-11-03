@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Tabs, ModalController } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { InvestitionsrechnerTabInvestitionPage } from '../../pages/investitionsrechner-tab-investition/investitionsrechner-tab-investition';
 import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
@@ -13,18 +13,12 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
 export class InvestitionsrechnerTabAnlagenPage {
 
   private formData: FormGroup;
-  private kostenToPushToProvider: any = [];
-
-  private materialKosten: number;
-
-
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private formBuilder: FormBuilder,
-    private modalCtrl: ModalController,
     private tabs: Tabs,
-    public investitionsrechnerService: InvestitionsrechnerProvider) {
+    private investitionsrechnerService: InvestitionsrechnerProvider) {
 
     this.investitionsrechnerService.load();
 
@@ -54,34 +48,31 @@ export class InvestitionsrechnerTabAnlagenPage {
     betriebsAltRuestKosten, betriebsAltLagerKosten, betriebsAltSonstigebetriebsAltkosten,
     verwertungRueckbauKosten, verwertungRestwert, verwertungSonstigeVerwertungKosten) {
 
+    this.setKeyValueMappingToProvider('betriebsAltMaterialKosten', betriebsAltAltMaterial);
+    this.setKeyValueMappingToProvider('betriebsAltBetriebundHilfstoffeKosten', betriebsAltBetriebundHilfstoffeKosten);
+    this.setKeyValueMappingToProvider('betriebsAltWartungKosten', betriebsAltWartungKosten);
+    this.setKeyValueMappingToProvider('betriebsAltEntsorgungKosten', betriebsAltEntsorgungKosten);
+    this.setKeyValueMappingToProvider('betriebsAltEnergieKosten', betriebsAltEnergieKosten);
+    this.setKeyValueMappingToProvider('betriebsAltWerkzeugKosten', betriebsAltWerkzeugKosten);
+    this.setKeyValueMappingToProvider('betriebsAltPersonalKosten', betriebsAltPersonalKosten);
+    this.setKeyValueMappingToProvider('betriebsAltRaumKosten', betriebsAltRaumKosten);
+    this.setKeyValueMappingToProvider('betriebsAltInstandsetzungKosten', betriebsAltInstandsetzungKosten);
+    this.setKeyValueMappingToProvider('betriebsAltRuestKosten', betriebsAltRuestKosten);
+    this.setKeyValueMappingToProvider('betriebsAltLagerKosten', betriebsAltLagerKosten);
+    this.setKeyValueMappingToProvider('betriebsAltSonstigebetriebsAltkosten', betriebsAltSonstigebetriebsAltkosten);
+    this.setKeyValueMappingToProvider('verwertungsRueckbauKosten', verwertungRueckbauKosten);
+    this.setKeyValueMappingToProvider('verwertungsRestwert', verwertungRestwert);
+    this.setKeyValueMappingToProvider('verwertungsSonstigeVerwertungKosten', verwertungSonstigeVerwertungKosten);
 
-    this.setKostenToProvider('betriebsAltMaterialKosten', betriebsAltAltMaterial);
-    this.setKostenToProvider('betriebsAltBetriebundHilfstoffeKosten', betriebsAltBetriebundHilfstoffeKosten);
-    this.setKostenToProvider('betriebsAltWartungKosten', betriebsAltWartungKosten);
-    this.setKostenToProvider('betriebsAltEntsorgungKosten', betriebsAltEntsorgungKosten);
-    this.setKostenToProvider('betriebsAltEnergieKosten', betriebsAltEnergieKosten);
-    this.setKostenToProvider('betriebsAltWerkzeugKosten', betriebsAltWerkzeugKosten);
-    this.setKostenToProvider('betriebsAltPersonalKosten', betriebsAltPersonalKosten);
-    this.setKostenToProvider('betriebsAltRaumKosten', betriebsAltRaumKosten);
-    this.setKostenToProvider('betriebsAltInstandsetzungKosten', betriebsAltInstandsetzungKosten);
-    this.setKostenToProvider('betriebsAltRuestKosten', betriebsAltRuestKosten);
-    this.setKostenToProvider('betriebsAltLagerKosten', betriebsAltLagerKosten);
-    this.setKostenToProvider('betriebsAltSonstigebetriebsAltkosten', betriebsAltSonstigebetriebsAltkosten);
-    this.setKostenToProvider('verwertungsRueckbauKosten', verwertungRueckbauKosten);
-    this.setKostenToProvider('verwertungsRestwert', verwertungRestwert);
-    this.setKostenToProvider('verwertungsSonstigeVerwertungKosten', verwertungSonstigeVerwertungKosten);
-
-    this.switchToTabWithData(1);
+    this.switchToTabIndex(1);
 
   }
 
-  private switchToTabWithData(tabIndex) {
+  private setKeyValueMappingToProvider(key, value) {
+    this.investitionsrechnerService.setKeyValueMappingToProvider(key, value);
+  }
+
+  private switchToTabIndex(tabIndex) {
     this.tabs.select(tabIndex);
-  }
-
-  // Provider Methoden 
-  private setKostenToProvider(kostenTyp, kostenValue) {
-    this.investitionsrechnerService.setKostentraeger(kostenTyp, kostenValue);
-  }
-  
+  }  
 }

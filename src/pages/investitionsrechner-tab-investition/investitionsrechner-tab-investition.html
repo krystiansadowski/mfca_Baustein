@@ -4,16 +4,21 @@
 
 <ion-content padding>
   <p id="Beschreibungstext">Bitte geben Sie hier die Kosten für Investitionsalternativen in der Entstehungs-, Betriebs- und Verwertungsphase an.</p>
-  
+
   <br>
-  
+
   <form [formGroup]="formData" (ngSubmit)="pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(
+    bezeichnungInvestition,
     betriebsInfraNeuBeschaffungsKosten, betriebsInfraNeuInfrastrukturKosten, betriebsInfraNeuSonstigeEntstehungsKosten, 
     betriebsNeuMaterialKosten, betriebsNeuBetriebsundHilfsStoffeKosten, betriebsNeuWartungsKosten,  
     betriebsNeuEntsorgungsKosten, betriebsNeuEnergieKosten, betriebsNeuWerkzeugKosten,
     betriebsNeuPersonalKosten, betriebsNeuRaumKosten, betriebsNeuInstandsetzungKosten,  
     betriebsNeuRuestKosten, betriebsNeuLagerKosten, betriebsNeuSonstigeBetriebsKosten,
     verwertungRueckbauKosten, verwertungRestwert, verwertungSonstigeVerwertungKosten)">
+    <ion-item>
+      <ion-label stacked class="formLabel"></ion-label>
+      <ion-input type="string" [(ngModel)]="bezeichnungInvestition" formControlName="bezeichnungInvestitionCheck" placeholder="Bezeichnung der Alternative"></ion-input>
+    </ion-item>
     <h5>Entstehungsphase der Neuinvestition</h5>
     <ion-item>
       <ion-label stacked class="formLabel">Beschaffungskosten</ion-label>

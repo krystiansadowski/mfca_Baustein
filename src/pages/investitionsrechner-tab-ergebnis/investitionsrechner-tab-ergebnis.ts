@@ -13,7 +13,7 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   private formData: FormGroup;
 
-  // Grundlegende Variablen für die Berechnung des Kapitalwerts und der Amortisationszeit
+  // Deklaration und Initialisierung der grundlegenden Variablen für den Kapitalwert und die Amortisationszeit
   private jaehrlicheKostenVorInvestition: number = 0;
   private alleVerwertungskostenVorInvestition: number = 0;
   private beschaffungsUndInfrastrukturKosten: number = 0;
@@ -39,27 +39,27 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   ngOnInit() {
     this.investitionsrechnerService.load();
-    this.loadErgebnisseAusVorherigenTabs();
+    this.berechneErgebnisseAusVorherigenTabs();
   }
 
   private setkalkulatorischenZinsUndNutzungsdauertToProvider(kalkulatorischerZins, nutzungsdauer) {
-    this.setKostenToProvider('kalkulatorischerZins', kalkulatorischerZins);
+    this.setKeyValueMappingToProvider('kalkulatorischerZins', kalkulatorischerZins);
     this.zinsFakor = this.investitionsrechnerService.getZinsfaktor();
 
-    this.setKostenToProvider('nutzungsdauer', nutzungsdauer);
+    this.setKeyValueMappingToProvider('nutzungsdauer', nutzungsdauer);
     this.nutzungsdauer = this.investitionsrechnerService.getNutzungsdauer();
 
     this.berechneKapitalUndAmortisation();
   }
 
-  private loadErgebnisseAusVorherigenTabs() {
+  private berechneErgebnisseAusVorherigenTabs() {
     // Tab 1 Ergebnisse 
-    this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.sumAlleKostentraegerWerteStartsWith('betriebsAlt');
+    this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.summiereAlleValuesStartsWith('betriebsAlt');
     this.alleVerwertungskostenVorInvestition = this.investitionsrechnerService.berechneVerwertungskostenVorInvestition();
 
     // Tab 2 Ergebnisse
-    this.beschaffungsUndInfrastrukturKosten = this.investitionsrechnerService.sumAlleKostentraegerWerteStartsWith('betriebsInfraNeu');
-    this.jaehrlicheKostenNachInvestition = this.investitionsrechnerService.sumAlleKostentraegerWerteStartsWith('betriebsNeu');
+    this.beschaffungsUndInfrastrukturKosten = this.investitionsrechnerService.summiereAlleValuesStartsWith('betriebsInfraNeu');
+    this.jaehrlicheKostenNachInvestition = this.investitionsrechnerService.summiereAlleValuesStartsWith('betriebsNeu');
     this.jaehrlicheEinsparungNachInvestition = this.jaehrlicheKostenVorInvestition - this.jaehrlicheKostenNachInvestition;
     this.kostenEndeNutzungNachInvestition = this.investitionsrechnerService.berechneVerwertungskostenNachInvestition();
   }
@@ -72,8 +72,8 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     return Math.log(1 - this.jaehrlicheKostenVorInvestition * (this.zinsFakor - 1) / this.jaehrlicheEinsparungNachInvestition) / Math.log(1 / this.zinsFakor);
   }
 
-  private setKostenToProvider(kostenTyp, kostenValue) {
-    this.investitionsrechnerService.setKostentraeger(kostenTyp, kostenValue);
+  private setKeyValueMappingToProvider(key, value) {
+    this.investitionsrechnerService.setKeyValueMappingToProvider(key, value);
   }
 
   private berechneKapitalUndAmortisation() {

@@ -5,213 +5,207 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class InvestitionsrechnerProvider {
 
-  private kosten: any = [];
-  private alleAusgelesenenKostenTraegerWerteSumiert: number = 0;
-  private ergVerwertungskostenVorInvestition: number = 0;
-  private kostenEndeNutzung: number = 0;
-
+  private data: any = [];
 
   constructor() {
     this.load();
   }
 
   load() {
-  //   if (this.kosten) {
-  //     // already loaded data
-  //     return Promise.resolve(this.kosten);
-  //   }
-    
-      
-    this.kosten = [
-      // Testdaten  Tab1 
-      { kostentraegerTyp: 'betriebsAltMaterialKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltBetriebundHilfstoffeKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltWartungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltEntsorgungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltEnergieKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltWerkzeugKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltPersonalKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltRaumKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltInstandsetzungKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltRuestKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltLagerKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsAltSonstigebetriebskosten', kostentraegerWert: '10' },
+    //   if (this.kosten) {
+    //     // already loaded data
+    //     return Promise.resolve(this.kosten);
+    //   }
 
-      { kostentraegerTyp: 'verwertungsRueckbauKosten', kostentraegerWert: '100' },
-      { kostentraegerTyp: 'verwertungsRestwert', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'verwertungsSonstigeVerwertungKosten', kostentraegerWert: '5' },
+    this.data = [
+      // Testdaten  Tab1 
+      { key: 'betriebsAltMaterialKosten', value: '10' },
+      { key: 'betriebsAltBetriebundHilfstoffeKosten', value: '10' },
+      { key: 'betriebsAltWartungKosten', value: '10' },
+      { key: 'betriebsAltEntsorgungKosten', value: '10' },
+      { key: 'betriebsAltEnergieKosten', value: '10' },
+      { key: 'betriebsAltWerkzeugKosten', value: '10' },
+      { key: 'betriebsAltPersonalKosten', value: '10' },
+      { key: 'betriebsAltRaumKosten', value: '10' },
+      { key: 'betriebsAltInstandsetzungKosten', value: '10' },
+      { key: 'betriebsAltRuestKosten', value: '10' },
+      { key: 'betriebsAltLagerKosten', value: '10' },
+      { key: 'betriebsAltSonstigebetriebskosten', value: '10' },
+
+      { key: 'verwertungsRueckbauKosten', value: '100' },
+      { key: 'verwertungsRestwert', value: '10' },
+      { key: 'verwertungsSonstigeVerwertungKosten', value: '5' },
 
       // Testdaten  Tab2 erterTeil
-      { kostentraegerTyp: 'betriebsInfraNeuBeschaffungsKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', kostentraegerWert: '10' },
-      { kostentraegerTyp: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', kostentraegerWert: '10' },
+      { key: 'betriebsInfraNeuBeschaffungsKosten', value: '10' },
+      { key: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', value: '10' },
+      { key: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', value: '10' },
 
       // Testdaten Tab2 zweiterTeil
-      { kostentraegerTyp: 'betriebsNeuMaterialKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuBetriebsundHilfsStoffeKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuWartungsKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuAbfallManagement', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuEnergieKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuWerkzeugKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuPersonalKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuRaumKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuInstandsetzungKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuRuestKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuLagerKosten', kostentraegerWert: '5' },
-      { kostentraegerTyp: 'betriebsNeuSonstigeBetriebsKosten', kostentraegerWert: '15' },
+      { key: 'betriebsNeuMaterialKosten', value: '5' },
+      { key: 'betriebsNeuBetriebsundHilfsStoffeKosten', value: '5' },
+      { key: 'betriebsNeuWartungsKosten', value: '5' },
+      { key: 'betriebsNeuAbfallManagement', value: '5' },
+      { key: 'betriebsNeuEnergieKosten', value: '5' },
+      { key: 'betriebsNeuWerkzeugKosten', value: '5' },
+      { key: 'betriebsNeuPersonalKosten', value: '5' },
+      { key: 'betriebsNeuRaumKosten', value: '5' },
+      { key: 'betriebsNeuInstandsetzungKosten', value: '5' },
+      { key: 'betriebsNeuRuestKosten', value: '5' },
+      { key: 'betriebsNeuLagerKosten', value: '5' },
+      { key: 'betriebsNeuSonstigeBetriebsKosten', value: '15' },
 
       // Testdaten Tab2 dritterTeil
-      { kostentraegerTyp: 'verwertungNeuRueckbauKosten', kostentraegerWert: '2' },
-      { kostentraegerTyp: 'verwertungNeuRestwert', kostentraegerWert: '100' },
+      { key: 'verwertungNeuRueckbauKosten', value: '2' },
+      { key: 'verwertungNeuRestwert', value: '100' },
 
       // Testdaten Tab3
-      { kostentraegerTyp: 'kalkulatorischerZins', kostentraegerWert: '5'},
-      { kostentraegerTyp: 'nutzungsdauer', kostentraegerWert: '20'}
+      { key: 'kalkulatorischerZins', value: '5' },
+      { key: 'nutzungsdauer', value: '20' }
     ];
   }
 
   /* ------ Setter und Getter Methoden ------*/
 
-  /* Setter für neue Kostentraeger */
-  setKostentraeger(kostenTyp, kostenValue) {
-    if (kostenValue == undefined) {
-      kostenValue = 0;
+  /* Setter für Key Value Mapping im Provider */
+  setKeyValueMappingToProvider(key, value) {
+    if (value == undefined) {
+      value = 0;
     }
-
-    this.kosten.push({ kostentraegerTyp: kostenTyp, kostentraegerWert: kostenValue });
-    console.log("Setter: Kostenträger mit kostentraegerTyp: " + kostenTyp + ", kostentraegerWert: " + kostenValue + " wurde erfolgreich hinzugefügt.");
-    return this.kosten;
+    this.data.push({ key: key, value: value });
+    console.log("InvestitionsProvider set Key: " + key + ", value: " + value + ".");
+    return this.data;
   }
 
   /*
-  Getter für einen einzelnen KostentraegerWert
-  @Param name des Kostenträgers
+  Getter für einen Value
+  @Param key
   */
-  getKostentraegerByName(name) {
-    if (this.kosten.length != 0) {
-      for (let kosten of this.kosten) {
-        if (kosten.kostentraegerTyp == name) {
-          console.log("Getter: Ausgelesener Wert für Kostenträger " + name + " = " + kosten.kostentraegerWert);
-          return kosten.kostentraegerWert;
+  getValueByKey(key) {
+    if (this.data.length != 0) {
+      for (let data of this.data) {
+        if (data.key == key) {
+          console.log("Getter: Ausgelesener Value für den Key '" + key + "' = " + data.value);
+          return data.value;
         }
       }
     }
     else {
-      console.log("Getter: Fehler: Keine Werte für Kostenträger vorhanden!")
+      console.log("Getter: Kein Value für den Key '" + key + "' gefunden.");
     }
   }
 
   /*
-  Getter für alle KostentraegerWerte, kostentraegerTyp beginntmit "startParam"
-  @Param startParam des Kostenträgers
+  Getter für Values die mit "key" beginnen
+  @Param key
   */
-  getKostentraegerWerteStartsWith(name) {
-    let alleKostenTraegerWerteStrartsWith = [];
+  getValueStartsWith(key) {
+    let alleValuesStartsWith = [];
 
-    if (this.kosten.length != 0) {
-      for (let kosten of this.kosten) {
-        // if (kosten.kostentraegerTyp.startsWith(name)) {
-        if (kosten.kostentraegerTyp.startsWith(name)) {
-          alleKostenTraegerWerteStrartsWith.push(kosten.kostentraegerWert);
+    if (this.data.length != 0) {
+      for (let data of this.data) {
+        if (data.key.startsWith(key)) {
+          alleValuesStartsWith.push(data.value);
         }
       }
-      console.log("Getter: Alle ausgelesener Werte für Kostenträger mit Parameter startWith '" + name + "' = " + alleKostenTraegerWerteStrartsWith.toString());
-      return alleKostenTraegerWerteStrartsWith;
+      console.log("Getter: Ausgelesene/r Value/s für den Key '" + key + "' = " + alleValuesStartsWith.toString());
+      return alleValuesStartsWith;
     }
     else {
-      console.log("Getter: Fehler: Keine Werte für Kostenträger vorhanden!")
+      console.log("Getter: Keine Values für den Key '" + key + "' gefunden.")
     }
   }
 
-  /* Getter für alle KostenträgerWerte */
-  getKostentraegerWerte() {
-    let alleKostenTraegerWerte = [];
+  /* Getter für alle Values im Mapping ohne Parameter*/
+  getAllValues() {
+    let alleValues = [];
 
-    if (this.kosten.length != 0) {
-      this.kosten.forEach(element => {
-        alleKostenTraegerWerte.push(element.kostentraegerWert)
+    if (this.data.length != 0) {
+      this.data.forEach(element => {
+        alleValues.push(element.value)
       });
-      console.log("Getter: Alle ausgelesener Werte für Kostenträger mit Parameter startWith " + alleKostenTraegerWerte.toString());
-      return alleKostenTraegerWerte;
+      console.log("Getter: Alle ausgelesene Values ohne Paramer = " + alleValues.toString());
+      return alleValues;
     }
     else {
-      console.log("Getter: Fehler: Keine Werte für Kostenträger vorhanden!")
+      console.log("Getter: Keine Values vorhanden!")
     }
   }
 
 
-  /* Getter für alle KostenträgerTypen und KostenträgerWerte startsWith name 
-  @paramter name */
-  getKostentreagerTypenUndKostentraegerWerte(name) {
-    let alleKostentraegerTypenUndKostenTraegerwerte = [];
+  /* Getter für alle keys und values, wo key mit "key" beginnt  
+  @paramter key
+  */
+  getKeyUndValueWhereKeyStartsWith(key) {
+    let alleKeysUndValuesStartsWithKey = [];
 
-    if (this.kosten.length != 0) {
-      this.kosten.forEach(element => {
-        if (element.kostentraegerTyp.startsWith(name)) {
-          alleKostentraegerTypenUndKostenTraegerwerte.push({ kostentraegerTyp: element.kostentraegerTyp, kostentraegerWert: element.kostentraegerWert });
+    if (this.data.length != 0) {
+      this.data.forEach(element => {
+        if (element.key.startsWith(key)) {
+          alleKeysUndValuesStartsWithKey.push({ key: element.key, value: element.value });
         }
       });
-      return alleKostentraegerTypenUndKostenTraegerwerte;
+      return alleKeysUndValuesStartsWithKey;
     }
   }
 
+  /* Getter für den Zinsfaktor, bedeutend für die Berechnungsgrundlage des 
+  Kapitalwerts und der Amortisationszeit
+  */
   getZinsfaktor() {
     var zinsfaktor = 0.0;
-    var zins = this.getKostentraegerByName('kalkulatorischerZins') / 100;
-    zinsfaktor = 1 + zins;
+    var kalkulatorischerZins = this.getValueByKey('kalkulatorischerZins') / 100;
+    zinsfaktor = 1 + kalkulatorischerZins;
 
     return zinsfaktor;
   }
 
+  /* Getter für die Nutzungsdauer, bedeutend für die Berechnungsgrundlage des 
+  Kapitalwerts und der Amortisationszeit
+  */
   getNutzungsdauer() {
-    return parseFloat(this.getKostentraegerByName('nutzungsdauer'));
+    return parseFloat(this.getValueByKey('nutzungsdauer'));
   }
+
+
 
 
   /* ------ Methoden zur Berechnung ------*/
 
-  sumAlleKostentraegerWerteStartsWith(name) {
-    let alleAusgelesenenKostenTraegerWerte = this.getKostentraegerWerteStartsWith(name);
-    // let dataSum = this.summiereGesamtenArray(alleAusgelesenenKostenTraegerWerte);
+  summiereAlleValuesStartsWith(key) {
+    var alleGefundenenValuesGesamt = 0.0;
+    let alleGefundenenValues = this.getValueStartsWith(key);
 
-    this.alleAusgelesenenKostenTraegerWerteSumiert = this.summiereGesamtenArray(alleAusgelesenenKostenTraegerWerte);
-    console.log("Ergebnis: Alle ausgelesener Werte für Kostenträger mit Parameter startWith '" + name + "' bilden die Summe = " + this.alleAusgelesenenKostenTraegerWerteSumiert.toString());
-    return this.alleAusgelesenenKostenTraegerWerteSumiert;
-  }
-
-  private summiereGesamtenArray(alleKostenArray) {
-    this.alleAusgelesenenKostenTraegerWerteSumiert = 0.0;
-
-    for (var i = 0; i < alleKostenArray.length; i++) {
-      this.alleAusgelesenenKostenTraegerWerteSumiert += parseFloat(alleKostenArray[i]);
+    for (var i = 0; i < alleGefundenenValues.length; i++) {
+      alleGefundenenValuesGesamt += parseFloat(alleGefundenenValues[i]);
     }
-    return this.alleAusgelesenenKostenTraegerWerteSumiert;
+    console.log("Ergebnis Summe für die Values Parameter startWith '" + key + "' = " + alleGefundenenValuesGesamt.toString());
+    return alleGefundenenValuesGesamt;
   }
 
   berechneVerwertungskostenVorInvestition() {
-    this.ergVerwertungskostenVorInvestition = 0.0;
+    var ergVerwertungskostenVorInvestition = 0.0;
 
-    var rueckbauKosten = parseFloat(this.getKostentraegerByName("verwertungsRueckbauKosten"));
-    var restWert = parseFloat(this.getKostentraegerByName("verwertungsRestwert"));
-    var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungsSonstigeVerwertungKosten"));
+    var rueckbauKosten = parseFloat(this.getValueByKey("verwertungsRueckbauKosten"));
+    var restWert = parseFloat(this.getValueByKey("verwertungsRestwert"));
+    var sonstigeKosten = parseFloat(this.getValueByKey("verwertungsSonstigeVerwertungKosten"));
 
-    this.ergVerwertungskostenVorInvestition = (rueckbauKosten - restWert) + sonstigeKosten;
-    console.log("Ergebnis: Der jährlichen Kosten vor der Investition: " + this.ergVerwertungskostenVorInvestition);
+    ergVerwertungskostenVorInvestition = (rueckbauKosten - restWert) + sonstigeKosten;
 
-    return this.ergVerwertungskostenVorInvestition;
+    console.log("Ergebnis: Der jährlichen Kosten vor der Investition betragen : " + ergVerwertungskostenVorInvestition + " Euro.");
+    return ergVerwertungskostenVorInvestition;
   }
 
   berechneVerwertungskostenNachInvestition() {
     var ergVerwertungskostenNachInvestition = 0.0;
 
-    var neuRestwert = parseFloat(this.getKostentraegerByName("verwertungNeuRestwert"));
-    var neuRueckbauKosten = parseFloat(this.getKostentraegerByName("verwertungNeuRueckbauKosten"));
-    var sonstigeKosten = parseFloat(this.getKostentraegerByName("verwertungSonstigeVerwertungKosten"));
+    var neuRestwert = parseFloat(this.getValueByKey("verwertungNeuRestwert"));
+    var neuRueckbauKosten = parseFloat(this.getValueByKey("verwertungNeuRueckbauKosten"));
+    var sonstigeKosten = parseFloat(this.getValueByKey("verwertungSonstigeVerwertungKosten"));
 
     ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
-    console.log("Ergebnis: Der jährlichen Kosten nach der Investition: " + this.ergVerwertungskostenVorInvestition);
 
+    console.log("Ergebnis: Der jährlichen Kosten nach der Investition betragen : " + ergVerwertungskostenNachInvestition + " Euro.");
     return ergVerwertungskostenNachInvestition;
   }
-
 }
