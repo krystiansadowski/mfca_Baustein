@@ -5,6 +5,11 @@
 <ion-content padding>
   <p id="Beschreibungstext">Bitte geben Sie hier die Kosten für Investitionsalternativen in der Entstehungs-, Betriebs- und Verwertungsphase an.</p>
 
+  <button ion-button (click)="addAlternative()">Alternative hinzufügen</button>
+
+  <div id="formContainer">
+  </div>
+
   <br>
 
   <form [formGroup]="formData" (ngSubmit)="pushValuesToInvestitionrechnerProviderUndWechselZumTabDrei(

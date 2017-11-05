@@ -81,6 +81,11 @@ export class InvestitionsrechnerTabInvestitionPage {
     this.investitionsrechnerService.setKeyValueMappingToProvider(key, value);
   }
 
+  private addAlternative() {
+    // document.getElementById('formContainer')
+
+  }
+
   private switchToTabIndex(tabIndex) {
     this.tabs.select(tabIndex);
   }

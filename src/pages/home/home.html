@@ -1,17 +1,39 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Kostenrechner</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding class="mainContent">
+
+  <ion-card class="moduleCard">
+    <ion-card-header class="moduleHeader">Kostenstruktur-Rechner</ion-card-header>
+    <ion-card-content class="moduleBeschreibung">Dieses Modul erlaubt dem Nutzer, die Kostenstruktur in seinem Betrieb darzustellen. Dem Anwender soll dabei aufgezeigt
+      werden, welche Bereiche in seinem Betrieb die Kostentreiber sind und welchen Anteil Material- und Energiekosten im
+      Unternehmen haben.
+
+      <button ion-button class="navButton" block [navPush]="kostenstrukturRechner">
+        <ion-icon name="ion-ios-pie"></ion-icon>
+        Zum Kostenstrukturrechner
+      </button>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card class="moduleCard">
+    <ion-card-header class="moduleHeader">Investitionsrechner</ion-card-header>
+    <ion-card-content class="moduleBeschreibung">Mit diesem Modul lassen sich anhand der Lebenszykluskosten Investitionen vergleichen. Es können anschaulich die Amortisationszeiten
+      verschiedener Neuinvestitionsalternativen berechnet werden. Grundlage hierfür ist die dynamische Amortisationsrechnung.
+      Die Eingaben für die Amortisationsrechnung orientieren sich am VDMA-Einheitsblatt 34160.
+
+      <button ion-button class="navButton" block [navPush]="investitionsRechner">
+        Zum Investitionsrechner
+      </button>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
 </ion-content>

@@ -3,6 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import{ HomePage } from '../pages/home/home';
+
 import { KostenstrukturrechnerPage } from '../pages/kostenstrukturrechner/kostenstrukturrechner';
 import { ModalKostenstrukturrechnerPage } from '../pages/modal-kostenstrukturrechner/modal-kostenstrukturrechner';
 
@@ -16,7 +18,7 @@ import { ModalInvestitionsrechnerPage } from '../pages/modal-investitionsrechner
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = InvestitionsrechnerPage;
+  rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
