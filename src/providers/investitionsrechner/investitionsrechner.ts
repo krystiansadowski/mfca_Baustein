@@ -12,58 +12,59 @@ export class InvestitionsrechnerProvider {
   }
 
   load() {
-      // if (this.data) {
-      //   // return bereits vorhandene Daten des providers
-      //   return Promise.resolve(this.data);
-      // }
+      if (this.data) {
+        // return bereits vorhandene Daten des providers
+        return Promise.resolve(this.data);
+      }
 
-    this.data = [
-      // Testdaten  Tab1 
-      { key: 'betriebsAltMaterialKosten', value: '10' },
-      { key: 'betriebsAltBetriebundHilfstoffeKosten', value: '10' },
-      { key: 'betriebsAltWartungKosten', value: '10' },
-      { key: 'betriebsAltEntsorgungKosten', value: '10' },
-      { key: 'betriebsAltEnergieKosten', value: '10' },
-      { key: 'betriebsAltWerkzeugKosten', value: '10' },
-      { key: 'betriebsAltPersonalKosten', value: '10' },
-      { key: 'betriebsAltRaumKosten', value: '10' },
-      { key: 'betriebsAltInstandsetzungKosten', value: '10' },
-      { key: 'betriebsAltRuestKosten', value: '10' },
-      { key: 'betriebsAltLagerKosten', value: '10' },
-      { key: 'betriebsAltSonstigebetriebskosten', value: '10' },
+    // this.data = [
+    //   // Testdaten  Tab1 
+    //   { key: 'betriebsAltMaterialKosten', value: '10' },
+    //   { key: 'betriebsAltBetriebundHilfstoffeKosten', value: '10' },
+    //   { key: 'betriebsAltWartungKosten', value: '10' },
+    //   { key: 'betriebsAltEntsorgungKosten', value: '10' },
+    //   { key: 'betriebsAltEnergieKosten', value: '10' },
+    //   { key: 'betriebsAltWerkzeugKosten', value: '10' },
+    //   { key: 'betriebsAltPersonalKosten', value: '10' },
+    //   { key: 'betriebsAltRaumKosten', value: '10' },
+    //   { key: 'betriebsAltInstandsetzungKosten', value: '10' },
+    //   { key: 'betriebsAltRuestKosten', value: '10' },
+    //   { key: 'betriebsAltLagerKosten', value: '10' },
+    //   { key: 'betriebsAltSonstigebetriebskosten', value: '10' },
 
-      { key: 'verwertungsRueckbauKosten', value: '100' },
-      { key: 'verwertungsRestwert', value: '10' },
-      { key: 'verwertungsSonstigeVerwertungKosten', value: '5' },
+    //   { key: 'verwertungsRueckbauKosten', value: '100' },
+    //   { key: 'verwertungsRestwert', value: '10' },
+    //   { key: 'verwertungsSonstigeVerwertungKosten', value: '5' },
 
-      // Testdaten  Tab2 erterTeil
-      { key: 'bezeichnungInvestition', value: 'Alternative A'},
-      { key: 'betriebsInfraNeuBeschaffungsKosten', value: '10' },
-      { key: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', value: '10' },
-      { key: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', value: '10' },
+    //   // Testdaten  Tab2 erterTeil
+    //   { key: 'bezeichnungInvestition', value: 'Alternative A'},
+    //   { key: 'betriebsInfraNeuBeschaffungsKosten', value: '10' },
+    //   { key: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', value: '10' },
+    //   { key: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', value: '10' },
 
-      // Testdaten Tab2 zweiterTeil
-      { key: 'betriebsNeuMaterialKosten', value: '5' },
-      { key: 'betriebsNeuBetriebsundHilfsStoffeKosten', value: '5' },
-      { key: 'betriebsNeuWartungsKosten', value: '5' },
-      { key: 'betriebsNeuAbfallManagement', value: '5' },
-      { key: 'betriebsNeuEnergieKosten', value: '5' },
-      { key: 'betriebsNeuWerkzeugKosten', value: '5' },
-      { key: 'betriebsNeuPersonalKosten', value: '5' },
-      { key: 'betriebsNeuRaumKosten', value: '5' },
-      { key: 'betriebsNeuInstandsetzungKosten', value: '5' },
-      { key: 'betriebsNeuRuestKosten', value: '5' },
-      { key: 'betriebsNeuLagerKosten', value: '5' },
-      { key: 'betriebsNeuSonstigeBetriebsKosten', value: '15' },
+    //   // Testdaten Tab2 zweiterTeil
+    //   { key: 'betriebsNeuMaterialKosten', value: '5' },
+    //   { key: 'betriebsNeuBetriebsundHilfsStoffeKosten', value: '5' },
+    //   { key: 'betriebsNeuWartungsKosten', value: '5' },
+    //   { key: 'betriebsNeuAbfallManagement', value: '5' },
+    //   { key: 'betriebsNeuEnergieKosten', value: '5' },
+    //   { key: 'betriebsNeuWerkzeugKosten', value: '5' },
+    //   { key: 'betriebsNeuPersonalKosten', value: '5' },
+    //   { key: 'betriebsNeuRaumKosten', value: '5' },
+    //   { key: 'betriebsNeuInstandsetzungKosten', value: '5' },
+    //   { key: 'betriebsNeuRuestKosten', value: '5' },
+    //   { key: 'betriebsNeuLagerKosten', value: '5' },
+    //   { key: 'betriebsNeuSonstigeBetriebsKosten', value: '15' },
 
-      // Testdaten Tab2 dritterTeil
-      { key: 'verwertungNeuRueckbauKosten', value: '2' },
-      { key: 'verwertungNeuRestwert', value: '100' },
+    //   // Testdaten Tab2 dritterTeil
+    //   { key: 'verwertungNeuRueckbauKosten', value: '2' },
+    //   { key: 'verwertungNeuRestwert', value: '100' },
 
-      // Testdaten Tab3
-      { key: 'kalkulatorischerZins', value: '5' },
-      { key: 'nutzungsdauer', value: '20' }
-    ];
+    //   // Testdaten Tab3
+    //   { key: 'kalkulatorischerZins', value: '5' },
+    //   { key: 'nutzungsdauer', value: '20' }
+    // ];
+    
   }
 
   /* ------ Setter und Getter Methoden ------*/
