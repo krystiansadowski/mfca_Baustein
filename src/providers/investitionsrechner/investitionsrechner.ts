@@ -37,6 +37,7 @@ export class InvestitionsrechnerProvider {
       { key: 'verwertungsSonstigeVerwertungKosten', value: '5' },
 
       // Testdaten  Tab2 erterTeil
+      { key: 'bezeichnungInvestition', value: 'Alternative A'},
       { key: 'betriebsInfraNeuBeschaffungsKosten', value: '10' },
       { key: 'betriebsInfraNeuNeuTypInfraAInfrastrukturKosten', value: '10' },
       { key: 'betriebsInfraNeuTypInfraSonstigeEntstehungsKosten', value: '10' },

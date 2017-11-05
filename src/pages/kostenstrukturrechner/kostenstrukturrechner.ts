@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, ToastController }
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { ModalKostenstrukturrechnerPage } from '../../pages/modal-kostenstrukturrechner/modal-kostenstrukturrechner';
+import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
 
 @IonicPage()
 @Component({
