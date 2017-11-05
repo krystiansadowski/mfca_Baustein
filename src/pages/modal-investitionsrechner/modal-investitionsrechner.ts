@@ -13,7 +13,7 @@ export class ModalInvestitionsrechnerPage implements OnInit {
   private ergInvestitionsrechner = [];
   private kapitalwert: number = 0;
   private amortisation: number = 0;
-  private bezeichnungInvestition = [];
+
 
   // Variablen für AmortisationsChart
   private amortisationChartValue: number[];
@@ -24,7 +24,6 @@ export class ModalInvestitionsrechnerPage implements OnInit {
 
   // Werte für das Befüllen des AmortisationsChart
   // private amortisationChartLabelsValues: string[] = [this.getInvestitionsBezeichnung];
-  
   private amortisationChartColorValues: string[] = ["#ffa1b5"];
   private amortisationChartDataValues: number[] = [this.amortisation];
 
@@ -41,6 +40,11 @@ export class ModalInvestitionsrechnerPage implements OnInit {
   private kapitalChartDataValues: number[] = [this.kapitalwert];
 
 
+  // Variablen die für beide Charts geleten
+  private bezeichnungInvestition = [];
+  private  barChartLegend:boolean = false;
+
+  
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private viewCtrl: ViewController,
