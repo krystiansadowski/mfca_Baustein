@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class InvestitionsrechnerProvider {
 
   private data: any = [];
 
-  constructor() {
+  constructor(private toastCtrl: ToastController) {
     this.load();
   }
 
   load() {
-    if (this.data) {
-      // return bereits vorhandene Daten des providers
-      return Promise.resolve(this.data);
-    }
+    // if (this.data) {
+    //   // return bereits vorhandene Daten des providers
+    //   return Promise.resolve(this.data);
+    // }
 
     this.data = [
       // ### Alternative 1 ###
@@ -91,8 +92,6 @@ export class InvestitionsrechnerProvider {
       { key: 'kalkulatorischerZins', value: '5' },
       { key: 'nutzungsdauer', value: '20' }
     ];
-
-
   }
 
   /* ------ Setter und Getter Methoden ------*/
@@ -145,6 +144,7 @@ export class InvestitionsrechnerProvider {
       console.log("Getter: Keine Values für den Key '" + key + "' gefunden.")
     }
   }
+
 
   /* Getter für alle Values im Mapping ohne Parameter*/
   getAllValues() {
@@ -203,14 +203,28 @@ export class InvestitionsrechnerProvider {
   /* ------ Methoden zur Berechnung ------*/
 
   summiereAlleValuesStartsWith(key) {
-    var alleGefundenenValuesGesamt = 0.0;
-    let alleGefundenenValues = this.getValueStartsWith(key);
 
-    for (var i = 0; i < alleGefundenenValues.length; i++) {
-      alleGefundenenValuesGesamt += parseFloat(alleGefundenenValues[i]);
+    // Definierter Toast für den Bentuzer zum Fehlerabfang, wenn die Werte aus den vorigen Tabs leer sind.
+    let toast = this.createToast(
+      'Zur Berechnung werden Werte aus den vorherigen Tabs benötigt. Bitte ausfüllen.',
+      'bottom',
+      4000
+    );
+
+    var alleGefundenenValuesGesamt = 0.0;
+    try {
+      let alleGefundenenValues = this.getValueStartsWith(key);
+      for (var i = 0; i < alleGefundenenValues.length; i++) {
+        alleGefundenenValuesGesamt += parseFloat(alleGefundenenValues[i]);
+      }
+      console.log("Ergebnis Summe für die Values Parameter startWith '" + key + "' = " + alleGefundenenValuesGesamt.toString());
+      return alleGefundenenValuesGesamt;
     }
-    console.log("Ergebnis Summe für die Values Parameter startWith '" + key + "' = " + alleGefundenenValuesGesamt.toString());
-    return alleGefundenenValuesGesamt;
+    catch (e) {
+      console.log('Fehler beim auslesen der Daten. Bitte sicherstellen, dass das Key-Value-Mapping des Investitionsproviders gültige Paare aufweist.')
+      console.log('Details im Stacktrace: ', e);
+      toast.present();
+    }
   }
 
 
@@ -224,8 +238,6 @@ export class InvestitionsrechnerProvider {
     var rueckbauKosten = parseFloat(this.getValueByKey("verwertungsRueckbauKosten"));
     var restWert = parseFloat(this.getValueByKey("verwertungsRestwert"));
     var sonstigeKosten = parseFloat(this.getValueByKey("verwertungsSonstigeVerwertungKosten"));
-
-    // ergVerwertungskostenVorInvestition = rueckbauKosten - (restWert + sonstigeKosten);
 
     ergVerwertungskostenVorInvestition = beschaffungsUndInfrastrukturKosten + (rueckbauKosten - restWert);
 
@@ -252,5 +264,17 @@ export class InvestitionsrechnerProvider {
     let alleBetrieblichenKostenNachInvestition = this.summiereAlleValuesStartsWith('betriebsNeu');
     jaerhlicheEinsparung = alleBetrieblichenKostenVorInvestition - alleBetrieblichenKostenNachInvestition;
     return jaerhlicheEinsparung;
+  }
+
+
+
+  /* ----- Methoden zum Umgang mit Fehlern -----*/
+  private createToast(message: string, position: string, duration: number) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      position: position,
+      duration: duration
+    });
+    return toast;
   }
 }
