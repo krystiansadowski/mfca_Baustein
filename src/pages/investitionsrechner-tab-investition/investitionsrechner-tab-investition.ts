@@ -12,6 +12,7 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
 export class InvestitionsrechnerTabInvestitionPage {
 
   private formData: FormGroup;
+  private calculateAlternativeForm: boolean = false;
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
@@ -82,7 +83,7 @@ export class InvestitionsrechnerTabInvestitionPage {
   }
 
   private addAlternative() {
-    // document.getElementById('formContainer')
+   this.calculateAlternativeForm = true;
 
   }
 
