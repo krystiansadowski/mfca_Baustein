@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ModalInvestitionsrechnerPage } from '../modal-investitionsrechner/modal-investitionsrechner';
 
 // import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
 // import { ModalInvestitionsrechnerPage } from '../modal-investitionsrechner/modal-investitionsrechner';
@@ -9,7 +10,34 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
   selector: 'page-investitionsrechner-tab-ergebnis',
   templateUrl: 'investitionsrechner-tab-ergebnis.html',
 })
-export class InvestitionsrechnerTabErgebnisPage  {
+export class InvestitionsrechnerTabErgebnisPage implements OnInit {
+
+  private ergebnis: FormGroup;
+
+
+  constructor(private navCtrl: NavController,
+    private navParams: NavParams,
+    private fb: FormBuilder,
+    private modalCtrl: ModalController) { }
+
+
+
+  ngOnInit() {
+    this.buildForm();
+  }
+
+  private buildForm() {
+    this.ergebnis = this.fb.group({
+      kalkulatorischerZins: [''],
+      nutzungsdauer: ['']
+    });
+  }
+
+
+  private submit(value) {
+    console.log(value);
+    this.berechneKapitalUndAmortisationUndErstelleModal();
+  }
 
   // private formData: FormGroup;
 
@@ -17,7 +45,7 @@ export class InvestitionsrechnerTabErgebnisPage  {
   // private jaehrlicheKostenVorInvestition: number = 0;
   // private jaehrlicheEinsparungNachInvestition: number = 0;
   // private kostenEndeNutzungNachInvestition: number = 0;
-  
+
   // private zinsFakor: number = 0;
   // private nutzungsdauer: number = 0;
   // private kapitalwert: number = 0;
@@ -95,4 +123,9 @@ export class InvestitionsrechnerTabErgebnisPage  {
   //   let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage, {ergInvestitionsrechner: ergInvestitionsrechner})
   //   modalPage.present();
   // }
+
+  private berechneKapitalUndAmortisationUndErstelleModal(){
+    let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage);
+    modalPage.present();
+  }
 }

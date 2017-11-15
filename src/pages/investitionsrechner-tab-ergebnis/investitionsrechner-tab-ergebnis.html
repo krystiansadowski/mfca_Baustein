@@ -21,38 +21,29 @@
   <br>
   <!-- berechneInvestition(kalkulatorischerZins, nutzungsdauer) -->
 
-  <!-- <form [formGroup]="formData" (ngSubmit)="setkalkulatorischenZinsUndNutzungsdauertToProvider(kalkulatorischerZins, nutzungsdauer)">
+  <form [formGroup]="ergebnis" (ngSubmit)="submit(ergebnis.value)">
     <h5>Berechnungsgrundlagen</h5>
     <ion-item>
       <ion-label stacked class="formLabel">Kalkulatorischer Zinssatz</ion-label>
-      <ion-input type="number" name="kalkulatorischerZinssatz" [(ngModel)]="kalkulatorischerZins" [min]="0.1" placeholder="5" formControlName="kalkulatorischerZinsInputCheck"></ion-input>
+      <ion-input type="number" formControlName="kalkulatorischerZins" [min]="0" placeholder="5"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked class="formLabel">Nutzungsdauer</ion-label>
-      <ion-input type="number" name="nutzungsdauer" [(ngModel)]="nutzungsdauer" [min]="0.1" placeholder="20" formControlName="nutzungsdauerInputCheck"></ion-input>
+      <ion-input type="number" formControlName="nutzungsdauer" [min]="0" placeholder="20"></ion-input>
     </ion-item>
 
-    <button ion-button type="submit" block> Berechnen
-      <ion-icon name="ion-calculator"></ion-icon>
+    <button ion-button type="submit" block>
+      Berechnen
+      <ion-icon ios="ios-calculator" md="md-calculator" class="bttnIcon"></ion-icon>
     </button>
-
-    <!-- <button ion-button block onclick="openModal()"> Ergebnisse in Tabelle darstellen
-      <ion-icon name="ion-document-text"></ion-icon>
-    </button> 
-  </form> -->
+  </form>
 
 
-  <div id="divChart">
-    <canvas baseChart
-            [data]="chartData"
-            [labels]="chartLabels"
-            [colors]="chartColors"
-            [chartType]="chartType"
-            (chartHover)="chartHovered($event)"
-            width = "100%"
-            height= "100%">
-      </canvas>
-  </div>
+  <!-- <div id="divChart">
+    <canvas baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors" [chartType]="chartType" (chartHover)="chartHovered($event)"
+      width="100%" height="100%">
+    </canvas>
+  </div> -->
 
 </ion-content>

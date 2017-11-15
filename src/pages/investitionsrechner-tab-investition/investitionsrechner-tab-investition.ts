@@ -38,8 +38,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       betriebsNeuLagerKosten: [''],
       betriebsNeuSonstigeBetriebsKosten: [''],
       verwertungRueckbauKosten: [''],
-      verwertungRestwert: [''],
-      verwertungSonstigeVerwertungKosten: ['']
+      verwertungRestwert: ['']
     }
   }
 

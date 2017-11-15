@@ -44,11 +44,11 @@ export class ModalInvestitionsrechnerPage{
   // private  barChartLegend:boolean = false;
   
 
-  // constructor(private navCtrl: NavController,
-  //   private navParams: NavParams,
-  //   private viewCtrl: ViewController,
-  //   private investitionsrechnerService: InvestitionsrechnerProvider) {
-  // }
+  constructor(private navCtrl: NavController,
+    private navParams: NavParams,
+    private viewCtrl: ViewController,
+    private investitionsrechnerService: InvestitionsrechnerProvider) {
+  }
 
 
   // ngOnInit() {
@@ -141,8 +141,8 @@ export class ModalInvestitionsrechnerPage{
 
 
   // Methode zum Schliessen des Modalds
-  // private closeModal() {
-  //   this.viewCtrl.dismiss();
-  // }
+  private closeModal() {
+    this.viewCtrl.dismiss();
+  }
 
 }
