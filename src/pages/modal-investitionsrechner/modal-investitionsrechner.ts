@@ -141,8 +141,8 @@ export class ModalInvestitionsrechnerPage{
 
 
   // Methode zum Schliessen des Modalds
-  private closeModal() {
-    this.viewCtrl.dismiss();
-  }
+  // private closeModal() {
+  //   this.viewCtrl.dismiss();
+  // }
 
 }

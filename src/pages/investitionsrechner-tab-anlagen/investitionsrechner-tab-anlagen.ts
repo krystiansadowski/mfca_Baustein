@@ -13,30 +13,68 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class InvestitionsrechnerTabAnlagenPage implements OnInit {
 
-  private investitionen: FormGroup;
-  
-  constructor(private fb: FormBuilder) {  }
+  // private investitionen: FormGroup;
+
+  // constructor(private fb: FormBuilder) {  }
+
+  // ngOnInit() {
+  //   this.investitionen = this.fb.group({
+  //     alternativen: this.fb.array([
+  //       this.fb.group({
+  //         city:[''],
+  //         country: ['']
+  //       })
+  //     ])
+  //   });
+  // }
+
+  // private submit(value) {
+  //   console.log(value);
+  // }
+
+  // addAlternative() {
+  //   let alternativen = <FormArray>this.investitionen.get('alternativen');
+  //   alternativen.push(this.fb.group({
+  //     city: [''],
+  //     country: ['']
+  //   }))
+  // }
+
+  private anlagen: FormGroup;
+
+  constructor(private fb: FormBuilder,
+    private tabs: Tabs) { }
 
   ngOnInit() {
-    this.investitionen = this.fb.group({
-      alternativen: this.fb.array([
-        this.fb.group({
-          city:[''],
-          country: ['']
-        })
-      ])
-    });
+    this.buildForm();
   }
-  
+
+  private buildForm() {
+    this.anlagen = this.fb.group({
+      betriebsAltMaterial: [''],
+      betriebsAltBetriebundHilfstoffeKosten: [''],
+      betriebsAltWartungKosten: [''],
+      betriebsAltEntsorgungKosten: [''],
+      betriebsAltEnergieKosten: [''],
+      betriebsAltWerkzeugKosten: [''],
+      betriebsAltPersonalKosten: [''],
+      betriebsAltRaumKosten: [''],
+      betriebsAltInstandsetzungKosten: [''],
+      betriebsAltRuestKosten: [''],
+      betriebsAltLagerKosten: [''],
+      betriebsAltSonstigebetriebsAltkosten: [''],
+      verwertungRueckbauKosten: [''],
+      verwertungRestwert: [''],
+      verwertungSonstigeVerwertungKosten: ['']
+    })
+  }
+
   private submit(value) {
     console.log(value);
+    this.switchToTabIndex(1);
   }
-  
-  addAlternative() {
-    let alternativen = <FormArray>this.investitionen.get('alternativen');
-    alternativen.push(this.fb.group({
-      city: [''],
-      country: ['']
-    }))
+
+  private switchToTabIndex(tabIndex) {
+    this.tabs.select(tabIndex);
   }
 }
