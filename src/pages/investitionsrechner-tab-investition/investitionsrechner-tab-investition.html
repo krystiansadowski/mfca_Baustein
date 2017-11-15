@@ -6,10 +6,15 @@
   <p id="Beschreibungstext">Bitte geben Sie hier die Kosten für Investitionsalternativen in der Entstehungs-, Betriebs- und Verwertungsphase an.</p>
   <br>
 
-  <button ion-button (click)="addAlternative()">
+  <!-- <button ion-button (click)="addAlternative()">
     Investition hinzufügen
     <ion-icon name="add" class="bttnIcon"></ion-icon>
-  </button>
+  </button> -->
+
+
+  <div id="bttnAddAlternative">
+    <a (click)="addAlternative()"> + Investition hinzufügen</a>
+  </div>
 
   <form [formGroup]="investitionen" (ngSubmit)="submit(investitionen.value)">
     <div formArrayName="alternativen">
@@ -17,12 +22,18 @@
 
         <!-- Verschachtelte Formular Daten -->
 
-        <div id="investitionHeader">
+        <div id="investitionHeader" id="investitionsForm">
           <ion-label>Alternative {{i+1}} </ion-label>
         </div>
 
         <div [formGroupName]="i" id="investitionFormBody">
+          <ion-item>
+            <ion-label stacked class="formLabel"></ion-label>
+            <ion-input type="string" formControlName="bezeichnungInvestition" placeholder="Bezeichnung der Alternative"></ion-input>
+          </ion-item>
+
           <h5>Entstehungsphase der Neuinvestition</h5>
+
           <ion-item>
             <ion-label stacked class="formLabel">Beschaffungskosten</ion-label>
             <ion-input type="number" formControlName="betriebsInfraNeuBeschaffungsKosten" [min]="0" placeholder="0"></ion-input>

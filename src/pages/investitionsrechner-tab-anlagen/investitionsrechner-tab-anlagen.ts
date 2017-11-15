@@ -13,33 +13,6 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class InvestitionsrechnerTabAnlagenPage implements OnInit {
 
-  // private investitionen: FormGroup;
-
-  // constructor(private fb: FormBuilder) {  }
-
-  // ngOnInit() {
-  //   this.investitionen = this.fb.group({
-  //     alternativen: this.fb.array([
-  //       this.fb.group({
-  //         city:[''],
-  //         country: ['']
-  //       })
-  //     ])
-  //   });
-  // }
-
-  // private submit(value) {
-  //   console.log(value);
-  // }
-
-  // addAlternative() {
-  //   let alternativen = <FormArray>this.investitionen.get('alternativen');
-  //   alternativen.push(this.fb.group({
-  //     city: [''],
-  //     country: ['']
-  //   }))
-  // }
-
   private anlagen: FormGroup;
 
   constructor(private fb: FormBuilder,

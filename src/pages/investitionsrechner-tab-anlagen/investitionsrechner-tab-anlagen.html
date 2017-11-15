@@ -4,51 +4,13 @@
 
 <ion-content padding>
 
-  <!-- <button ion-button (click)="addAlternative()">
-    Investition hinzufügen
-    <ion-icon name="add" class="bttnIcon"></ion-icon>
-  </button> -->
-
-  <!-- <form [formGroup]="investitionen" (ngSubmit)="submit(investitionen.value)">
-    <div formArrayName="alternativen">
-      <div *ngFor="let step of investitionen.controls.alternativen.controls; let i = index;">
-
-        <!-- Verschachtelte Formular Daten 
-
-        <div id="investitionHeader">
-          <ion-label>Alternative {{i+1}} </ion-label>
-        </div>
-
-        <div [formGroupName]="i" id="investitionFormBody">
-          <ion-item>
-            <ion-label stacked>City</ion-label>
-            <ion-input type="string" formControlName="city"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label stacked>Country</ion-label>
-            <ion-input type="string" formControlName="country"></ion-input>
-          </ion-item>
-        </div>
-
-      </div>
-    </div>
-    
-    <button ion-button type="submit" block>Weiter
-      <ion-icon name="arrow-forward" class="bttnIcon"></ion-icon>
-
-    </button>
-  </form>  -->
-
   <p id="Beschreibungstext">
     Bitte geben Sie hier die Kosten für den Betrieb und der Verwertung der bestehenden Anlage an.</p>
 
   <br>
 
   <form [formGroup]="anlagen" (ngSubmit)="submit(anlagen.value)">
-
-    <h5>betriebsAltphase der bestehenden Anlage</h5>
-
+    <h5>Betriebsphase der bestehenden Anlage</h5>
     <ion-item>
       <ion-label stacked class="formLabel">Kosten für Materialeinsatz</ion-label>
       <ion-input type="number" name="materialkostenInput" [min]="0" placeholder="0" formControlName="betriebsAltMaterial"></ion-input>
@@ -130,8 +92,5 @@
       <ion-icon name="arrow-forward" class="bttnIcon"></ion-icon>
     </button>
   </form>
-
-
-
-
+  
 </ion-content>

@@ -22,6 +22,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
   private createFormArrayValues() {
     return {
+      bezeichnungInvestition: [''],
       betriebsInfraNeuBeschaffungsKosten: [''],
       betriebsInfraNeuInfrastrukturKosten: [''],
       betriebsInfraNeuSonstigeEntstehungsKosten: [''],
@@ -61,7 +62,6 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       this.createFormArrayValues()
     ))
   }
-
 
   private switchToTabIndex(tabIndex) {
     this.tabs.select(tabIndex);
