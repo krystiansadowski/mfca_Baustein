@@ -3,113 +3,41 @@
 
 
 <ion-content padding>
-  <p id="Beschreibungstext">
-    Bitte geben Sie hier die Kosten für den Betrieb und der Verwertung der bestehenden Anlage an.</p>
 
-  <br>
+  <button ion-button (click)="addAlternative()">
+    Investition hinzufügen
+    <ion-icon name="add" class="bttnIcon"></ion-icon>
+  </button>
 
-  <!-- <ion-list>
-    <ion-item *ngFor="let kostentraeger of investitionsrechnerService.kosten">
-      {{kostentraeger.kostentraegerTyp}} {{kostentraeger.kostentraegerWert}}
-    </ion-item>
-  </ion-list> -->
+   <form [formGroup]="investitionen" (ngSubmit)="submit(investitionen.value)">
+    <div formArrayName="alternativen">
+      <div *ngFor="let step of investitionen.controls.alternativen.controls; let i = index;">
 
+        <!-- Verschachtelte Formular Daten -->
 
-  <form [formGroup]="formData" (ngSubmit)="pushValuesToInvestitionrechnerProviderUndWechselZumTabZwei(
-    betriebsAltAltMaterial, betriebsAltBetriebundHilfstoffeKosten, betriebsAltWartungKosten, 
-      betriebsAltEntsorgungKosten, betriebsAltEnergieKosten, betriebsAltWerkzeugKosten, 
-      betriebsAltPersonalKosten, betriebsAltRaumKosten, betriebsAltInstandsetzungKosten,
-      betriebsAltRuestKosten, betriebsAltLagerKosten, betriebsAltSonstigebetriebsAltkosten, 
-      verwertungRueckbauKosten, verwertungRestwert, verwertungSonstigeVerwertungKosten)">
+        <div id="investitionHeader">
+          <ion-label>Alternative {{i+1}} </ion-label>
+        </div>
 
-    <h5>betriebsAltphase der bestehenden Anlage</h5>
+        <div [formGroupName]="i" id="investitionFormBody">
+          <ion-item>
+            <ion-label stacked>City</ion-label>
+            <ion-input type="string" formControlName="city"></ion-input>
+          </ion-item>
 
-    <ion-item>
-      <ion-label stacked class="formLabel">Kosten für Materialeinsatz</ion-label>
-      <ion-input type="number" name="materialkostenInput" [(ngModel)]="betriebsAltAltMaterial" [min]="0" placeholder="0" formControlName="materialInputCheck"></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label stacked>Country</ion-label>
+            <ion-input type="string" formControlName="country"></ion-input>
+          </ion-item>
+        </div>
 
-    <ion-item>
-      <ion-label stacked class="formLabel">Kosten für betriebsAlt- und Hilfsstoffe</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltBetriebundHilfstoffeKosten" formControlName="betriebsAltHilfstoffeInputCheck"
-        [min]="0" placeholder="0"></ion-input>
-    </ion-item>
+      </div>
+    </div>
+    
+    <button ion-button type="submit" block>Weiter
+      <ion-icon name="arrow-forward" class="bttnIcon"></ion-icon>
 
-    <ion-item>
-      <ion-label stacked class="formLabel">Wartung & Inspektion</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltWartungKosten" formControlName="wartungsInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Entsorgungskosten (Abfallmanagement)</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltEntsorgungKosten" formControlName="entsorgungsInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Energiekosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltEnergieKosten" formControlName="energieInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Durchschnittliche Werkzeugkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltWerkzeugKosten" formControlName="werkzeugInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Personalkosten für Betrieb</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltPersonalKosten" formControlName="personalInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Raumkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltRaumKosten" formControlName="raumInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Instandsetzungkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltInstandsetzungKosten" formControlName="instandhaltungInputCheck" [min]="0"
-        placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Rüstkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltRuestKosten" formControlName="ruestInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Lagerkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltLagerKosten" formControlName="lagerInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Sonstige betriebsAltkosten</ion-label>
-      <ion-input type="number" [(ngModel)]="betriebsAltSonstigebetriebsAltkosten" formControlName="sonstigeInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <h5>Verwertungsphase der bestehenden Anlage</h5>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Kosten für den Rückbau</ion-label>
-      <ion-input type="number" [(ngModel)]="verwertungRueckbauKosten" formControlName="rueckbauInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Restwert</ion-label>
-      <ion-input type="number" [(ngModel)]="verwertungRestwert" formControlName="restwertInputCheck" [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked class="formLabel">Sonstige Verwertungskosten</ion-label>
-      <ion-input type="number" [(ngModel)]="verwertungSonstigeVerwertungKosten" formControlName="verwertungSonstigeKostenInputCheck"
-        [min]="0" placeholder="0"></ion-input>
-    </ion-item>
-
-
-    <br>
-
-    <button ion-button type="submit" block> Weiter
-      <ion-icon name="arrow-forward"></ion-icon>
     </button>
+  </form> 
 
-  </form>
 </ion-content>
