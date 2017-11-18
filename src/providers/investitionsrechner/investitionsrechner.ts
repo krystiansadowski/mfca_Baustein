@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ToastController } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { FormArray } from '@angular/forms/src/model';
+
 
 @Injectable()
 export class InvestitionsrechnerProvider {
@@ -317,4 +321,35 @@ export class InvestitionsrechnerProvider {
   //   });
   //   return toast;
   // }
+
+
+
+
+
+  // Neuer Versuch Array Daten über die Tabs zu peristieren
+
+  private data = new Map<string, string>();
+  // private data = [];
+
+  constructor(private toastCtrl: ToastController,
+    private fb: FormBuilder) {
+  }
+
+  load() {
+  }
+
+  /* Setter  */
+  setData(values) {
+    for (var formProperties in values) {
+      if(values[formProperties]== ""){
+        values[formProperties] = '0';
+      }
+      this.data.set(formProperties, values[formProperties]);
+      //   console.log("Key: ", formProperties, ",  Value: ", values[formProperties]);
+
+    }
+    console.log("Mapping der Formulardaten.", this.data) ;
+    return this.data;
+  }
 }
+

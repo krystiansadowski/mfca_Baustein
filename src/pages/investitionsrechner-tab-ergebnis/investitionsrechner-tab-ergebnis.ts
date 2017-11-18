@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ModalInvestitionsrechnerPage } from '../modal-investitionsrechner/modal-investitionsrechner';
 
-// import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
+import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
 // import { ModalInvestitionsrechnerPage } from '../modal-investitionsrechner/modal-investitionsrechner';
 @IonicPage()
 @Component({
@@ -18,7 +18,8 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private fb: FormBuilder,
-    private modalCtrl: ModalController) { }
+    private modalCtrl: ModalController,
+    private investitionsService: InvestitionsrechnerProvider) { }
 
 
 
@@ -124,7 +125,7 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
   //   modalPage.present();
   // }
 
-  private berechneKapitalUndAmortisationUndErstelleModal(){
+  private berechneKapitalUndAmortisationUndErstelleModal() {
     let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage);
     modalPage.present();
   }

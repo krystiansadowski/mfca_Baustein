@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 
 import { InvestitionsrechnerTabInvestitionPage } from '../../pages/investitionsrechner-tab-investition/investitionsrechner-tab-investition';
-import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
+import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
 @IonicPage()
 @Component({
   selector: 'page-investitionsrechner-tab-anlagen',
@@ -16,7 +16,9 @@ export class InvestitionsrechnerTabAnlagenPage implements OnInit {
   private anlagen: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private tabs: Tabs) { }
+    private tabs: Tabs,
+    private navCtrl: NavController,
+    private investitionsService: InvestitionsrechnerProvider) { }
 
   ngOnInit() {
     this.buildForm();
@@ -43,11 +45,16 @@ export class InvestitionsrechnerTabAnlagenPage implements OnInit {
   }
 
   private submit(value) {
-    console.log(value);
+    // console.log("ausgelesene Formulardaten: " +  JSON.stringify(value));
+    this.setDataToProvider(value);
     this.switchToTabIndex(1);
   }
 
   private switchToTabIndex(tabIndex) {
     this.tabs.select(tabIndex);
+  }
+
+  private setDataToProvider(value) {
+    this.investitionsService.setData(value);
   }
 }
