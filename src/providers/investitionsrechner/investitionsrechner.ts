@@ -333,23 +333,54 @@ export class InvestitionsrechnerProvider {
 
   constructor(private toastCtrl: ToastController,
     private fb: FormBuilder) {
+    this.load();
   }
 
   load() {
+    if (this.data) {
+      // return bereits vorhandene Daten des providers
+      return Promise.resolve(this.data);
+    }
   }
 
-  /* Setter  */
+  /* Set Data to Provider */
   setData(values) {
     for (var formProperties in values) {
-      if(values[formProperties]== ""){
+      if (values[formProperties] == "") {
         values[formProperties] = '0';
       }
       this.data.set(formProperties, values[formProperties]);
       //   console.log("Key: ", formProperties, ",  Value: ", values[formProperties]);
 
     }
-    console.log("Mapping der Formulardaten.", this.data) ;
+    console.log("Mapping der Formulardaten.", this.data);
     return this.data;
+  }
+
+
+  // /*
+  // Getter für einen Value
+  // @Param keyToSearch
+  // */
+  getValueByKey(keyToSearch) {
+    let valueFound = "";
+
+    this.data.forEach((value: string, key: string) => {
+      if (key == keyToSearch) {
+        valueFound = value;
+        console.log("Getter: Ausgelesener Value für den Key '" + keyToSearch + "' = " + valueFound);
+      }
+    });
+    this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
+
+    return valueFound;
+  }
+
+
+  private ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound) {
+    if (valueFound == "") {
+      console.log("Getter: Für den Key '" + keyToSearch + "' konnte kein Value gefunden werden.");
+    }
   }
 }
 

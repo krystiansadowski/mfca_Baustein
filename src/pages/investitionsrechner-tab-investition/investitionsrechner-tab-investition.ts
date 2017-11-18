@@ -13,12 +13,19 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
   private investitionen: FormGroup;
 
+
   constructor(private fb: FormBuilder,
     private tabs: Tabs,
-    private investitionsService: InvestitionsrechnerProvider) { }
+    private investitionsService: InvestitionsrechnerProvider) {
+  }
+
 
   ngOnInit() {
+    this.investitionsService.load();
     this.buildForm();
+
+    let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
+    console.log("Investitionstab gefunden: " + betriebsAltMaterial);
   }
 
   private createFormArrayValues() {
