@@ -3,17 +3,18 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 
 import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
 
+
 @IonicPage()
 @Component({
   selector: 'page-modal-investitionsrechner',
   templateUrl: 'modal-investitionsrechner.html',
 })
-export class ModalInvestitionsrechnerPage{
+export class ModalInvestitionsrechnerPage {
 
   // private ergInvestitionsrechner = [];
   // private kapitalwert: number = 0;
   // private amortisation: number = 0;
-  
+
   // private bezeichnungInvestition = [];
 
 
@@ -38,17 +39,17 @@ export class ModalInvestitionsrechnerPage{
   // // Werte für das Befüllen des AmortisationsChart
   // private kapitalChartColorValues: string[] = ["#86c7f3"];
   // private kapitalChartDataValues: number[] = [this.kapitalwert];
-  
+
   // // Variablen die für beide Charts geleten
   // private chartLabels: string[];
   // private  barChartLegend:boolean = false;
-  
 
-  constructor(private navCtrl: NavController,
-    private navParams: NavParams,
-    private viewCtrl: ViewController,
-    private investitionsrechnerService: InvestitionsrechnerProvider) {
-  }
+
+  // constructor(private navCtrl: NavController,
+  //   private navParams: NavParams,
+  //   private viewCtrl: ViewController,
+  //   private investitionsrechnerService: InvestitionsrechnerProvider) {
+  // }
 
 
   // ngOnInit() {
@@ -112,7 +113,7 @@ export class ModalInvestitionsrechnerPage{
   // private setAmortisationsChartType(chartType: string) {
   //   this.amortisationChartType = chartType;
   // }
-  
+
   // private setAmortisationsChartColor(chartColorValues: string[]) {
   //   this.amortisationChartColors = [{ backgroundColor: chartColorValues }];
   // }
@@ -138,6 +139,36 @@ export class ModalInvestitionsrechnerPage{
   //   this.chartLabels = this.getInvestitionsBezeichnung();
   // }
 
+
+
+
+
+
+
+  // NEU
+
+  constructor(private navCtrl: NavController,
+    private navParams: NavParams,
+    private viewCtrl: ViewController,
+    private investitionsService: InvestitionsrechnerProvider) { }
+
+  ionViewWillEnter() {
+    this.investitionsService.load();
+
+    // Tab Anlagen
+    console.log("Tab Anlagen: ");
+    let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
+    console.log("Investitionstab gefunden: " + betriebsAltMaterial);
+    var arrayStartwith = this.investitionsService.getValueStartsWith('betriebsAlt');
+    console.log("Investitionstab gefunden: " + arrayStartwith);
+    var summe = this.investitionsService.summiereAlleValuesStartsWith('betriebsAlt');
+
+    // Tab Investitionen
+    console.log("Tab Investition: ");
+    var summe2 = this.investitionsService.summiereAlleValuesStartsWith('betriebsInfraNeu');
+
+    var alternativen = this.investitionsService.getAlternativen();
+  }
 
 
   // Methode zum Schliessen des Modalds

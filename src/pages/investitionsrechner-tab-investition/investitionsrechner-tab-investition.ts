@@ -21,17 +21,19 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
 
   ngOnInit() {
-    // this.investitionsService.load();
     this.buildForm();
-
-    // let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
-    // console.log("Investitionstab gefunden: " + betriebsAltMaterial);
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.investitionsService.load();
-    let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
-    console.log("Investitionstab gefunden: " + betriebsAltMaterial);
+    // // let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
+    // // console.log("Investitionstab gefunden: " + betriebsAltMaterial);
+
+
+    // // var arrayStartwith = this.investitionsService.getValueStartsWith('2betriebsAlt');
+    // // console.log("Investitionstab gefunden: " + arrayStartwith);
+
+    // var summe = this.investitionsService.summiereAlleValuesStartsWith('betriebsAlt');
   }
 
   private createFormArrayValues() {
@@ -66,7 +68,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
   private submit(value) {
     console.log(value);
-    this.setDataToPrivder(value);
+    this.setDataToProvider(value);
     this.switchToTabIndex(2);
   }
 
@@ -82,7 +84,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
   }
 
 
-  private setDataToPrivder(value) {
+  private setDataToProvider(value) {
     this.investitionsService.setData(value);
   }
 

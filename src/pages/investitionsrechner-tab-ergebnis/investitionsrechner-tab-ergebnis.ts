@@ -11,9 +11,7 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
   templateUrl: 'investitionsrechner-tab-ergebnis.html',
 })
 export class InvestitionsrechnerTabErgebnisPage implements OnInit {
-
   private ergebnis: FormGroup;
-
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
@@ -21,10 +19,35 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     private modalCtrl: ModalController,
     private investitionsService: InvestitionsrechnerProvider) { }
 
-
-
   ngOnInit() {
+    this.investitionsService.load();
     this.buildForm();
+  }
+
+  ionViewWillEnter() {
+    this.investitionsService.load();
+
+
+    // // Tab Anlagen
+    // console.log("Tab Anlagen: ");
+    // let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
+    // console.log("Investitionstab gefunden: " + betriebsAltMaterial);
+    // var arrayStartwith = this.investitionsService.getValueStartsWith('betriebsAlt');
+    // console.log("Investitionstab gefunden: " + arrayStartwith);
+    // var summe = this.investitionsService.summiereAlleValuesStartsWith('betriebsAlt');
+
+    // // Tab Investitionen
+    // console.log("Tab Investition: ");
+    // var summe2 = this.investitionsService.summiereAlleValuesStartsWith('betriebsInfraNeu');
+
+    var alternativen = this.investitionsService.getAlternativen();
+
+
+    alternativen.forEach((value: any, key: number) => {
+      let a = this.investitionsService.getValueByKey('betriebsInfraNeu');
+      console.log(a);
+    });
+
   }
 
   private buildForm() {
@@ -37,7 +60,13 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   private submit(value) {
     console.log(value);
-    this.berechneKapitalUndAmortisationUndErstelleModal();
+    // this.berechneKapitalUndAmortisationUndErstelleModal();
+    this.createUndOpenModal();
+  }
+
+  private createUndOpenModal() {
+    let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage);
+    modalPage.present();
   }
 
   // private formData: FormGroup;
@@ -64,9 +93,9 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
   // }
 
   // ngOnInit() {
-  //   // this.investitionsrechnerService.load();
-  //   // this.berechneErgebnisseAusVorherigenTabs();
-  // }
+  // this.investitionsrechnerService.load();
+  // this.berechneErgebnisseAusVorherigenTabs();
+}
 
   // private setkalkulatorischenZinsUndNutzungsdauertToProvider(kalkulatorischerZins, nutzungsdauer) {
 
@@ -120,13 +149,9 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
   //     kapitalwert, amortisation
   //   };
 
-  //   // Modal-Darstellung
-  //   let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage, {ergInvestitionsrechner: ergInvestitionsrechner})
-  //   modalPage.present();
-  // }
+  // Modal-Darstellung
+//   let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage)
+//   modalPage.present();
+// }
 
-  private berechneKapitalUndAmortisationUndErstelleModal() {
-    let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage);
-    modalPage.present();
-  }
-}
+
