@@ -21,9 +21,15 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
 
   ngOnInit() {
-    this.investitionsService.load();
+    // this.investitionsService.load();
     this.buildForm();
 
+    // let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
+    // console.log("Investitionstab gefunden: " + betriebsAltMaterial);
+  }
+
+  ionViewWillEnter(){
+    this.investitionsService.load();
     let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
     console.log("Investitionstab gefunden: " + betriebsAltMaterial);
   }

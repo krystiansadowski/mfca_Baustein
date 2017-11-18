@@ -11,7 +11,7 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
   selector: 'page-investitionsrechner-tab-anlagen',
   templateUrl: 'investitionsrechner-tab-anlagen.html',
 })
-export class InvestitionsrechnerTabAnlagenPage implements OnInit {
+export class InvestitionsrechnerTabAnlagenPage  implements OnInit{
 
   private anlagen: FormGroup;
 
