@@ -40,13 +40,11 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     // console.log("Tab Investition: ");
     // var summe2 = this.investitionsService.summiereAlleValuesStartsWith('betriebsInfraNeu');
 
-    var alternativen = this.investitionsService.getAlternativen();
 
+    // Iteration über alternativen notwendig
+    // forEach alternative Kapitalwert-Berechnung
 
-    alternativen.forEach((value: any, key: number) => {
-      let a = this.investitionsService.getValueByKey('betriebsInfraNeu');
-      console.log(a);
-    });
+    var alternativen = this.investitionsService.getAlternativenValue('alternativen');
 
   }
 
@@ -59,7 +57,7 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
 
   private submit(value) {
-    console.log(value);
+    this.setDataToProvider(value);
     // this.berechneKapitalUndAmortisationUndErstelleModal();
     this.createUndOpenModal();
   }
@@ -69,89 +67,7 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     modalPage.present();
   }
 
-  // private formData: FormGroup;
-
-  // // Deklaration und Initialisierung der grundlegenden Variablen für den Kapitalwert und die Amortisationszeit
-  // private jaehrlicheKostenVorInvestition: number = 0;
-  // private jaehrlicheEinsparungNachInvestition: number = 0;
-  // private kostenEndeNutzungNachInvestition: number = 0;
-
-  // private zinsFakor: number = 0;
-  // private nutzungsdauer: number = 0;
-  // private kapitalwert: number = 0;
-  // private amortisation: number = 0;
-
-  // constructor(private navCtrl: NavController,
-  //   private navParams: NavParams,
-  //   private formBuilder: FormBuilder,
-  //   private modalCtrl: ModalController) {
-
-  //   this.formData = this.formBuilder.group({
-  //     kalkulatorischerZinsInputCheck: [],
-  //     nutzungsdauerInputCheck: [],
-  //   });
-  // }
-
-  // ngOnInit() {
-  // this.investitionsrechnerService.load();
-  // this.berechneErgebnisseAusVorherigenTabs();
+  private setDataToProvider(value) {
+    this.investitionsService.setData(value);
+  }
 }
-
-  // private setkalkulatorischenZinsUndNutzungsdauertToProvider(kalkulatorischerZins, nutzungsdauer) {
-
-  //   // Test zum laden der Daten bei jedem klick
-  //   this.investitionsrechnerService.load();
-  //   this.berechneErgebnisseAusVorherigenTabs();
-  //   // Test ende
-
-
-  //   this.setKeyValueMappingToProvider('kalkulatorischerZins', kalkulatorischerZins);
-  //   this.zinsFakor = this.investitionsrechnerService.getZinsfaktor();
-
-  //   this.setKeyValueMappingToProvider('nutzungsdauer', nutzungsdauer);
-  //   this.nutzungsdauer = this.investitionsrechnerService.getNutzungsdauer();
-
-  //   this.berechneKapitalUndAmortisation();
-  // }
-
-  // private berechneErgebnisseAusVorherigenTabs() {
-  //   // Tab 1 Ergebnisse 
-  //   this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.berechneVerwertungskostenVorInvestition();
-  //   this.jaehrlicheEinsparungNachInvestition = this.investitionsrechnerService.berechneJaehrlicheEinsparung();
-  //   this.kostenEndeNutzungNachInvestition = this.investitionsrechnerService.berechneVerwertungskostenNachInvestition();
-  // }
-
-  // private berechneKapitalwert() {
-  //   return -1 * this.jaehrlicheKostenVorInvestition + this.jaehrlicheEinsparungNachInvestition * ((Math.pow(this.zinsFakor, this.nutzungsdauer) - 1) / (Math.pow(this.zinsFakor, this.nutzungsdauer) * (this.zinsFakor - 1))) + this.kostenEndeNutzungNachInvestition / Math.pow(this.zinsFakor, this.nutzungsdauer);
-  // }
-
-  // private berechneAmortisation() {
-  //   return Math.log(1 - this.jaehrlicheKostenVorInvestition * (this.zinsFakor - 1) / this.jaehrlicheEinsparungNachInvestition) / Math.log(1 / this.zinsFakor);
-  // }
-
-  // private setKeyValueMappingToProvider(key, value) {
-  //   this.investitionsrechnerService.setKeyValueMappingToProvider(key, value);
-  // }
-
-  // private berechneKapitalUndAmortisation() {
-  //   this.kapitalwert = this.berechneKapitalwert();
-  //   this.amortisation = this.berechneAmortisation();
-
-  //   // set Variables für Modal-Übergabe
-  //   var jaehrlicheKostenVorInvestiton = this.jaehrlicheKostenVorInvestition;
-  //   var jaehrlicheEinsparungNachInvestition = this.jaehrlicheEinsparungNachInvestition;
-  //   var kostenEndeNutzungNachInvestition = this.kostenEndeNutzungNachInvestition;
-
-  //   var kapitalwert = this.kapitalwert;
-  //   var amortisation = this.amortisation;
-
-  //   let ergInvestitionsrechner = {
-  //     kapitalwert, amortisation
-  //   };
-
-  // Modal-Darstellung
-//   let modalPage = this.modalCtrl.create(ModalInvestitionsrechnerPage)
-//   modalPage.present();
-// }
-
-

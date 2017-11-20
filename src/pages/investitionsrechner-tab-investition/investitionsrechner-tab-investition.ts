@@ -26,14 +26,6 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
 
   ionViewWillEnter() {
     this.investitionsService.load();
-    // // let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
-    // // console.log("Investitionstab gefunden: " + betriebsAltMaterial);
-
-
-    // // var arrayStartwith = this.investitionsService.getValueStartsWith('2betriebsAlt');
-    // // console.log("Investitionstab gefunden: " + arrayStartwith);
-
-    // var summe = this.investitionsService.summiereAlleValuesStartsWith('betriebsAlt');
   }
 
   private createFormArrayValues() {
@@ -53,8 +45,8 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       betriebsNeuRuestKosten: [''],
       betriebsNeuLagerKosten: [''],
       betriebsNeuSonstigeBetriebsKosten: [''],
-      verwertungRueckbauKosten: [''],
-      verwertungRestwert: ['']
+      verwertungNeuRueckbauKosten: [''],
+      verwertungNeuRestwert: ['']
     }
   }
 

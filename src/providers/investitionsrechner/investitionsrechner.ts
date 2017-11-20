@@ -9,142 +9,6 @@ import { FormArray } from '@angular/forms/src/model';
 
 @Injectable()
 export class InvestitionsrechnerProvider {
-
-
-
-  // /* Getter für alle Values im Mapping ohne Parameter*/
-  // getAllValues() {
-  //   let alleValues = [];
-  //   var iterator = this.data.keys();
-  //   if (iterator.next()) {
-  //     alleValues.push(iterator.next().value);
-  //   }
-  //   return alleValues;
-
-  //   // if (this.data.length != 0) {
-  //   //   this.data.forEach(element => {
-  //   //     alleValues.push(element.value)
-  //   //   });
-  //   //   console.log("Getter: Alle ausgelesene Values ohne Paramer = " + alleValues.toString());
-  //   //   return alleValues;
-  //   // }
-  //   // else {
-  //   //   console.log("Getter: Keine Values vorhanden!")
-  //   // }
-  // }
-
-
-  // /* Getter für alle keys und values, wo key mit "key" beginnt  
-  // @paramter key
-  // */
-  // getKeyUndValueWhereKeyStartsWith(key) {
-  //   let alleKeysUndValuesStartsWithKey = [];
-
-  //   // if (this.data.length != 0) {
-  //   //   this.data.forEach(element => {
-  //   //     if (element.key.startsWith(key)) {
-  //   //       alleKeysUndValuesStartsWithKey.push({ key: element.key, value: element.value });
-  //   //     }
-  //   //   });
-  //   //   return alleKeysUndValuesStartsWithKey;
-  //   // }
-  // }
-
-
-  // /* Getter für den Zinsfaktor, bedeutend für die Berechnungsgrundlage des 
-  // Kapitalwerts und der Amortisationszeit
-  // */
-  // getZinsfaktor() {
-
-  //   var zinsfaktor = 0.0;
-  //   var kalkulatorischerZins = parseFloat(this.getValueByKey('kalkulatorischerZins')) / 100;
-  //   zinsfaktor = 1 + kalkulatorischerZins;
-
-  //   return zinsfaktor;
-  // }
-
-  // /* Getter für die Nutzungsdauer, bedeutend für die Berechnungsgrundlage des 
-  // Kapitalwerts und der Amortisationszeit
-  // */
-  // getNutzungsdauer() {
-  //   return parseFloat(this.getValueByKey('nutzungsdauer'));
-  // }
-
-
-
-
-  // /* ------ Methoden zur Berechnung ------*/
-
-  // summiereAlleValuesStartsWith(key) {
-
-  //   // Definierter Toast für den Bentuzer zum Fehlerabfang, wenn die Werte aus den vorigen Tabs leer sind.
-  //   let toast = this.createToast(
-  //     'Zur Berechnung werden Werte aus den vorherigen Tabs benötigt. Bitte ausfüllen.',
-  //     'bottom',
-  //     4000
-  //   );
-
-  //   var alleGefundenenValuesGesamt = 0.0;
-  //   try {
-  //     var alleGefundenenValues = this.getValueStartsWith(key);
-  //     for (var i = 0; i < alleGefundenenValues.length; i++) {
-  //       alleGefundenenValuesGesamt += parseFloat(alleGefundenenValues[i]);
-  //     }
-
-
-
-  //     console.log("Ergebnis Summe für die Values Parameter startWith '" + key + "' = " + alleGefundenenValuesGesamt.toString());
-  //     return alleGefundenenValuesGesamt;
-  //   }
-  //   catch (e) {
-  //     console.log('Fehler beim auslesen der Daten. Bitte sicherstellen, dass das Key-Value-Mapping des Investitionsproviders gültige Paare aufweist.')
-  //     console.log('Details im Stacktrace: ', e);
-  //     toast.present();
-  //   }
-  // }
-
-
-  // // investitionVornutzung
-  // berechneVerwertungskostenVorInvestition() {
-  //   var ergVerwertungskostenVorInvestition = 0.0;
-
-  //   // neu
-  //   var beschaffungsUndInfrastrukturKosten = this.summiereAlleValuesStartsWith('betriebsInfraNeu');
-
-  //   var rueckbauKosten = parseFloat(this.getValueByKey("verwertungsRueckbauKosten"));
-  //   var restWert = parseFloat(this.getValueByKey("verwertungsRestwert"));
-  //   var sonstigeKosten = parseFloat(this.getValueByKey("verwertungsSonstigeVerwertungKosten"));
-
-  //   ergVerwertungskostenVorInvestition = beschaffungsUndInfrastrukturKosten + (rueckbauKosten - restWert);
-
-  //   console.log("Ergebnis: Der jährlichen Kosten vor der Investition betragen : " + ergVerwertungskostenVorInvestition + " Euro.");
-  //   return ergVerwertungskostenVorInvestition;
-  // }
-
-  // berechneVerwertungskostenNachInvestition() {
-  //   var ergVerwertungskostenNachInvestition = 0.0;
-
-  //   var neuRestwert = parseFloat(this.getValueByKey("verwertungNeuRestwert"));
-  //   var neuRueckbauKosten = parseFloat(this.getValueByKey("verwertungNeuRueckbauKosten"));
-  //   var sonstigeKosten = parseFloat(this.getValueByKey("verwertungSonstigeVerwertungKosten"));
-
-  //   ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
-
-  //   console.log("Ergebnis: Der jährlichen Kosten nach der Investition betragen : " + ergVerwertungskostenNachInvestition + " Euro.");
-  //   return ergVerwertungskostenNachInvestition;
-  // }
-
-  // berechneJaehrlicheEinsparung() {
-  //   var jaerhlicheEinsparung = 0.0;
-  //   let alleBetrieblichenKostenVorInvestition = this.summiereAlleValuesStartsWith('betriebsAlt');
-  //   let alleBetrieblichenKostenNachInvestition = this.summiereAlleValuesStartsWith('betriebsNeu');
-  //   jaerhlicheEinsparung = alleBetrieblichenKostenVorInvestition - alleBetrieblichenKostenNachInvestition;
-  //   return jaerhlicheEinsparung;
-  // }
-
-
-
-
   private data = new Map<string, string>();
 
   constructor(private toastCtrl: ToastController,
@@ -181,29 +45,29 @@ export class InvestitionsrechnerProvider {
   // @Param key
   // */
   getValueByKey(keyToSearch) {
-    // let valueFound = "";
-
-    // this.data.forEach((value: string, key: string) => {
-    //   if (key == keyToSearch) {
-    //     valueFound = value;
-    //     console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = " , valueFound);
-    //   }
-    // });
-    // this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
-
-    // return valueFound;
-
-    let valueFound = [];
+    let valueFound = "";
 
     this.data.forEach((value: string, key: string) => {
       if (key == keyToSearch) {
-        valueFound.push(value);
+        valueFound = value;
         console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = ", valueFound);
       }
     });
-    // this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
+    this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
 
     return valueFound;
+
+    // let valueFound = [];
+
+    // this.data.forEach((value: string, key: string) => {
+    //   if (key == keyToSearch) {
+    //     valueFound.push(value);
+    //     console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = ", valueFound);
+    //   }
+    // });
+    // // this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
+
+    // return valueFound;
   }
 
 
@@ -232,14 +96,47 @@ export class InvestitionsrechnerProvider {
   }
 
 
-  getAlternativen() {
-    var alternativen  = this.getValueByKey('alternativen');
-    return alternativen;
+  getAlternativenValue(keyToSearch) {
+    var valueFound = [];
+
+    this.data.forEach((value: string, key: string) => {
+      if (key == keyToSearch) {
+        valueFound.push(value);
+        console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = ", valueFound);
+      }
+    });
+    // this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
+
+    return valueFound;
+
+
+
+    // var alternativen = this.getValueByKey('alternativen');
+    // return alternativen;
 
     // alternativen.forEach((value: any, key: number) => {
-      
-    // });
 
+    // });
+  }
+
+
+  /* Getter für den Zinsfaktor, bedeutend für die Berechnungsgrundlage des 
+  Kapitalwerts und der Amortisationszeit
+  */
+  zinsFaktor() {
+    var zinsfaktor = 0.0;
+    var kalkulatorischerZins = parseFloat(this.getValueByKey('kalkulatorischerZins')) / 100;
+    zinsfaktor = 1 + kalkulatorischerZins;
+
+    return zinsfaktor;
+  }
+
+
+/* Getter für die Nutzungsdauer, bedeutend für die Berechnungsgrundlage des 
+Kapitalwerts und der Amortisationszeit
+*/
+  getNutzungsdauer() {
+    return parseFloat(this.getValueByKey('nutzungsdauer'));
   }
 
 
@@ -278,6 +175,47 @@ export class InvestitionsrechnerProvider {
   }
 
 
+  // investitionVornutzung
+  berechneVerwertungskostenVorInvestition() {
+    var ergVerwertungskostenVorInvestition = 0.0;
+
+    // neu
+    var beschaffungsUndInfrastrukturKosten = this.summiereAlleValuesStartsWith('betriebsInfraNeu');
+
+    var rueckbauKosten = parseFloat(this.getValueByKey("verwertungAltRueckbauKosten"));
+    var restWert = parseFloat(this.getValueByKey("verwertungAltRestwert"));
+    var sonstigeKosten = parseFloat(this.getValueByKey("verwertungAltSonstigeVerwertungKosten"));
+
+    ergVerwertungskostenVorInvestition = beschaffungsUndInfrastrukturKosten + (rueckbauKosten - restWert);
+
+    console.log("Ergebnis: Der jährlichen Kosten vor der Investition betragen : " + ergVerwertungskostenVorInvestition + " Euro.");
+    return ergVerwertungskostenVorInvestition;
+  }
+
+
+  berechneJaehrlicheEinsparung() {
+    var jaerhlicheEinsparung = 0.0;
+    let alleBetrieblichenKostenVorInvestition = this.summiereAlleValuesStartsWith('betriebsAlt');
+    let alleBetrieblichenKostenNachInvestition = this.summiereAlleValuesStartsWith('betriebsNeu');
+    jaerhlicheEinsparung = alleBetrieblichenKostenVorInvestition - alleBetrieblichenKostenNachInvestition;
+    return jaerhlicheEinsparung;
+  }
+
+
+  berechneVerwertungskostenNachInvestition() {
+    var ergVerwertungskostenNachInvestition = 0.0;
+
+    var neuRestwert = parseFloat(this.getValueByKey("verwertungNeuRestwert"));
+    var neuRueckbauKosten = parseFloat(this.getValueByKey("verwertungNeuRueckbauKosten"));
+    // var sonstigeKosten = parseFloat(this.getValueByKey("verwertungSonstigeVerwertungKosten"));
+
+    ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
+
+    console.log("Ergebnis: Der jährlichen Kosten nach der Investition betragen : " + ergVerwertungskostenNachInvestition + " Euro.");
+    return ergVerwertungskostenNachInvestition;
+  }
+
+
 
   // ### Methoden zum Umgang mit Fehlern ###
 
@@ -289,6 +227,4 @@ export class InvestitionsrechnerProvider {
     });
     return toast;
   }
-
 }
-

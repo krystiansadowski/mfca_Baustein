@@ -9,7 +9,7 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
   selector: 'page-modal-investitionsrechner',
   templateUrl: 'modal-investitionsrechner.html',
 })
-export class ModalInvestitionsrechnerPage {
+export class ModalInvestitionsrechnerPage implements OnInit {
 
   // private ergInvestitionsrechner = [];
   // private kapitalwert: number = 0;
@@ -147,27 +147,61 @@ export class ModalInvestitionsrechnerPage {
 
   // NEU
 
+  // Deklaration und Initialisierung der grundlegenden Variablen für den Kapitalwert und die Amortisationszeit
+  private jaehrlicheKostenVorInvestition: number = 0;
+  private jaehrlicheEinsparungNachInvestition: number = 0;
+  private kostenEndeNutzungNachInvestition: number = 0;
+
+  private zinsFaktor: number = 0;
+  private nutzungsdauer: number = 0;
+  private kapitalwert: number = 0;
+  private amortisation: number = 0;
+
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private viewCtrl: ViewController,
-    private investitionsService: InvestitionsrechnerProvider) { }
+    private investitionsrechnerService: InvestitionsrechnerProvider) { }
 
   ionViewWillEnter() {
-    this.investitionsService.load();
+    this.investitionsrechnerService.load();
 
-    // Tab Anlagen
-    console.log("Tab Anlagen: ");
-    let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
-    console.log("Investitionstab gefunden: " + betriebsAltMaterial);
-    var arrayStartwith = this.investitionsService.getValueStartsWith('betriebsAlt');
-    console.log("Investitionstab gefunden: " + arrayStartwith);
-    var summe = this.investitionsService.summiereAlleValuesStartsWith('betriebsAlt');
+    this.getZinsfaktor();
+    this.getNutzungsdauer();
+    this.getNutzungsdauer();
+    this.berechneJaehrlicheKostenVorUndNachInvestitionUndKostenEndeNutzung();
+    this.kapitalwert = this.berechneKapitalwert();
+    console.log("Kapitalwert: " +  this.kapitalwert);
+    this.amortisation = this.berechneAmortisation();
+    console.log("Kapitalwert: " +  this.amortisation);
+  }
 
-    // Tab Investitionen
-    console.log("Tab Investition: ");
-    var summe2 = this.investitionsService.summiereAlleValuesStartsWith('betriebsInfraNeu');
+  ngOnInit() {
+  }
 
-    var alternativen = this.investitionsService.getAlternativen();
+
+
+  private berechneKapitalwert() {
+    return -1 * this.jaehrlicheKostenVorInvestition + this.jaehrlicheEinsparungNachInvestition * ((Math.pow(this.zinsFaktor, this.nutzungsdauer) - 1) / (Math.pow(this.zinsFaktor, this.nutzungsdauer) * (this.zinsFaktor - 1))) + this.kostenEndeNutzungNachInvestition / Math.pow(this.zinsFaktor, this.nutzungsdauer);
+  }
+
+  private berechneAmortisation() {
+    return Math.log(1 - this.jaehrlicheKostenVorInvestition * (this.zinsFaktor - 1) / this.jaehrlicheEinsparungNachInvestition) / Math.log(1 / this.zinsFaktor);
+  }
+
+  private getZinsfaktor() {
+    this.zinsFaktor = this.investitionsrechnerService.zinsFaktor();
+    console.log("Zinsfaktor: " + this.zinsFaktor);
+  }
+
+  private getNutzungsdauer() {
+    this.nutzungsdauer = this.investitionsrechnerService.getNutzungsdauer();
+    console.log("Nutzungsdauer: " + this.nutzungsdauer);
+  }
+
+  private berechneJaehrlicheKostenVorUndNachInvestitionUndKostenEndeNutzung() {
+    this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.berechneVerwertungskostenVorInvestition();
+    this.jaehrlicheEinsparungNachInvestition = this.investitionsrechnerService.berechneJaehrlicheEinsparung();
+    this.kostenEndeNutzungNachInvestition = this.investitionsrechnerService.berechneVerwertungskostenNachInvestition();
   }
 
 

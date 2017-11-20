@@ -38,9 +38,9 @@ export class InvestitionsrechnerTabAnlagenPage  implements OnInit{
       betriebsAltRuestKosten: [''],
       betriebsAltLagerKosten: [''],
       betriebsAltSonstigebetriebsAltkosten: [''],
-      verwertungRueckbauKosten: [''],
-      verwertungRestwert: [''],
-      verwertungSonstigeVerwertungKosten: ['']
+      verwertungAltRueckbauKosten: [''],
+      verwertungAltRestwert: [''],
+      verwertungAltSonstigeVerwertungKosten: ['']
     })
   }
 
