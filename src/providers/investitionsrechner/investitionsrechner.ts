@@ -40,6 +40,21 @@ export class InvestitionsrechnerProvider {
 
   // ### Getter Methoden ###
 
+  getValuesByKeyFromAlternativen(keyToSearch){
+    var valueFound = "";
+    
+    var alternativen = this.getAlternativenValue('alternativen');
+    for (var i = 0; i < alternativen.length; i++) {
+      alternativen[i].forEach((value:string, key)=> {
+          // console.log(value , " " , key);
+          if(value.startsWith(keyToSearch)){
+            valueFound = value;
+          }
+      });
+    }
+  }
+
+
   // /*
   // Getter für einen Value
   // @Param key
@@ -96,7 +111,25 @@ export class InvestitionsrechnerProvider {
   }
 
 
-  getAlternativenValue(keyToSearch) {
+  getAllAlternativeValues(){
+    var alternativen = this.getAlternativen('alternativen');
+    for (var indexOfArray in alternativen) {
+      var alternative = alternativen[indexOfArray];
+      for (var i = 0; i < alternative.length; i++) {
+        var alternativeObjekt = alternative[i];
+        for (var eigenschaft in alternativeObjekt) {
+          if (alternativeObjekt.hasOwnProperty(eigenschaft)) {
+            // console.log("Alternative " + i + " " + eigenschaft + " = " + alternativeObjekt[eigenschaft]);
+            var alteternative = "Alternative " + i + " " + eigenschaft + " = " + alternativeObjekt[eigenschaft];
+          }
+        }
+      }
+    }
+    return alternative;
+  }
+
+
+   getAlternativen(keyToSearch) {
     var valueFound = [];
 
     this.data.forEach((value: string, key: string) => {
@@ -105,18 +138,7 @@ export class InvestitionsrechnerProvider {
         console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = ", valueFound);
       }
     });
-    // this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
-
     return valueFound;
-
-
-
-    // var alternativen = this.getValueByKey('alternativen');
-    // return alternativen;
-
-    // alternativen.forEach((value: any, key: number) => {
-
-    // });
   }
 
 

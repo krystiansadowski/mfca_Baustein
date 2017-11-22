@@ -195,7 +195,6 @@ export class ModalInvestitionsrechnerPage implements OnInit {
 
   private getNutzungsdauer() {
     this.nutzungsdauer = this.investitionsrechnerService.getNutzungsdauer();
-    console.log("Nutzungsdauer: " + this.nutzungsdauer);
   }
 
   private berechneJaehrlicheKostenVorUndNachInvestitionUndKostenEndeNutzung() {

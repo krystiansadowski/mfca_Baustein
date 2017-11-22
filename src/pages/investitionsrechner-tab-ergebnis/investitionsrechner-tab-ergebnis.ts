@@ -44,8 +44,21 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
     // Iteration über alternativen notwendig
     // forEach alternative Kapitalwert-Berechnung
 
-    var alternativen = this.investitionsService.getAlternativenValue('alternativen');
+    var alternativen = this.investitionsService.getAlternativen('alternativen');
+    for (var indexOfArray in alternativen) {
+      var alternative = alternativen[indexOfArray];
+      for (var i = 0; i < alternative.length; i++) {
+        var alternativeObjekt = alternative[i];
+        for (var eigenschaft in alternativeObjekt) {
+          if (alternativeObjekt.hasOwnProperty(eigenschaft)) {
+            console.log("Alternative " + i + " " + eigenschaft + " = " + alternativeObjekt[eigenschaft]);
+          }
+        }
+      }
+    }
 
+    // var alleAlternativen = this.investitionsService.getAllAlternativeValues();
+    // console.log(alleAlternativen);
   }
 
   private buildForm() {
