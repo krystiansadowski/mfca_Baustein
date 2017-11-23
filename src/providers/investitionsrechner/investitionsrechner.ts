@@ -57,18 +57,6 @@ export class InvestitionsrechnerProvider {
     this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
 
     return valueFound;
-
-    // let valueFound = [];
-
-    // this.data.forEach((value: string, key: string) => {
-    //   if (key == keyToSearch) {
-    //     valueFound.push(value);
-    //     console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = ", valueFound);
-    //   }
-    // });
-    // // this.ifValueFoundisEmptyShowGetterError(keyToSearch, valueFound)
-
-    // return valueFound;
   }
 
 
@@ -89,9 +77,9 @@ export class InvestitionsrechnerProvider {
       if (alleValuesStartsWith.toString.length != 0) {
         console.log("Getter: Ausgelesene/r Value/s für den Key '" + keyToSearch + "' = " + alleValuesStartsWith.toString());
       }
-      // else {
-      //   this.ifValueFoundisEmptyShowGetterError(keyToSearch, alleValuesStartsWith);
-      // }
+      else {
+        this.ifValueFoundisEmptyShowGetterError(keyToSearch, alleValuesStartsWith);
+      }
     }
     return alleValuesStartsWith;
   }
@@ -190,31 +178,7 @@ export class InvestitionsrechnerProvider {
     console.log("Ergebnis: Der jährlichen Kosten vor der Investition betragen : " + ergVerwertungskostenVorInvestition + " Euro.");
     return ergVerwertungskostenVorInvestition;
   }
-
-
-  berechneJaehrlicheEinsparung() {
-    var jaerhlicheEinsparung = 0.0;
-    let alleBetrieblichenKostenVorInvestition = this.summiereAlleValuesStartsWith('betriebsAlt');
-    let alleBetrieblichenKostenNachInvestition = this.summiereAlleValuesStartsWith('betriebsNeu');
-    jaerhlicheEinsparung = alleBetrieblichenKostenVorInvestition - alleBetrieblichenKostenNachInvestition;
-    return jaerhlicheEinsparung;
-  }
-
-
-  // berechneVerwertungskostenNachInvestition() {
-  //   var ergVerwertungskostenNachInvestition = 0.0;
-
-  //   var neuRestwert = parseFloat(this.getValueByKey("verwertungNeuRestwert"));
-  //   var neuRueckbauKosten = parseFloat(this.getValueByKey("verwertungNeuRueckbauKosten"));
-  //   // var sonstigeKosten = parseFloat(this.getValueByKey("verwertungSonstigeVerwertungKosten"));
-
-  //   ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
-
-  //   console.log("Ergebnis: Der jährlichen Kosten nach der Investition betragen : " + ergVerwertungskostenNachInvestition + " Euro.");
-  //   return ergVerwertungskostenNachInvestition;
-  // }
-
-
+  
 
   // ### Methoden zum Umgang mit Fehlern ###
 

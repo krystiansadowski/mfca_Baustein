@@ -8,19 +8,6 @@
 
   <br>
 
-  <!-- <ion-list>
-    <ion-item *ngFor="let kostentraeger of investitionsrechnerService.kosten">
-      {{kostentraeger.kostentraegerTyp}} {{kostentraeger.kostentraegerWert}}
-    </ion-item>
-  </ion-list> -->
-
-  <p>Kapitalwert: {{kapitalwert}}</p>
-  <p>Amortisation: {{amortisation}}</p>
-
-  <br>
-  <br>
-  <!-- berechneInvestition(kalkulatorischerZins, nutzungsdauer) -->
-
   <form [formGroup]="ergebnis" (ngSubmit)="submit(ergebnis.value)">
     <h5>Berechnungsgrundlagen</h5>
     <ion-item>
@@ -38,12 +25,4 @@
       <ion-icon ios="ios-calculator" md="md-calculator" class="bttnIcon"></ion-icon>
     </button>
   </form>
-
-
-  <!-- <div id="divChart">
-    <canvas baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors" [chartType]="chartType" (chartHover)="chartHovered($event)"
-      width="100%" height="100%">
-    </canvas>
-  </div> -->
-
 </ion-content>

@@ -19,7 +19,6 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
     private investitionsService: InvestitionsrechnerProvider) {
   }
 
-
   ngOnInit() {
     this.buildForm();
   }
@@ -76,9 +75,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
     this.tabs.select(tabIndex);
   }
 
-
   private setDataToProvider(value) {
     this.investitionsService.setData(value);
   }
-
 }

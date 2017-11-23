@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { ModalInvestitionsrechnerPage } from '../modal-investitionsrechner/modal-investitionsrechner';
 
 import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner/investitionsrechner';
-// import { ModalInvestitionsrechnerPage } from '../modal-investitionsrechner/modal-investitionsrechner';
+
 @IonicPage()
 @Component({
   selector: 'page-investitionsrechner-tab-ergebnis',

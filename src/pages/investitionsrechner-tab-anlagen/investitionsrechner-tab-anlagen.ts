@@ -45,7 +45,6 @@ export class InvestitionsrechnerTabAnlagenPage  implements OnInit{
   }
 
   private submit(value) {
-    // console.log("ausgelesene Formulardaten: " +  JSON.stringify(value));
     this.setDataToProvider(value);
     this.switchToTabIndex(1);
   }
