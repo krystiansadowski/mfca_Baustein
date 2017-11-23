@@ -146,16 +146,8 @@ export class ModalInvestitionsrechnerPage implements OnInit {
 
 
   // NEU
-
-  // Deklaration und Initialisierung der grundlegenden Variablen für den Kapitalwert und die Amortisationszeit
-  private jaehrlicheKostenVorInvestition: number = 0;
-  private jaehrlicheEinsparungNachInvestition: number = 0;
-  private kostenEndeNutzungNachInvestition: number = 0;
-
-  private zinsFaktor: number = 0;
-  private nutzungsdauer: number = 0;
-  private kapitalwert: number = 0;
-  private amortisation: number = 0;
+  private kapitalwertErgebnisse = [];
+  private amortisationszseitErgebnisse = [];
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
@@ -167,40 +159,166 @@ export class ModalInvestitionsrechnerPage implements OnInit {
 
     this.getZinsfaktor();
     this.getNutzungsdauer();
-    this.getNutzungsdauer();
-    this.berechneJaehrlicheKostenVorUndNachInvestitionUndKostenEndeNutzung();
-    this.kapitalwert = this.berechneKapitalwert();
-    console.log("Kapitalwert: " +  this.kapitalwert);
-    this.amortisation = this.berechneAmortisation();
-    console.log("Kapitalwert: " +  this.amortisation);
+
+    // this.berechneJaehrlicheKostenVorUndNachInvestitionUndKostenEndeNutzung();
+
+
+
+    // this.kapitalwert = this.berechneKapitalwert();
+    // console.log("Kapitalwert: " +  this.kapitalwert);
+    // this.amortisation = this.berechneAmortisation();
+    // console.log("Kapitalwert: " +  this.amortisation);
+
+    var alternativen = this.investitionsrechnerService.getAlternativen('alternativen');
+    this.berechneKapitalUndAmortisationforEachAlternative(alternativen);
+    this.logKapitalwertUndAmortisationszeitErgebnisse();
+
+
   }
 
   ngOnInit() {
   }
 
 
+  private berechneKapitalUndAmortisationforEachAlternative(alternativen) {
+    for (var indexOfArray in alternativen) {
+      var alternative = alternativen[indexOfArray];
+      for (var i = 0; i < alternative.length; i++) {
+        var alternativeObjekt = alternative[i];
 
-  private berechneKapitalwert() {
-    return -1 * this.jaehrlicheKostenVorInvestition + this.jaehrlicheEinsparungNachInvestition * ((Math.pow(this.zinsFaktor, this.nutzungsdauer) - 1) / (Math.pow(this.zinsFaktor, this.nutzungsdauer) * (this.zinsFaktor - 1))) + this.kostenEndeNutzungNachInvestition / Math.pow(this.zinsFaktor, this.nutzungsdauer);
+        // Hier die Berechnungen für jede Alternative einfügen (alternative Objekt)
+        // Ergebnis in den jeweiligen [] pushen 
+        var nutzungsdauer = this.investitionsrechnerService.getNutzungsdauer();
+        var zinsFaktor = this.investitionsrechnerService.getZinsfaktor();
+        var jaehrlicheKostenVorInvestition = this.berechneVerwertungskostenVorInvestition(alternativeObjekt);
+        // var jaehrlicheEinsparungNachInvestition = parseFloat('50');
+        var jaehrlicheEinsparungNachInvestition = this.berechneJaehrlicheEinsparung(alternativeObjekt);
+        var kostenEndeNutzungNachInvestition = this.berechneVerwertungskostenNachInvestition(alternativeObjekt);
+
+
+        var kapitalwert = this.berechneKapitalwert(jaehrlicheKostenVorInvestition, jaehrlicheEinsparungNachInvestition, kostenEndeNutzungNachInvestition, nutzungsdauer, zinsFaktor);
+        this.kapitalwertErgebnisse.push(kapitalwert);
+        
+        var amortisationszeit = this.berechneAmortisation(jaehrlicheKostenVorInvestition, zinsFaktor, jaehrlicheEinsparungNachInvestition);
+        this.amortisationszseitErgebnisse.push(amortisationszeit);
+      }
+    }
   }
 
-  private berechneAmortisation() {
-    return Math.log(1 - this.jaehrlicheKostenVorInvestition * (this.zinsFaktor - 1) / this.jaehrlicheEinsparungNachInvestition) / Math.log(1 / this.zinsFaktor);
+
+
+  berechneVerwertungskostenVorInvestition(alternativeObjekt) {
+    var ergVerwertungskostenVorInvestition = 0.0;
+
+    // neu
+    var beschaffungsUndInfrastrukturKosten = this.summiereAlleValuesStartsWith(alternativeObjekt, 'betriebsInfraNeu');
+
+    var rueckbauKosten = parseFloat(this.investitionsrechnerService.getValueByKey("verwertungAltRueckbauKosten"));
+    var restWert = parseFloat(this.investitionsrechnerService.getValueByKey("verwertungAltRestwert"));
+    var sonstigeKosten = parseFloat(this.investitionsrechnerService.getValueByKey("verwertungAltSonstigeVerwertungKosten"));
+
+    ergVerwertungskostenVorInvestition = beschaffungsUndInfrastrukturKosten + (rueckbauKosten - restWert);
+
+    console.log("Ergebnis: Der jährlichen Kosten vor der Investition betragen : " + ergVerwertungskostenVorInvestition + " Euro.");
+    return ergVerwertungskostenVorInvestition;
+  }
+
+
+  berechneVerwertungskostenNachInvestition(alternativeObjekt) {
+    var ergVerwertungskostenNachInvestition = 0.0;
+
+    var neuRestwert = parseFloat(this.getValueFromAlternative(alternativeObjekt, "verwertungNeuRestwert"));
+    var neuRueckbauKosten = parseFloat(this.getValueFromAlternative(alternativeObjekt, "verwertungNeuRueckbauKosten"));
+
+    ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
+
+    console.log("Ergebnis: Der jährlichen Kosten nach der Investition betragen : " + ergVerwertungskostenNachInvestition + " Euro.");
+    return ergVerwertungskostenNachInvestition;
+  }
+
+
+  berechneJaehrlicheEinsparung(alternativeObjekt) {
+    var jaehrlicheKostenVorDerInvestition = this.investitionsrechnerService.summiereAlleValuesStartsWith('betriebsAlt');
+    var jaehrlicheKostenNachDerInvestition = this.summiereAlleValuesStartsWith(alternativeObjekt, 'betriebsNeu');
+    return jaehrlicheKostenVorDerInvestition - jaehrlicheKostenNachDerInvestition;
+  }
+
+
+
+
+  private berechneKapitalwert(jaehrlicheKostenVorInvestition, jaehrlicheEinsparungNachInvestition, kostenEndeNutzungNachInvestition, nutzungsdauer, zinsFaktor) {
+    return -1 * jaehrlicheKostenVorInvestition + jaehrlicheEinsparungNachInvestition * ((Math.pow(zinsFaktor, nutzungsdauer) - 1) / (Math.pow(zinsFaktor, nutzungsdauer) * (zinsFaktor - 1))) + kostenEndeNutzungNachInvestition / Math.pow(zinsFaktor, nutzungsdauer);
+  }
+
+  private berechneAmortisation(jaehrlicheKostenVorInvestition, zinsFaktor, jaehrlicheEinsparungNachInvestition) {
+    return Math.log(1 - jaehrlicheKostenVorInvestition * (zinsFaktor - 1) / jaehrlicheEinsparungNachInvestition) / Math.log(1 / zinsFaktor);
   }
 
   private getZinsfaktor() {
-    this.zinsFaktor = this.investitionsrechnerService.zinsFaktor();
-    console.log("Zinsfaktor: " + this.zinsFaktor);
+    var zinsaktor = this.investitionsrechnerService.zinsFaktor();
+    console.log("Zinsfaktor: " + zinsaktor);
+    return zinsaktor;
   }
 
   private getNutzungsdauer() {
-    this.nutzungsdauer = this.investitionsrechnerService.getNutzungsdauer();
+    return this.investitionsrechnerService.getNutzungsdauer();
   }
 
-  private berechneJaehrlicheKostenVorUndNachInvestitionUndKostenEndeNutzung() {
-    this.jaehrlicheKostenVorInvestition = this.investitionsrechnerService.berechneVerwertungskostenVorInvestition();
-    this.jaehrlicheEinsparungNachInvestition = this.investitionsrechnerService.berechneJaehrlicheEinsparung();
-    this.kostenEndeNutzungNachInvestition = this.investitionsrechnerService.berechneVerwertungskostenNachInvestition();
+
+
+  private logKapitalwertUndAmortisationszeitErgebnisse() {
+    console.log("Kapitalwerte: ", this.kapitalwertErgebnisse);
+    console.log("Amortisationszeiten: ", this.amortisationszseitErgebnisse);
+  }
+
+
+  private getValueFromAlternative(alternativeObjekt, keyToSearch) {
+    let valueFound = "";
+
+    for (var eigenschaft in alternativeObjekt) {
+      if (alternativeObjekt.hasOwnProperty(eigenschaft)) {
+        if (eigenschaft == keyToSearch) {
+          if (alternativeObjekt[eigenschaft] == "") {
+            alternativeObjekt[eigenschaft] = 0;
+          }
+          valueFound = alternativeObjekt[eigenschaft];
+        }
+      }
+    }
+
+    console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = ", valueFound);
+    return valueFound;
+  }
+
+  private getValuesFromWhichStartsWithKey(alternativeObjekt, keyToSearch) {
+    let valueFound = [];
+
+    for (var eigenschaft in alternativeObjekt) {
+      if (alternativeObjekt.hasOwnProperty(eigenschaft)) {
+        if (eigenschaft.startsWith(keyToSearch)) {
+          if (alternativeObjekt[eigenschaft] == "") {
+            alternativeObjekt[eigenschaft] = 0;
+          }
+          valueFound.push(alternativeObjekt[eigenschaft]);
+        }
+      }
+    }
+
+    console.log("Getter : Ausgelesener Value für den Key '" + keyToSearch + "' = ", valueFound);
+    return valueFound;
+  }
+
+
+  summiereAlleValuesStartsWith(alternativeObjekt, keyToSearch) {
+    var alleGefundenenValuesGesamt = 0.0;
+
+    var alleGefundenenValues = this.getValuesFromWhichStartsWithKey(alternativeObjekt, keyToSearch);
+    for (var i = 0; i < alleGefundenenValues.length; i++) {
+      alleGefundenenValuesGesamt += parseFloat(alleGefundenenValues[i]);
+    }
+    console.log("Berechnung: Ergebnis Summe für die Values Parameter startWith '" + keyToSearch + "' = " + alleGefundenenValuesGesamt.toString());
+    return alleGefundenenValuesGesamt;
+
   }
 
 

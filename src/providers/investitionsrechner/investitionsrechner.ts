@@ -40,20 +40,6 @@ export class InvestitionsrechnerProvider {
 
   // ### Getter Methoden ###
 
-  getValuesByKeyFromAlternativen(keyToSearch){
-    var valueFound = "";
-    
-    var alternativen = this.getAlternativenValue('alternativen');
-    for (var i = 0; i < alternativen.length; i++) {
-      alternativen[i].forEach((value:string, key)=> {
-          // console.log(value , " " , key);
-          if(value.startsWith(keyToSearch)){
-            valueFound = value;
-          }
-      });
-    }
-  }
-
 
   // /*
   // Getter für einen Value
@@ -110,26 +96,8 @@ export class InvestitionsrechnerProvider {
     return alleValuesStartsWith;
   }
 
-
-  getAllAlternativeValues(){
-    var alternativen = this.getAlternativen('alternativen');
-    for (var indexOfArray in alternativen) {
-      var alternative = alternativen[indexOfArray];
-      for (var i = 0; i < alternative.length; i++) {
-        var alternativeObjekt = alternative[i];
-        for (var eigenschaft in alternativeObjekt) {
-          if (alternativeObjekt.hasOwnProperty(eigenschaft)) {
-            // console.log("Alternative " + i + " " + eigenschaft + " = " + alternativeObjekt[eigenschaft]);
-            var alteternative = "Alternative " + i + " " + eigenschaft + " = " + alternativeObjekt[eigenschaft];
-          }
-        }
-      }
-    }
-    return alternative;
-  }
-
-
-   getAlternativen(keyToSearch) {
+  
+  getAlternativen(keyToSearch) {
     var valueFound = [];
 
     this.data.forEach((value: string, key: string) => {
@@ -154,13 +122,22 @@ export class InvestitionsrechnerProvider {
   }
 
 
-/* Getter für die Nutzungsdauer, bedeutend für die Berechnungsgrundlage des 
-Kapitalwerts und der Amortisationszeit
-*/
+  /* Getter für die Nutzungsdauer, bedeutend für die Berechnungsgrundlage des 
+  Kapitalwerts und der Amortisationszeit
+  */
   getNutzungsdauer() {
     return parseFloat(this.getValueByKey('nutzungsdauer'));
   }
 
+
+  getZinsfaktor(){
+    var zinsfaktor = 0.0;
+    var kalkulatorischerZins = parseFloat(this.getValueByKey('kalkulatorischerZins'));
+    kalkulatorischerZins = kalkulatorischerZins/100;
+    zinsfaktor = 1 + kalkulatorischerZins;
+
+    return zinsfaktor;
+  }
 
   private ifValueFoundisEmptyShowGetterError(keyToSearch, values) {
     if (values == "") {
@@ -224,18 +201,18 @@ Kapitalwerts und der Amortisationszeit
   }
 
 
-  berechneVerwertungskostenNachInvestition() {
-    var ergVerwertungskostenNachInvestition = 0.0;
+  // berechneVerwertungskostenNachInvestition() {
+  //   var ergVerwertungskostenNachInvestition = 0.0;
 
-    var neuRestwert = parseFloat(this.getValueByKey("verwertungNeuRestwert"));
-    var neuRueckbauKosten = parseFloat(this.getValueByKey("verwertungNeuRueckbauKosten"));
-    // var sonstigeKosten = parseFloat(this.getValueByKey("verwertungSonstigeVerwertungKosten"));
+  //   var neuRestwert = parseFloat(this.getValueByKey("verwertungNeuRestwert"));
+  //   var neuRueckbauKosten = parseFloat(this.getValueByKey("verwertungNeuRueckbauKosten"));
+  //   // var sonstigeKosten = parseFloat(this.getValueByKey("verwertungSonstigeVerwertungKosten"));
 
-    ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
+  //   ergVerwertungskostenNachInvestition = neuRestwert - neuRueckbauKosten;
 
-    console.log("Ergebnis: Der jährlichen Kosten nach der Investition betragen : " + ergVerwertungskostenNachInvestition + " Euro.");
-    return ergVerwertungskostenNachInvestition;
-  }
+  //   console.log("Ergebnis: Der jährlichen Kosten nach der Investition betragen : " + ergVerwertungskostenNachInvestition + " Euro.");
+  //   return ergVerwertungskostenNachInvestition;
+  // }
 
 
 

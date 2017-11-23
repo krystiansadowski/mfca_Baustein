@@ -25,40 +25,7 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.investitionsService.load();
-
-
-    // // Tab Anlagen
-    // console.log("Tab Anlagen: ");
-    // let betriebsAltMaterial = this.investitionsService.getValueByKey('betriebsAltMaterial');
-    // console.log("Investitionstab gefunden: " + betriebsAltMaterial);
-    // var arrayStartwith = this.investitionsService.getValueStartsWith('betriebsAlt');
-    // console.log("Investitionstab gefunden: " + arrayStartwith);
-    // var summe = this.investitionsService.summiereAlleValuesStartsWith('betriebsAlt');
-
-    // // Tab Investitionen
-    // console.log("Tab Investition: ");
-    // var summe2 = this.investitionsService.summiereAlleValuesStartsWith('betriebsInfraNeu');
-
-
-    // Iteration über alternativen notwendig
-    // forEach alternative Kapitalwert-Berechnung
-
-    var alternativen = this.investitionsService.getAlternativen('alternativen');
-    for (var indexOfArray in alternativen) {
-      var alternative = alternativen[indexOfArray];
-      for (var i = 0; i < alternative.length; i++) {
-        var alternativeObjekt = alternative[i];
-        for (var eigenschaft in alternativeObjekt) {
-          if (alternativeObjekt.hasOwnProperty(eigenschaft)) {
-            console.log("Alternative " + i + " " + eigenschaft + " = " + alternativeObjekt[eigenschaft]);
-          }
-        }
-      }
-    }
-
-    // var alleAlternativen = this.investitionsService.getAllAlternativeValues();
-    // console.log(alleAlternativen);
+    this.investitionsService.load();  
   }
 
   private buildForm() {
@@ -71,7 +38,6 @@ export class InvestitionsrechnerTabErgebnisPage implements OnInit {
 
   private submit(value) {
     this.setDataToProvider(value);
-    // this.berechneKapitalUndAmortisationUndErstelleModal();
     this.createUndOpenModal();
   }
 

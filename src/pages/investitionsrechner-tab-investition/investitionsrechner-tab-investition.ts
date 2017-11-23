@@ -41,6 +41,7 @@ export class InvestitionsrechnerTabInvestitionPage implements OnInit {
       betriebsNeuEnergieKosten: [''],
       betriebsNeuWerkzeugKosten: [''],
       betriebsNeuPersonalKosten: [''],
+      betriebsNeuRaumKosten: [''],
       betriebsNeuInstandsetzungKosten: [''],
       betriebsNeuRuestKosten: [''],
       betriebsNeuLagerKosten: [''],

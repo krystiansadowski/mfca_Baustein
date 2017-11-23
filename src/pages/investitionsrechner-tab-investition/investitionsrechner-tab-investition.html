@@ -79,6 +79,11 @@
           </ion-item>
 
           <ion-item>
+            <ion-label stacked class="formLabel">Raumkosten</ion-label>
+            <ion-input type="number" formControlName="betriebsNeuRaumKosten" [min]="0" placeholder="0"></ion-input>
+          </ion-item>
+
+          <ion-item>
             <ion-label stacked class="formLabel">Instandsetzungskosten</ion-label>
             <ion-input type="number" formControlName="betriebsNeuInstandsetzungKosten" [min]="0" placeholder="0"></ion-input>
           </ion-item>
