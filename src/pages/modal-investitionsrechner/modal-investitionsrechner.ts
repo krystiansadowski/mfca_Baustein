@@ -13,9 +13,12 @@ export class ModalInvestitionsrechnerPage implements OnInit {
   private kapitalwertErgebnisse = [];
   private amortisationszseitErgebnisse = [];
 
+  private minScaleValueKapitalwertErgebnisse: number;
+  private minScaleValueAmortisationszeitErgebnisse: number;
   private kapitalChartData = [];
   private kapitalChartLabels: string[];
-  private minScaleValue: number;
+  private amortisationChartData = [];
+  private amortisationChartLabels: string[];
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
@@ -26,20 +29,9 @@ export class ModalInvestitionsrechnerPage implements OnInit {
   ngOnInit() {
     var alternativen = this.investitionsrechnerService.getAlternativen('alternativen');
     this.berechneKapitalUndAmortisationforEachAlternative(alternativen);
-    
-    this.minScaleValue = this.getMinValue();
 
-    // this.setChartData([{ data: [-310, 510], label: 'Kapitalwert' }]);
-    // this.setChartLabels(['A', 'B']);
-
-    this.setChartData([{ data: [this.kapitalwertErgebnisse], label: 'Kapitalwert' }]);
-    var bezeichnungen = this.getInvestitionBezeichnung(alternativen);
-    this.setChartLabels(bezeichnungen);
-    var data = this.kapitalChartData;
-    var label = this.kapitalChartLabels;
+    this.createChartWithData(alternativen);
   }
-
-  
 
   private berechneKapitalUndAmortisationforEachAlternative(alternativen) {
     for (var indexOfArray in alternativen) {
@@ -155,8 +147,8 @@ export class ModalInvestitionsrechnerPage implements OnInit {
 
 
   /* Getter für den minimalen Kapitalwert und die minimale Amortisationszeit, damit das jeweilige Chart in der Skalierung angepasst werden kann.*/
-  private getMinValue(){
-    return Math.min.apply(Math, this.kapitalwertErgebnisse)
+  private getMinValue(dataHolder) {
+    return Math.min.apply(Math, dataHolder);
   }
 
   // Summierung für Alternative-Investitionen
@@ -174,36 +166,51 @@ export class ModalInvestitionsrechnerPage implements OnInit {
 
 
 
-  // Chart
-
-  // Das funktioniert!
-
-  // private kapitalChartLabels = ['Alternative 1', 'Alternative 2'];
-  // private kapitalChartData = [
-  //   { data: [510, 330], label: 'Kapitalwert' },
-  // ];
+  // Chart Definitionen
 
 
+  
+  private createChartWithData(alternativen){
+    this.minScaleValueAmortisationszeitErgebnisse = this.getMinValue(this.amortisationszseitErgebnisse);
+    this.minScaleValueKapitalwertErgebnisse = this.getMinValue(this.kapitalwertErgebnisse);
 
-
-
-  private setChartData(chartDataValues) {
-    this.kapitalChartData = chartDataValues;
+    this.kapitalChartData = [{ data: this.kapitalwertErgebnisse, label: 'Kapitalwert' }];
+    this.amortisationChartData = [{ data: this.amortisationszseitErgebnisse, label: 'Amortisationszeit'}];
+    var bezeichnungen = this.getInvestitionBezeichnung(alternativen);
+    this.kapitalChartLabels = bezeichnungen;
+    this.amortisationChartLabels = bezeichnungen;
   }
 
-  private setChartLabels(chartLabelValues: string[]) {
-    this.kapitalChartLabels = chartLabelValues;
-  }
-  onChartClick(event) {
-    console.log(event);
-  }
-  chartOptions = {                                                                                            
+  kapitalChartOptions = {
     scales: {
-      yAxes: [{id: 'y-axis-1', type: 'linear', position: 'left', ticks: {autoskip: false, beginAtZero: true, min: this.minScaleValue}}]
+      yAxes: [{ id: 'y-axis-1', type: 'linear', position: 'left', ticks: { autoskip: false, beginAtZero: true, min: this.minScaleValueAmortisationszeitErgebnisse } }]
+    }, tooltips: {
+      callbacks: {
+        label: function (tooltipItem) {
+          return "Die Investition hat einen Kapitalwert von " + Number(tooltipItem.yLabel).toFixed(2) + " Euro.";
+        }
+      }
     }
   };
 
- 
+
+  amortisationChartOptions = {
+    scales: {
+      yAxes: [{ id: 'y-axis-1', type: 'linear', position: 'left', ticks: { autoskip: false, beginAtZero: true, min: this.minScaleValueAmortisationszeitErgebnisse } }]
+    }, tooltips: {
+      callbacks: {
+        label: function (tooltipItem) {
+          if (tooltipItem.yLabel > 0) {
+            return "Die Investition rentiert sich nach ca. " + Number(tooltipItem.yLabel).toFixed(2) + " Jahren.";
+          }
+          else if (tooltipItem.yLabel < 0) {
+            return "Die Investition rentiert sich nicht. Da die Amortisationszeit  " + Number(tooltipItem.yLabel).toFixed(2) + " Jahre beträgt.";
+          }
+
+        }
+      }
+    }
+  };
 
 
   private getInvestitionBezeichnung(alternativen) {
