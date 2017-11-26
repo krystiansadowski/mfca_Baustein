@@ -13,7 +13,7 @@
 
 <ion-content padding>
 
-  <h2>Amortisation (Jahre)</h2>
+  <!-- <h2>Amortisation (Jahre)</h2>
   <div id="divChart">
     <canvas baseChart 
     [data]="amortisationChartData" 
@@ -36,8 +36,17 @@
     [legend]="barChartLegend"
     (chartHover)="chartHovered($event)"
       width="100%" height="100%">
+    </canvas> -->
+  <div id="KapitalwertChart">
+    <canvas baseChart [chartType]="'bar'" [datasets]="kapitalChartData" [labels]="kapitalChartLabels" [options]="chartOptions" [legend]="true"
+      (chartClick)="onChartClick($event)">
     </canvas>
   </div>
-
+<!-- 
+  <div id="AmortisationswertChart">
+    <canvas baseChart [chartType]="'bar'" [datasets]="amortisationChartData" [labels]="amortisationChartLabels" [options]="chartOptions" [legend]="true"
+      (chartClick)="onChartClick($event)">
+    </canvas>
+  </div> -->
 
 </ion-content>

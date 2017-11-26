@@ -9,34 +9,37 @@ import { InvestitionsrechnerProvider } from '../../providers/investitionsrechner
   selector: 'page-modal-investitionsrechner',
   templateUrl: 'modal-investitionsrechner.html',
 })
-export class ModalInvestitionsrechnerPage {
+export class ModalInvestitionsrechnerPage implements OnInit {
   private kapitalwertErgebnisse = [];
   private amortisationszseitErgebnisse = [];
-  // private bezeichnungInvestition = [];
 
-  // // Variablen für AmortisationsChart
-  // private amortisationChartValue: number[];
-  // private amortisationChartType: string
-  // private amortisationChartColors: any[];
-  // private amortisationChartData: number[];
-
-  // // Werte für das Befüllen des AmortisationsChart
-  // // private amortisationChartLabelsValues: string[] = [this.getInvestitionsBezeichnung];
-  // private amortisationChartColorValues: string[] = ["#ffa1b5"];
-  // private amortisationChartDataValues: number[] = [this.amortisation];
+  private kapitalChartData = [];
+  private kapitalChartLabels: string[];
+  private minScaleValue: number;
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private viewCtrl: ViewController,
     private investitionsrechnerService: InvestitionsrechnerProvider) { }
 
-  ionViewWillEnter() {
-    this.investitionsrechnerService.load();
 
+  ngOnInit() {
     var alternativen = this.investitionsrechnerService.getAlternativen('alternativen');
     this.berechneKapitalUndAmortisationforEachAlternative(alternativen);
+    
+    this.minScaleValue = this.getMinValue();
+
+    // this.setChartData([{ data: [-310, 510], label: 'Kapitalwert' }]);
+    // this.setChartLabels(['A', 'B']);
+
+    this.setChartData([{ data: [this.kapitalwertErgebnisse], label: 'Kapitalwert' }]);
+    var bezeichnungen = this.getInvestitionBezeichnung(alternativen);
+    this.setChartLabels(bezeichnungen);
+    var data = this.kapitalChartData;
+    var label = this.kapitalChartLabels;
   }
 
+  
 
   private berechneKapitalUndAmortisationforEachAlternative(alternativen) {
     for (var indexOfArray in alternativen) {
@@ -114,7 +117,7 @@ export class ModalInvestitionsrechnerPage {
   }
 
 
-// Getter für Alternative-Investitionen
+  // Getter für Alternative-Investitionen
   private getValueFromAlternative(alternativeObjekt, keyToSearch) {
     let valueFound = "";
 
@@ -151,6 +154,11 @@ export class ModalInvestitionsrechnerPage {
   }
 
 
+  /* Getter für den minimalen Kapitalwert und die minimale Amortisationszeit, damit das jeweilige Chart in der Skalierung angepasst werden kann.*/
+  private getMinValue(){
+    return Math.min.apply(Math, this.kapitalwertErgebnisse)
+  }
+
   // Summierung für Alternative-Investitionen
   summiereAlleValuesStartsWith(alternativeObjekt, keyToSearch) {
     var alleGefundenenValuesGesamt = 0.0;
@@ -166,103 +174,55 @@ export class ModalInvestitionsrechnerPage {
 
 
 
-  // Chart-Darstellung
+  // Chart
 
-  // // Variablen für KapitalwertChart
-  // private kapitalChartValue: number[];
-  // private kapitalChartType: string
-  // private kapitalChartColors: any[];
-  // private kapitalChartData: number[];
+  // Das funktioniert!
 
-  // // Werte für das Befüllen des AmortisationsChart
-  // private kapitalChartColorValues: string[] = ["#86c7f3"];
-  // private kapitalChartDataValues: number[] = [this.kapitalwert];
-
-  // // Variablen die für beide Charts geleten
-  // private chartLabels: string[];
-  // private  barChartLegend:boolean = false;
-
-
-  // constructor(private navCtrl: NavController,
-  //   private navParams: NavParams,
-  //   private viewCtrl: ViewController,
-  //   private investitionsrechnerService: InvestitionsrechnerProvider) {
-  // }
-
-
-  // ngOnInit() {
-  //   this.investitionsrechnerService.load();
-
-  //   this.ergInvestitionsrechner = this.navParams.get('ergInvestitionsrechner');
-  //   console.log(this.ergInvestitionsrechner);
-
-  //   this.kapitalwert = this.navParams.get('ergInvestitionsrechner').kapitalwert;
-  //   console.log(this.kapitalwert);
-
-  //   this.amortisation = this.navParams.get('ergInvestitionsrechner').amortisation;
-  //   console.log(this.amortisation);
-
-  //   // Setzen des errechnenten Wertes für die Amortisation
-  //   this.amortisationChartValue = this.getamortisationChartValue();
-
-  //   // Setzen des errechnenten Wertes für den Kapitalwert
-  //   this.kapitalChartValue = this.getKapitalwertChartValue();
-
-  //   // Gestaltung des Charts
-  //   /* Gestaltung in Methoden ausgelagert, damit das Chart nach belieben spezifiziert werden kann, wie beispielsweise
-  //     this.setAmortisationsChartType("doughnut") -> doughnut-Chart
-  //     weitere Parametermöglichkeiten: doughnut, radar, line, bar
-  //   */
-  //   this.setAmortisationsChartType("bar");
-  //   this.setAmortisationsChartColor(this.amortisationChartColorValues);
-  //   this.setAmortisationsChartData(this.amortisationChartValue);
-
-  //   this.setKapitalChartType("bar");
-  //   this.setKapitalChartColor(this.kapitalChartColorValues);
-  //   this.setKapitalChartData(this.kapitalChartValue);
-
-
-  //   this.setChartLabels(this.getInvestitionsBezeichnung());
-  // }
-
-
-  // private pushBezeichnungZuDenCharts(){
-  //   let bezeichnungsArray = [(this.bezeichnungInvestition)];
-  //   return bezeichnungsArray;
-
-  // }
-
-
-  // // Methoden die Erstellung eines Charts
-
-  // private setAmortisationsChartType(chartType: string) {
-  //   this.amortisationChartType = chartType;
-  // }
-
-  // private setAmortisationsChartColor(chartColorValues: string[]) {
-  //   this.amortisationChartColors = [{ backgroundColor: chartColorValues }];
-  // }
-  // private setAmortisationsChartData(chartDataValues: number[]) {
-  //   this.amortisationChartData = chartDataValues;
-  // }
+  // private kapitalChartLabels = ['Alternative 1', 'Alternative 2'];
+  // private kapitalChartData = [
+  //   { data: [510, 330], label: 'Kapitalwert' },
+  // ];
 
 
 
-  // private setKapitalChartType(chartType: string) {
-  //   this.kapitalChartType = chartType;
-  // }
 
-  // private setKapitalChartColor(chartColorValues: string[]) {
-  //   this.kapitalChartColors = [{ backgroundColor: chartColorValues }];
-  // }
-  // private setKapitalChartData(chartDataValues: number[]) {
-  //   this.kapitalChartData = chartDataValues;
-  // }
 
-  // // für beide die Methoden
-  // private setChartLabels(chartLabelValues: string[]) {
-  //   this.chartLabels = this.getInvestitionsBezeichnung();
-  // }
+  private setChartData(chartDataValues) {
+    this.kapitalChartData = chartDataValues;
+  }
+
+  private setChartLabels(chartLabelValues: string[]) {
+    this.kapitalChartLabels = chartLabelValues;
+  }
+  onChartClick(event) {
+    console.log(event);
+  }
+  chartOptions = {                                                                                            
+    scales: {
+      yAxes: [{id: 'y-axis-1', type: 'linear', position: 'left', ticks: {autoskip: false, beginAtZero: true, min: this.minScaleValue}}]
+    }
+  };
+
+ 
+
+
+  private getInvestitionBezeichnung(alternativen) {
+    var alternativeBezeichnung = [];
+    for (var indexOfArray in alternativen) {
+      var alternative = alternativen[indexOfArray];
+      for (var i = 0; i < alternative.length; i++) {
+        var alternativeObjekt = alternative[i];
+        var bezeichnungInvestition = this.getValueFromAlternative(alternativeObjekt, 'bezeichnungInvestition');
+        if (bezeichnungInvestition == "") {
+          bezeichnungInvestition = "Alternative " + i;
+        }
+        alternativeBezeichnung.push(bezeichnungInvestition);
+      }
+    }
+    return alternativeBezeichnung;
+  }
+
+
 
 
   // Methode zum Schliessen des Modalds
